@@ -1,0 +1,46 @@
+.layout{
+    display: flex;
+    justify-content: flex-start;
+    height: calc(100% - 64px);
+    &_menu{
+        width: 240px;
+        box-sizing: border-box;
+        margin-top: 3px;
+        transition: .3s;
+    }
+    &_body{
+        width: calc(100vw - 300px);
+        height: calc(100vh - 80px);
+        background-color: #ffffff;
+        // box-shadow:rgb(219, 219, 219) 0px 1px 4px, rgb(219, 219, 219) 0px 3px 12px 2px;
+        box-sizing: border-box;
+    }
+    &_footer{
+        z-index: 1;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 100px;
+    }
+
+}
+    // 自适应，当屏幕小于1000px执行
+@media screen and (max-width: 810px) {
+    .layout{
+        &_body{
+            width: 100vw;
+            // height: calc(100vh - 80px);
+            background-color: #ffffff;
+            // box-shadow:rgb(219, 219, 219) 0px 1px 4px, rgb(219, 219, 219) 0px 3px 12px 2px;
+            box-sizing: border-box;
+        }
+        &_footer{
+            height: 77px;
+        }
+        &_menu{
+            opacity: 0;
+            width: 0px;
+        }
+    }
+    
+}

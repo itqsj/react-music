@@ -1,0 +1,30 @@
+.player{
+    transition: .3s;
+    &_slider{
+        transition: .3s;
+        width: 600px;
+        margin-top: -8px;
+    }
+    &_play{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+    }
+    &_btn{
+        transition: .3s;
+        margin: 0 20px!important;
+    }
+}
+@media screen and (max-width: 1000px) {
+    .player{
+       &_slider{
+            width: 300px;
+            margin: -15px auto 0;
+        }
+        &_btn{
+            margin: 0 0px!important;
+        }
+    }
+     
+}
