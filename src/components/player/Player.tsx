@@ -144,8 +144,8 @@ function Player({ isPhone, currentSong }: PlayerPropInit) {
 
     const playBtn = (
         <IconButton
+            className={style.player_btn}
             aria-label={paused ? 'play' : 'pause'}
-            onClick={() => setPaused(!paused)}
         >
             {paused ? (
                 <PlayArrowRounded
@@ -427,7 +427,9 @@ function Player({ isPhone, currentSong }: PlayerPropInit) {
                                 <CircularProgressWithLabel
                                     value={80}
                                     children={playBtn}
+                                    onClick={() => setPaused(!paused)}
                                 ></CircularProgressWithLabel>
+
                                 <Toggle></Toggle>
                             </div>
                         </Widget>

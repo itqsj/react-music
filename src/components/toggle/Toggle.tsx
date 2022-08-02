@@ -42,16 +42,18 @@ export const Toggle = () => {
                 />
             </motion.nav>
             <IconButton
-                size="large"
                 edge="start"
                 color="inherit"
                 aria-label="menu"
+                sx={{
+                    padding: '0',
+                    marginLeft: '15px',
+                }}
                 onClick={() => toggleOpen()}
             >
                 <MenuOpenIcon
                     style={{
                         fontSize: '40px',
-                        marginLeft: '15px',
                     }}
                 ></MenuOpenIcon>
             </IconButton>
