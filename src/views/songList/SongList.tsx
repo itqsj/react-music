@@ -5,6 +5,8 @@ import SongListInfo from './songListInfo/SongListInfo';
 import NormalTabs from '@/components/tab/Tabs';
 const PlayList = React.lazy(() => import('@/components/playList/PlayList'));
 const Common = React.lazy(() => import('@/views/common/Comment'));
+const Animation = React.lazy(() => import('@/components/animation/Animation'));
+const Collector = React.lazy(() => import('../collector/Collector'));
 
 import style from './css/songlist.module.less';
 import { playListDetail } from '@/api/api_playlist';
@@ -68,37 +70,24 @@ function SongList() {
         {
             label: '收藏者',
             value: '3',
-            children: <PlayList data={playlist?.tracks ?? []}></PlayList>,
+            children: <Collector></Collector>,
         },
     ];
     const handleTabChange = (tabVal: string) => {
         setTabVal(tabVal);
     };
     return (
-        <motion.div
-            className="single"
-            initial="exit"
-            animate="enter"
-            exit="exit"
-        >
-            <motion.div
-                style={{ overflow: 'hidden' }}
-                key="modal"
-                variants={imageVariants}
-            >
-                <div className={style.page}>
-                    {hasPlayList && (
-                        <SongListInfo data={playlist}></SongListInfo>
-                    )}
-                    <div style={{ padding: '5px 15px' }}>
-                        <NormalTabs
-                            tabs={tabData}
-                            change={handleTabChange}
-                        ></NormalTabs>
-                    </div>
+        <Animation>
+            <div className={style.page}>
+                {hasPlayList && <SongListInfo data={playlist}></SongListInfo>}
+                <div style={{ padding: '5px 15px' }}>
+                    <NormalTabs
+                        tabs={tabData}
+                        change={handleTabChange}
+                    ></NormalTabs>
                 </div>
-            </motion.div>
-        </motion.div>
+            </div>
+        </Animation>
     );
 }
 

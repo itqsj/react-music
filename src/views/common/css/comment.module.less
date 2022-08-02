@@ -1,6 +1,58 @@
 .page{
+    overflow: auto;
+    height: calc(100vh - 450px);
     padding: 5px 0;
     &_input{
         width: 100%;
     }
+    &_operation{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+        &_left{
+            font-size: 18px;
+            &_btn{
+                min-width: 5px;
+                color: #000;
+            }
+        }
+        &_confirm{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 15px;
+            height: 34px;
+            color: #000;
+            padding: 2 14px;
+            font-size: 14px;
+            border-radius: 15px;
+            background-color: white;
+            border: 1px solid rgb(230, 230, 230);
+            box-sizing: border-box;
+            &:hover{
+                background: #e6e6e6;
+            }
+        }
+    }
+    &_title{
+        font-size: 16px;
+        font-weight: 600;
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 1260px) {
+    .page{
+        height: calc(100vh - 400px);
+        &_operation{
+            &_confirm{
+                padding: 0 10px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    
 }

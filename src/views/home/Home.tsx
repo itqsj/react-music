@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import RouterTab from '@/components/tab/RouterTab';
 
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const transition = {
@@ -20,6 +20,13 @@ const imageVariants = {
 };
 
 function Home() {
+    const navigate = useNavigate();
+    const { pathname } = useLocation();
+    useEffect(() => {
+        if (pathname === '/home') {
+            navigate('/home/personalRecom');
+        }
+    }, []);
     return (
         <div
             style={{
@@ -28,7 +35,7 @@ function Home() {
         >
             <RouterTab></RouterTab>
             <div>
-                <AnimatePresence>
+                <AnimatePresence exitBeforeEnter>
                     <motion.div
                         className="single"
                         initial="exit"

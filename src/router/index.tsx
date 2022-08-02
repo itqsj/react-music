@@ -1,5 +1,5 @@
 import React, { ReactNode, Suspense } from 'react';
-import { RouteObject, Navigate } from 'react-router-dom';
+import { RouteObject } from 'react-router-dom';
 
 const Layout = React.lazy(() => import('../views/Layout'));
 const PersonalRecom = React.lazy(

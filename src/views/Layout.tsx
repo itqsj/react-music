@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Header from '@/components/header/Header';
 import Menu from '@/components/menu/Menu';
@@ -7,8 +7,7 @@ import Player from '@/components/player/Player';
 
 import style from './css/layout.module.less';
 import { connect } from 'react-redux/es/exports';
-
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 
 const transition = {
     duration: 1,
@@ -29,6 +28,13 @@ interface LayoutPropInt {
 }
 
 function Layout({ isPhone }: LayoutPropInt) {
+    const navigate = useNavigate();
+    const { pathname } = useLocation();
+    useEffect(() => {
+        if (pathname === '/') {
+            navigate('/home');
+        }
+    }, []);
     return (
         <div>
             <Header></Header>
