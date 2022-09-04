@@ -37,7 +37,7 @@ function Message({ content, duration, type }: MessagePropInt) {
 }
 
 const message = {
-    success({ content, duration }: MessagePropInt) {
+    success({ content, duration = 2 }: MessagePropInt) {
         // 创建一个dom
         const dom = document.createElement('div');
         // 定义组件，

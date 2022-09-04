@@ -60,18 +60,19 @@ commonAxios.interceptors.response.use(
         }
     },
     (error: AxiosError) => {
-        if (!!error.message) {
-            if (error.message.includes('timeout')) {
-                return Promise.reject('网络请求超时，请稍候重试');
-            }
-            if (error.message.includes('404')) {
-                return Promise.reject('糟糕页面丢失了，请稍候重试404');
-            }
-            if (error.message.includes('500')) {
-                return Promise.reject('当前服务异常，请稍候重试500');
-            }
-        }
-        return Promise.reject('当前网络繁忙，errorcode' + error.message);
+        // if (!!error.message) {
+        //     if (error.message.includes('timeout')) {
+        //         return Promise.reject('网络请求超时，请稍候重试');
+        //     }
+        //     if (error.message.includes('404')) {
+        //         return Promise.reject('糟糕页面丢失了，请稍候重试404');
+        //     }
+        //     if (error.message.includes('500')) {
+        //         return Promise.reject('当前服务异常，请稍候重试500');
+        //     }
+        // }
+        // return Promise.reject('当前网络繁忙，errorcode' + error.message);
+        return Promise.reject(error.response?.data);
     },
 );
 
@@ -82,6 +83,7 @@ function http({ url, method = 'post', data = {}, params = {} }: ReqInt) {
                 resolve(res.data);
             })
             .catch((err) => {
+                message.warning({ content: err.message, duration: 2 });
                 reject(err);
             });
     });

@@ -33,3 +33,14 @@ export function songUrl(params: ParamsIdInt) {
         },
     });
 }
+
+//判断音乐是否可用
+export function checkMusic(params: ParamsIdInt) {
+    return http({
+        url: '/api/check/music',
+        params: {
+            timestamp: Date.now(),
+            ...params,
+        },
+    });
+}

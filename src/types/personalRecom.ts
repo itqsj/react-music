@@ -53,6 +53,7 @@ export interface TracksInt {
     ar: ArInt[]; //歌手
     al: AlInt; //专辑
     dt: number; //时长
+    url?: string;
 }
 
 export interface AlInt {

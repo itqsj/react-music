@@ -1,4 +1,4 @@
-import { SongInt } from '@/types/personalRecom';
+import { TracksInt } from '@/types/personalRecom';
 import { fromJS } from 'immutable';
 
 interface ActionInt {
@@ -6,15 +6,12 @@ interface ActionInt {
     payload?: any;
 }
 interface PrevStateInt {
-    currentSong: SongInt;
+    currentSong: TracksInt;
 }
 
 export const PlayListReducer = (
     prevState: PrevStateInt = {
-        currentSong: {
-            id: '',
-            url: '',
-        },
+        currentSong: {} as TracksInt,
     },
     action: ActionInt,
 ) => {

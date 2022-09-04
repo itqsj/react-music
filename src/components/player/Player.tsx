@@ -14,14 +14,16 @@ import VolumeDownRounded from '@mui/icons-material/VolumeDownRounded';
 import CircularProgress, {
     CircularProgressProps,
 } from '@mui/material/CircularProgress';
+import Drawer from '@mui/material/Drawer';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
 import style from './css/player.module.less';
 import { connect } from 'react-redux';
-import { SongInt } from '@/types/personalRecom';
+import { TracksInt } from '@/types/personalRecom';
 import { Toggle } from '../toggle/Toggle';
+import PlayDetail from '@/views/playDetail/PlayDetail';
 
 const WallPaper = styled('div')({
     position: 'absolute',
@@ -96,17 +98,31 @@ const CoverImage = styled('div')({
 
 interface PlayerPropInit {
     isPhone: boolean;
-    currentSong: SongInt;
+    currentSong: TracksInt;
+}
+
+interface audioInt {
+    current: currentInt;
+}
+
+interface currentInt {
+    play: () => void;
+    pause: () => void;
+    currentTime: number | number[];
+}
+
+interface SongInfoInt {
+    showDetailDrawer: () => viod;
 }
 
 function CircularProgressWithLabel(
     props: CircularProgressProps & { value: number } & {
         children: React.ReactNode;
-    },
+    } & { pause: () => void },
 ) {
     return (
         <Box sx={{ position: 'relative', display: 'inline-flex' }}>
-            <CircularProgress variant="determinate" {...props} />
+            <CircularProgress variant="determinate" value={props.value} />
             <Box
                 sx={{
                     top: 0,
@@ -118,6 +134,7 @@ function CircularProgressWithLabel(
                     alignItems: 'center',
                     justifyContent: 'center',
                 }}
+                onClick={() => props.pause()}
             >
                 {props.children}
             </Box>
@@ -127,10 +144,31 @@ function CircularProgressWithLabel(
 
 function Player({ isPhone, currentSong }: PlayerPropInit) {
     const theme = useTheme();
-    const duration = 200; // seconds
-    const [position, setPosition] = React.useState(32);
+    const [duration, setDuration] = React.useState<number>(0); // seconds
+    const [position, setPosition] = React.useState<number>(0);
     const [paused, setPaused] = React.useState(false);
+    const audio = React.useRef<HTMLAudioElement>(null) as audioInt;
+    const [openPlayer, setOpenPlayer] = React.useState<boolean>(false);
 
+    const pausedControl = () => {
+        setPaused(!paused);
+        if (paused) {
+            audio.current.pause();
+        } else {
+            audio.current.play();
+        }
+    };
+    React.useEffect(() => {
+        if (currentSong.url) {
+            setPaused(true);
+            setPosition(0);
+            setDuration(Math.ceil(currentSong.dt / 1000));
+        }
+    }, [currentSong.url]);
+
+    const updateCurrenTime = () => {
+        setPosition(Math.floor(audio.current.currentTime as number));
+    };
     function formatDuration(value: number) {
         const minute = Math.floor(value / 60);
         const secondLeft = value - minute * 60;
@@ -148,12 +186,12 @@ function Player({ isPhone, currentSong }: PlayerPropInit) {
             aria-label={paused ? 'play' : 'pause'}
         >
             {paused ? (
-                <PlayArrowRounded
+                <PauseRounded
                     sx={{ fontSize: '1.8rem' }}
                     htmlColor={mainIconColor}
                 />
             ) : (
-                <PauseRounded
+                <PlayArrowRounded
                     sx={{ fontSize: '1.8rem' }}
                     htmlColor={mainIconColor}
                 />
@@ -161,7 +199,7 @@ function Player({ isPhone, currentSong }: PlayerPropInit) {
         </IconButton>
     );
 
-    const SongInfo = () => (
+    const SongInfo = (props: SongInfoInt) => (
         <div
             style={{
                 flex: 1,
@@ -177,11 +215,12 @@ function Player({ isPhone, currentSong }: PlayerPropInit) {
                     width: '70px',
                     height: '70px',
                 }}
+                onClick={() => props.showDetailDrawer()}
             >
                 <img
                     className={style.player_img}
                     alt="can't win - Chilling Sunday"
-                    src="/static/images/sliders/chilling-sunday.jpg"
+                    src={currentSong.al?.picUrl}
                 />
             </CoverImage>
             <Box sx={{ ml: 2 }}>
@@ -190,16 +229,20 @@ function Player({ isPhone, currentSong }: PlayerPropInit) {
                     color="text.secondary"
                     fontWeight={500}
                 >
-                    Jun Pulse
+                    {currentSong.ar?.map((item) => (
+                        <span key={item.id}>{item.name}</span>
+                    ))}
                 </Typography>
 
                 <Typography noWrap letterSpacing={-0.25}>
-                    Chilling Sunday
+                    {currentSong.name ? currentSong.name : '播放音乐'}
                 </Typography>
             </Box>
         </div>
     );
-
+    const toggleDrawer = () => {
+        setOpenPlayer(!openPlayer);
+    };
     return (
         <Box sx={{ width: '100%', height: '100%', overflow: 'hidden' }}>
             <AnimatePresence>
@@ -213,7 +256,9 @@ function Player({ isPhone, currentSong }: PlayerPropInit) {
                         transition={{ duration: 0.3 }}
                     >
                         <Widget>
-                            <SongInfo></SongInfo>
+                            <SongInfo
+                                showDetailDrawer={toggleDrawer}
+                            ></SongInfo>
                             <div style={{ textAlign: 'center' }}>
                                 <div>
                                     <Box
@@ -246,15 +291,15 @@ function Player({ isPhone, currentSong }: PlayerPropInit) {
                                             aria-label={
                                                 paused ? 'play' : 'pause'
                                             }
-                                            onClick={() => setPaused(!paused)}
+                                            onClick={pausedControl}
                                         >
                                             {paused ? (
-                                                <PlayArrowRounded
+                                                <PauseRounded
                                                     sx={{ fontSize: '3rem' }}
                                                     htmlColor={mainIconColor}
                                                 />
                                             ) : (
-                                                <PauseRounded
+                                                <PlayArrowRounded
                                                     sx={{ fontSize: '3rem' }}
                                                     htmlColor={mainIconColor}
                                                 />
@@ -289,7 +334,7 @@ function Player({ isPhone, currentSong }: PlayerPropInit) {
                                         step={1}
                                         max={duration}
                                         onChange={(_, value) =>
-                                            setPosition(value as number)
+                                            (audio.current.currentTime = value)
                                         }
                                         sx={{
                                             color:
@@ -422,12 +467,14 @@ function Player({ isPhone, currentSong }: PlayerPropInit) {
                                 justifyContent: 'space-between',
                             }}
                         >
-                            <SongInfo></SongInfo>
+                            <SongInfo
+                                showDetailDrawer={toggleDrawer}
+                            ></SongInfo>
                             <div className={style.player_play}>
                                 <CircularProgressWithLabel
-                                    value={80}
+                                    value={(position / duration) * 100}
                                     children={playBtn}
-                                    onClick={() => setPaused(!paused)}
+                                    pause={pausedControl}
                                 ></CircularProgressWithLabel>
 
                                 <Toggle></Toggle>
@@ -437,8 +484,26 @@ function Player({ isPhone, currentSong }: PlayerPropInit) {
                 )}
             </AnimatePresence>
             <WallPaper />
-
-            <audio src={currentSong.url} autoPlay={true}></audio>
+            <Drawer
+                sx={{
+                    width: '100vw',
+                    height: '98vh',
+                    '& .MuiPaper-elevation16': {
+                        height: '98vh',
+                    },
+                }}
+                anchor="bottom"
+                open={openPlayer}
+                onClose={toggleDrawer}
+            >
+                <PlayDetail></PlayDetail>
+            </Drawer>
+            <audio
+                ref={audio}
+                src={currentSong.url}
+                autoPlay={true}
+                onTimeUpdate={updateCurrenTime}
+            ></audio>
         </Box>
     );
 }

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -17,6 +17,7 @@ import style from './css/playList.module.less';
 import { TracksInt } from '@/types/personalRecom';
 import { changeSong } from '@/redux/actionCreator/PlayList';
 import { ActiveInt } from '@/redux/actionCreator/PlayList';
+import { checkMusic } from '@/api/api_playlist';
 
 const transition = {
     duration: 1,
@@ -38,9 +39,19 @@ interface PropsInt {
     changeSong: (data: TracksInt) => ActiveInt;
 }
 
+interface CheckMusicInt {
+    success: boolean;
+    message: string;
+}
+
 const PlayList: FC<PropsInt> = (props) => {
-    const handleSongClick = (data: TracksInt) => {
-        props.changeSong(data);
+    const handleSongClick = async (songData: TracksInt) => {
+        const data: CheckMusicInt = (await checkMusic({
+            id: songData.id,
+        })) as CheckMusicInt; //判断是否有版权
+        if (data.success) {
+            props.changeSong(songData);
+        }
     };
     return (
         <motion.div
@@ -163,7 +174,7 @@ const PlayList: FC<PropsInt> = (props) => {
                                         <div className={style.song_info_singer}>
                                             {song.ar.map((singer) => (
                                                 <span key={singer.id}>
-                                                    singer.name
+                                                    {singer.name}
                                                 </span>
                                             ))}
                                         </div>

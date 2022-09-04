@@ -1,0 +1,40 @@
+.page{
+  display: flex;
+  height: 100%;
+  background: #111;
+  &_animat{
+    flex: 3;
+    overflow: hidden;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    // transform: scale(1.2);
+    background: #111;
+    -webkit-perspective: 1000px;
+            perspective: 1000px;
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+    &_buttom{
+      color: aliceblue;
+    }
+  }
+  &_lyric{
+    display: flex;
+    align-items: center;
+    flex: 2;
+    color: aliceblue;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .page{
+    display: flex;
+    flex-direction: column;
+    &_lyric{
+      align-items: flex-start;
+      justify-content: center;
+    }
+  } 
+  
+}
