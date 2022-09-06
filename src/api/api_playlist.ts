@@ -1,5 +1,10 @@
-import { ParamsIdInt } from '@/types/personalRecom';
 import http from './api_index';
+
+export interface ParamsIdInt {
+    id?: string | null | number;
+    limit?: number;
+    cat?: string;
+}
 
 // 账号信息
 export function getPersonalized() {
@@ -49,6 +54,17 @@ export function checkMusic(params: ParamsIdInt) {
 export function songLyric(params: ParamsIdInt) {
     return http({
         url: '/api/lyric',
+        params: {
+            timestamp: Date.now(),
+            ...params,
+        },
+    });
+}
+
+//获取精品歌单
+export function playlistHighquality(params: ParamsIdInt) {
+    return http({
+        url: '/api/top/playlist/highquality',
         params: {
             timestamp: Date.now(),
             ...params,

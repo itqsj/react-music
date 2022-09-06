@@ -12,10 +12,6 @@ export interface PersonalInt {
     type?: number;
 }
 
-export interface ParamsIdInt {
-    id: string | null | number;
-}
-
 export interface PlayListDetailInt {
     code?: number;
     playlist?: PlayListInt;

@@ -1,0 +1,46 @@
+.card{
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding: 20px 0;
+    border-radius: 10px;
+    &_bg{
+        position: absolute;
+        top: -400px;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: -1;
+        width: 100%;
+        filter: blur(45px);
+    }
+    &_body{
+        display: flex;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0);
+        img{
+            width: 160px;
+            object-fit: contain;
+            border-radius: 10px;
+            margin-left: 20px;
+        }
+        &_info{
+            margin-left: 20px;
+            &_label{
+                display: flex;
+                align-items: center;
+                height: 30px;
+                padding: 0 16px;
+                outline: 0;
+                border: 1px solid #e7aa5a;
+                color: #e7aa5a;
+                background-color: transparent;
+                border-radius: 15px;
+            }
+            &_text{
+                margin-top: 20px;
+                
+            }
+        }
+    }
+}

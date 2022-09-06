@@ -8,7 +8,7 @@ const PlayComment = React.lazy(() => import('@/views/common/PlayComment'));
 const Animation = React.lazy(() => import('@/components/animation/Animation'));
 const Collector = React.lazy(() => import('@/views/collector/Collector'));
 
-import style from './css/playListDeTab.module.less';
+import style from './css/playListDetail.module.less';
 import { playListDetail } from '@/api/api_playlist';
 import { useSearchParams } from 'react-router-dom';
 import {
