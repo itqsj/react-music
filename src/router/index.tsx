@@ -9,9 +9,12 @@ const PersonalRecom = React.lazy(
 //     () => import('@/views/video/videoDetail/VideoDetail'),
 // );
 import VideoDetail from '@/views/video/videoDetail/VideoDetail';
-const SongList = React.lazy(() => import('@/views/songList/SongList'));
+const PlayListDetail = React.lazy(
+    () => import('@/views/playList/PlayListDetail'),
+);
 // import SongList from '@/views/songList/SongList';
 import Home from '@/views/home/Home';
+import PlayList from '@/views/playList/PlayList';
 const NotFount = React.lazy(() => import('@/views/notFount/NotFount'));
 
 const lazyLoad = (children: ReactNode): ReactNode => {
@@ -31,11 +34,15 @@ const routes: RouteObject[] = [
                         path: 'personalRecom',
                         element: lazyLoad(<PersonalRecom></PersonalRecom>),
                     },
+                    {
+                        path: 'playList',
+                        element: lazyLoad(<PlayList></PlayList>),
+                    },
                 ],
             },
             {
-                path: 'songlist',
-                element: lazyLoad(<SongList></SongList>),
+                path: 'playListDetail',
+                element: lazyLoad(<PlayListDetail></PlayListDetail>),
             },
             {
                 path: '/videoDetail',

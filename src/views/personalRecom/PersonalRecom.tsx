@@ -34,7 +34,7 @@ function PersonalRecom() {
                             data={personal}
                             key={personal.id}
                             navigate={() => {
-                                navigate(`/songlist?id=${personal.id}`);
+                                navigate(`/playListDetail?id=${personal.id}`);
                             }}
                         ></Card>
                     ))}

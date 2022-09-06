@@ -1,14 +1,14 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import SongListInfo from './songListInfo/SongListInfo';
+import SongListInfo from './playListDetInfo/PlayListDetInfo';
 import NormalTabs from '@/components/tab/Tabs';
 const PlayList = React.lazy(() => import('@/components/playList/PlayList'));
 const PlayComment = React.lazy(() => import('@/views/common/PlayComment'));
 const Animation = React.lazy(() => import('@/components/animation/Animation'));
-const Collector = React.lazy(() => import('../collector/Collector'));
+const Collector = React.lazy(() => import('@/views/collector/Collector'));
 
-import style from './css/songList.module.less';
+import style from './css/playListDeTab.module.less';
 import { playListDetail } from '@/api/api_playlist';
 import { useSearchParams } from 'react-router-dom';
 import {
@@ -39,17 +39,17 @@ function SongList() {
         return has;
     }, [playlist]);
     const [search] = useSearchParams();
-    const getPlayListDetail = () => {
+    const getPlayListDetail = async () => {
         const params: ParamsIdInt = {
             id: search.get('id'),
         };
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        playListDetail(params).then((res: PlayListDetailInt) => {
-            if (res.code === 200) {
-                setPlaylist(res.playlist as PlayListInt);
-            }
-        });
+
+        const res: PlayListDetailInt = (await playListDetail(
+            params,
+        )) as PlayListDetailInt;
+        if (res.code === 200) {
+            setPlaylist(res.playlist as PlayListInt);
+        }
     };
     useEffect(() => {
         if (tabVal === '1' && !hasPlayList) {

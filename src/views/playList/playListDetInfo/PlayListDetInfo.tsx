@@ -6,7 +6,7 @@ import ScreenShareIcon from '@mui/icons-material/ScreenShare';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import Button from '@mui/material/Button';
 
-import style from './css/songlistInfo.module.less';
+import style from './css/playListDetInfo.module.less';
 import { connect } from 'react-redux';
 import { PlayListInt } from '@/types/personalRecom';
 

@@ -34,7 +34,7 @@ function RouterTab() {
         },
         {
             label: '歌单',
-            href: 'personalRecom',
+            href: 'playList',
         },
         {
             label: '主播电台',
