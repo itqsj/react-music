@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import style from './css/playDetail.module.less';
+import SongLyric from './SongLyric';
 
 interface OdragInt extends HTMLDivElement {
     timer: NodeJS.Timeout;
@@ -9,8 +11,14 @@ interface EventInt extends Event {
     wheelDelta: number;
     detail: number;
 }
-function PlayDetail() {
+import { TracksInt } from '@/types/personalRecom';
+interface PlayDetail {
+    currentSong: TracksInt;
+}
+
+function PlayDetail({ currentSong }: PlayDetail) {
     useEffect(() => {
+        console.log(currentSong);
         let radius = 240; // how big of the radius
         const autoRotate = true; // auto rotate or not
         const rotateSpeed = -60; // unit: seconds/360 degrees
@@ -130,65 +138,60 @@ function PlayDetail() {
             radius += d;
             init(1);
         };
-    });
+    }, []);
 
     return (
         <div className={style.page}>
             <div className={style.page_animat}>
                 <div id="drag_container">
                     <div id="spin_container">
-                        <img
-                            src="https://images.pexels.com/photos/206395/pexels-photo-206395.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                            alt=""
-                        />
-                        <img
-                            src="https://images.pexels.com/photos/1391498/pexels-photo-1391498.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                            alt=""
-                        />
-                        <img
-                            src="https://images.pexels.com/photos/1382731/pexels-photo-1382731.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                            alt=""
-                        />
-                        <img
-                            src="https://images.pexels.com/photos/1758144/pexels-photo-1758144.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                            alt=""
-                        />
-                        <img
-                            src="https://images.pexels.com/photos/1382734/pexels-photo-1382734.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                            alt=""
-                        />
-                        <img
-                            src="https://images.pexels.com/photos/1462636/pexels-photo-1462636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                            alt=""
-                        />
+                        <img src={currentSong.al.picUrl} alt="" />
+                        <img src={currentSong.al.picUrl} alt="" />
+                        <img src={currentSong.al.picUrl} alt="" />
+                        <img src={currentSong.al.picUrl} alt="" />
+                        <img src={currentSong.al.picUrl} alt="" />
+                        <img src={currentSong.al.picUrl} alt="" />
 
                         <a
                             target="_blank"
                             href="https://images.pexels.com/photos/139829/pexels-photo-139829.jpeg"
                         >
-                            <img
-                                src="https://images.pexels.com/photos/139829/pexels-photo-139829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                                alt=""
-                            />
+                            <img src={currentSong.al.picUrl} alt="" />
                         </a>
-
+                        <img src={currentSong.al.picUrl} alt="" />
+                        {/* 
                         <video controls loop>
                             <source
                                 src="https://player.vimeo.com/external/322244668.sd.mp4?s=338c48ac2dfcb1d4c0689968b5baf94eee6ca0c1&profile_id=165&oauth2_token_id=57447761"
                                 type="video/mp4"
                             />
-                        </video>
+                        </video> */}
 
-                        <p>3D Tiktok Carousel</p>
+                        <p className={style.page_animat_info}>
+                            <span>{currentSong.name}</span>(
+                            {currentSong.ar.map((item) => (
+                                <span key={item.id}>{item.name}</span>
+                            ))}
+                            )
+                        </p>
                     </div>
                     <div id="ground"></div>
                 </div>
 
                 <div id="music_container"></div>
             </div>
-            <div className={style.page_lyric}>123</div>
+
+            <div className={style.page_lyric}>
+                <SongLyric id={currentSong.id}></SongLyric>
+            </div>
         </div>
     );
 }
 
-export default PlayDetail;
+const mapStateToProps = function (store: any) {
+    return {
+        currentSong: store.PlayListReducer.currentSong,
+    };
+};
+
+export default connect(mapStateToProps)(PlayDetail);

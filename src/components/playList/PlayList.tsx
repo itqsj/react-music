@@ -12,12 +12,13 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import { connect } from 'react-redux';
-
 import style from './css/playList.module.less';
 import { TracksInt } from '@/types/personalRecom';
 import { changeSong } from '@/redux/actionCreator/PlayList';
 import { ActiveInt } from '@/redux/actionCreator/PlayList';
 import { checkMusic } from '@/api/api_playlist';
+import { PlayArrowRounded } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 const transition = {
     duration: 1,
@@ -45,6 +46,7 @@ interface CheckMusicInt {
 }
 
 const PlayList: FC<PropsInt> = (props) => {
+    const navigate = useNavigate();
     const handleSongClick = async (songData: TracksInt) => {
         const data: CheckMusicInt = (await checkMusic({
             id: songData.id,
@@ -52,6 +54,14 @@ const PlayList: FC<PropsInt> = (props) => {
         if (data.success) {
             props.changeSong(songData);
         }
+    };
+
+    const handleGoMv = (event: Event, data: TracksInt) => {
+        event.stopPropagation();
+        navigate({
+            pathname: '/videoDetail',
+            search: `?id=${data.mv}`,
+        });
     };
     return (
         <motion.div
@@ -132,6 +142,24 @@ const PlayList: FC<PropsInt> = (props) => {
                                         </TableCell>
                                         <TableCell component="th" scope="row">
                                             {row.name}
+                                            {row.mv !== 0 && (
+                                                <span
+                                                    className={style.page_mv}
+                                                    onClick={() =>
+                                                        handleGoMv(
+                                                            event as Event,
+                                                            row,
+                                                        )
+                                                    }
+                                                >
+                                                    MV
+                                                    <PlayArrowRounded
+                                                        sx={{
+                                                            fontSize: '14px',
+                                                        }}
+                                                    />
+                                                </span>
+                                            )}
                                         </TableCell>
                                         <TableCell align="left">
                                             {row.ar.map((singer) => (
@@ -181,7 +209,15 @@ const PlayList: FC<PropsInt> = (props) => {
                                     </div>
                                 </div>
                                 <div className={style.song_right}>
-                                    <SlowMotionVideoIcon></SlowMotionVideoIcon>
+                                    {song.mv !== 0 && (
+                                        <div
+                                            onClick={() =>
+                                                handleGoMv(event as Event, song)
+                                            }
+                                        >
+                                            <SlowMotionVideoIcon></SlowMotionVideoIcon>
+                                        </div>
+                                    )}
                                     <MoreHorizIcon
                                         sx={{ marginLeft: '5px' }}
                                     ></MoreHorizIcon>

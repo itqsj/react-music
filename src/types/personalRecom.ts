@@ -13,7 +13,7 @@ export interface PersonalInt {
 }
 
 export interface ParamsIdInt {
-    id: string | null;
+    id: string | null | number;
 }
 
 export interface PlayListDetailInt {
@@ -54,6 +54,7 @@ export interface TracksInt {
     al: AlInt; //专辑
     dt: number; //时长
     url?: string;
+    mv?: number;
 }
 
 export interface AlInt {

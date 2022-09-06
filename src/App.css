@@ -17,3 +17,67 @@
   box-shadow:rgb(68 214 0 / 25%) 0px 1px 4px, rgb(68 214 0 / 35%) 0px 3px 12px 2px;
   border-radius: 10px;
 } */
+.font-20{
+  font-size: 20px;
+}
+.font-18{
+  font-size: 18px;
+}
+.font-16{
+  font-size: 16px;
+}
+.font-14{
+  font-size: 14px;
+}
+.font-12{
+  font-size: 12px;
+}
+
+.font-bold{
+  font-weight: 600;
+} 
+.font-normal{
+  font-weight: normal;
+} 
+
+.mtop-10{
+  margin-top: 10px;
+}
+
+.mright-10{
+  margin-right: 10px;
+}
+
+.mbottom-10{
+  margin-bottom: 10px;
+}
+
+.mleft-10{
+  margin-left: 10px;
+}
+
+.mright-5{
+  margin-right: 5px;
+}
+.mleft-5{
+  margin-left: 5px;
+}
+.mtop-5{
+  margin-top: 5px;
+}
+.mbottom-5{
+  margin-bottom: 5px;
+}
+
+.ptop-10{
+  padding-top: 10px;
+}
+.pleft-10{
+  padding-left: 10px;
+}
+.pright-10{
+  padding-right: 10px;
+}
+.pbottom-10{
+  padding-bottom: 10px;
+}

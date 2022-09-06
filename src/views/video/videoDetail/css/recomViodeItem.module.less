@@ -1,0 +1,23 @@
+.item{
+  display: flex;
+  justify-content: flex-start;
+  cursor: pointer;
+  transition: all .3s;
+  &_left{
+    flex: 1;
+    img{
+      width: 100%;
+      aspect-ratio: 7/4;
+      border-radius: 5px;
+    }
+  }
+  &_right{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+  }
+  &:hover{
+    transform: scale(1.02);
+  }
+}

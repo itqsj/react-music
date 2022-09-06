@@ -5,7 +5,12 @@ const Layout = React.lazy(() => import('../views/Layout'));
 const PersonalRecom = React.lazy(
     () => import('../views/personalRecom/PersonalRecom'),
 );
-import SongList from '@/views/songList/SongList';
+// const VideoDetail = React.lazy(
+//     () => import('@/views/video/videoDetail/VideoDetail'),
+// );
+import VideoDetail from '@/views/video/videoDetail/VideoDetail';
+const SongList = React.lazy(() => import('@/views/songList/SongList'));
+// import SongList from '@/views/songList/SongList';
 import Home from '@/views/home/Home';
 const NotFount = React.lazy(() => import('@/views/notFount/NotFount'));
 
@@ -31,6 +36,10 @@ const routes: RouteObject[] = [
             {
                 path: 'songlist',
                 element: lazyLoad(<SongList></SongList>),
+            },
+            {
+                path: '/videoDetail',
+                element: <VideoDetail></VideoDetail>,
             },
         ],
     },

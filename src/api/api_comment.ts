@@ -4,7 +4,19 @@ import http from './api_index';
 export function playlistComment(id: string) {
     return http({
         url: '/api/comment/playlist',
-        data: {
+        params: {
+            timestamp: Date.now(),
+            limit: 25,
+            id,
+        },
+    });
+}
+
+// mv评论
+export function commentMv(id: string) {
+    return http({
+        url: '/api/comment/mv',
+        params: {
             timestamp: Date.now(),
             limit: 25,
             id,

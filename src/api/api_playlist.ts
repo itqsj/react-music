@@ -5,7 +5,7 @@ import http from './api_index';
 export function getPersonalized() {
     return http({
         url: '/api/personalized',
-        data: {
+        params: {
             timestamp: Date.now(),
             limit: 25,
         },
@@ -38,6 +38,17 @@ export function songUrl(params: ParamsIdInt) {
 export function checkMusic(params: ParamsIdInt) {
     return http({
         url: '/api/check/music',
+        params: {
+            timestamp: Date.now(),
+            ...params,
+        },
+    });
+}
+
+//获取歌词
+export function songLyric(params: ParamsIdInt) {
+    return http({
+        url: '/api/lyric',
         params: {
             timestamp: Date.now(),
             ...params,

@@ -1,7 +1,7 @@
 import { CommentInt } from '@/types/comment';
 import React, { FC } from 'react';
 
-import style from './commentList.module.less';
+import style from './css/commentList.module.less';
 
 interface PropInt {
     comment: CommentInt[];

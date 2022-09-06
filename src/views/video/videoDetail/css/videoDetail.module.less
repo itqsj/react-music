@@ -1,0 +1,33 @@
+.page{
+    overflow: auto;
+    height: calc(100vh - 100px - 70px);
+    &_bread{
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+    &_body{
+        display: flex;
+        justify-content: space-between;
+        &_right{
+            width: 400px;
+        }
+        &_left{
+            flex: 1;
+            padding: 15px 50px 0 0;
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .page{
+        &_body{
+            &_left{
+                padding: 15px;
+            }
+            &_right{
+                display: none;
+            }
+        }
+    }
+}

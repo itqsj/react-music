@@ -37,7 +37,8 @@
     "redux": "^4.2.0",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.4.1",
-    "swiper": "^8.3.0"
+    "swiper": "^8.3.0",
+    "xgplayer": "^2.32.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",

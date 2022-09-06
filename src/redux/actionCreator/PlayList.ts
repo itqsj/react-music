@@ -15,14 +15,12 @@ async function changeSong(songInfo: TracksInt) {
         id: songInfo.id,
     };
     const payload = { ...songInfo } as TracksInt;
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    await songUrl(params).then((res: ResponseInt) => {
-        if (res.code === 200) {
-            payload.url = res.data[0].url;
-            console.log(payload);
-        }
-    });
+
+    const res: ResponseInt = (await songUrl(params)) as ResponseInt;
+    if (res.code === 200) {
+        payload.url = res.data[0].url;
+        console.log(payload);
+    }
     const action: ActiveInt = {
         type: 'change_song',
         payload,

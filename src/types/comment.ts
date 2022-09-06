@@ -1,3 +1,14 @@
+export interface commentResInt {
+    //评论返回值
+    code: number;
+    comments: CommentInt[];
+    hotComments: CommentInt[];
+    isMusician: boolean;
+    more: boolean;
+    moreHot: boolean;
+    total: number;
+}
+
 export interface CommentInt {
     //评论
     beReplied?: Array<beRepliedInt>;

@@ -4,11 +4,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 import SongListInfo from './songListInfo/SongListInfo';
 import NormalTabs from '@/components/tab/Tabs';
 const PlayList = React.lazy(() => import('@/components/playList/PlayList'));
-const Common = React.lazy(() => import('@/views/common/Comment'));
+const PlayComment = React.lazy(() => import('@/views/common/PlayComment'));
 const Animation = React.lazy(() => import('@/components/animation/Animation'));
 const Collector = React.lazy(() => import('../collector/Collector'));
 
-import style from './css/songlist.module.less';
+import style from './css/songList.module.less';
 import { playListDetail } from '@/api/api_playlist';
 import { useSearchParams } from 'react-router-dom';
 import {
@@ -65,7 +65,7 @@ function SongList() {
         {
             label: '评论',
             value: '2',
-            children: <Common></Common>,
+            children: <PlayComment></PlayComment>,
         },
         {
             label: '收藏者',
@@ -86,6 +86,7 @@ function SongList() {
                         change={handleTabChange}
                     ></NormalTabs>
                 </div>
+                {/* <div style={{ height: '50px' }}></div> */}
             </div>
         </Animation>
     );
