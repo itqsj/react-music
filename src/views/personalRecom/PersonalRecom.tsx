@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from 'react';
 
-import Card from './card/Card';
-
-import { PersonalInt } from '@/types/personalRecom';
+import { PersonRecomInt, ResPersonalInt } from '@/types/playList';
 
 import style from './css/personalRecom.module.less';
 import { getPersonalized } from '@/api/api_playlist';
-import { useNavigate } from 'react-router-dom';
 import Animation from '@/components/animation/Animation';
+import CardList from '@/components/cardlist/CardList';
 
 function PersonalRecom() {
-    const navigate = useNavigate();
-    const [personalList, setPersonalList] = useState<object[]>([]);
+    const [personalList, setPersonalList] = useState<PersonRecomInt[]>([]);
 
+    const getPersonalizedList = async () => {
+        const res: ResPersonalInt = (await getPersonalized()) as ResPersonalInt;
+        if (res.code === 200) {
+            setPersonalList(res.result);
+        }
+    };
     useEffect(() => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        getPersonalized().then(({ result }: PersonalInt[]) => {
-            setPersonalList(result);
-        });
+        getPersonalizedList();
     }, []);
 
     return (
@@ -28,17 +27,7 @@ function PersonalRecom() {
                 <h3 className={style.page_title}>
                     今日推荐<i className={style.page_title_icon}></i>
                 </h3>
-                <div className={style.page_list}>
-                    {personalList.map((personal: PersonalInt) => (
-                        <Card
-                            data={personal}
-                            key={personal.id}
-                            navigate={() => {
-                                navigate(`/playListDetail?id=${personal.id}`);
-                            }}
-                        ></Card>
-                    ))}
-                </div>
+                <CardList data={personalList}></CardList>
             </div>
         </Animation>
     );

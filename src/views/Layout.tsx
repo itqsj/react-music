@@ -49,6 +49,7 @@ function Layout({ isPhone }: LayoutPropInt) {
                         maxWidth: '1240px',
                         border: 'none',
                         margin: '3px auto',
+                        borderRadius: '8px',
                     }}
                 >
                     <AnimatePresence>

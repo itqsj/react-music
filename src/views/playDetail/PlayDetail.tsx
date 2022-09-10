@@ -11,7 +11,7 @@ interface EventInt extends Event {
     wheelDelta: number;
     detail: number;
 }
-import { TracksInt } from '@/types/personalRecom';
+import { TracksInt } from '@/types/playList';
 interface PlayDetail {
     currentSong: TracksInt;
 }

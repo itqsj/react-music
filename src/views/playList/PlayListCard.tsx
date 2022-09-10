@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 
 import style from './css/playListCard.module.less';
 
-import { PlaylistsInt } from '@/types/playList';
+import { PlayListInt } from '@/types/playList';
 
 interface PropsInt {
-    data: PlaylistsInt;
+    data: PlayListInt;
 }
 
 const PlayListCard: FC<PropsInt> = ({ data }) => {

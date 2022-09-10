@@ -8,10 +8,10 @@ import Button from '@mui/material/Button';
 
 import style from './css/playListDetInfo.module.less';
 import { connect } from 'react-redux';
-import { PlayListInt } from '@/types/personalRecom';
+import { PlayListItemInt } from '@/types/playList';
 
 interface PropsInt {
-    data: PlayListInt;
+    data: PlayListItemInt;
     isPhone: boolean;
 }
 

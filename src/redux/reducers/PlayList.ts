@@ -1,4 +1,4 @@
-import { TracksInt } from '@/types/personalRecom';
+import { TracksInt } from '@/types/playList';
 import { fromJS } from 'immutable';
 
 interface ActionInt {

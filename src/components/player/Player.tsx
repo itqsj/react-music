@@ -21,7 +21,7 @@ import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
 import style from './css/player.module.less';
 import { connect } from 'react-redux';
-import { TracksInt } from '@/types/personalRecom';
+import { TracksInt } from '@/types/playList';
 import { Toggle } from '../toggle/Toggle';
 import PlayDetail from '@/views/playDetail/PlayDetail';
 // const PlayDetail = React.lazy(() => import('@/views/playDetail/PlayDetail'));
@@ -169,7 +169,7 @@ function Player({ isPhone, currentSong }: PlayerPropInit) {
 
     const updateCurrenTime = () => {
         setPosition(Math.floor(audio.current.currentTime as number));
-        console.log(audio.current.currentTime);
+        // console.log(audio.current.currentTime);
     };
     function formatDuration(value: number) {
         const minute = Math.floor(value / 60);

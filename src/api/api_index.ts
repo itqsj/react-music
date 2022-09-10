@@ -76,7 +76,7 @@ commonAxios.interceptors.response.use(
     },
 );
 
-function http({ url, method = 'post', data = {}, params = {} }: ReqInt) {
+function http({ url, method = 'post', data, params }: ReqInt) {
     return new Promise((resolve, reject) => {
         commonAxios({ url, method, data, params })
             .then((res) => {

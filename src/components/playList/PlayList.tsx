@@ -13,7 +13,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import { connect } from 'react-redux';
 import style from './css/playList.module.less';
-import { TracksInt } from '@/types/personalRecom';
+import { TracksInt } from '@/types/playList';
 import { changeSong } from '@/redux/actionCreator/PlayList';
 import { ActiveInt } from '@/redux/actionCreator/PlayList';
 import { checkMusic } from '@/api/api_playlist';

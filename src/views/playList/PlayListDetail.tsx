@@ -11,11 +11,7 @@ const Collector = React.lazy(() => import('@/views/collector/Collector'));
 import style from './css/playListDetail.module.less';
 import { playListDetail } from '@/api/api_playlist';
 import { useSearchParams } from 'react-router-dom';
-import {
-    ParamsIdInt,
-    PlayListDetailInt,
-    PlayListInt,
-} from '@/types/personalRecom';
+import { PlayListDetailInt, PlayListItemInt } from '@/types/playList';
 
 const transition = {
     duration: 1,
@@ -33,14 +29,16 @@ const imageVariants = {
 
 function SongList() {
     const [tabVal, setTabVal] = useState<string>('1');
-    const [playlist, setPlaylist] = useState<PlayListInt>({} as PlayListInt);
+    const [playlist, setPlaylist] = useState<PlayListItemInt>(
+        {} as PlayListItemInt,
+    );
     const hasPlayList = useMemo(() => {
         const has = JSON.stringify(playlist) !== '{}';
         return has;
     }, [playlist]);
     const [search] = useSearchParams();
     const getPlayListDetail = async () => {
-        const params: ParamsIdInt = {
+        const params = {
             id: search.get('id'),
         };
 
@@ -48,7 +46,7 @@ function SongList() {
             params,
         )) as PlayListDetailInt;
         if (res.code === 200) {
-            setPlaylist(res.playlist as PlayListInt);
+            setPlaylist(res.playlist as PlayListItemInt);
         }
     };
     useEffect(() => {

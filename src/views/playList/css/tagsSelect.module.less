@@ -1,0 +1,38 @@
+.page{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &_selected{
+        min-width: 70px;
+        display:inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 30px;
+        color: #343434;
+        border:1px solid #d8d8d8;
+        // padding: 0 20px 0 30px;
+        padding-left: 10px;
+        border-radius: 15px;
+        cursor: pointer;
+        &:hover{
+            background-color: #f2f2f2;
+        }
+    }
+    &_label{
+        overflow-x: scroll;
+        white-space: nowrap; /* 内容超出不换行 */
+        span{
+            display: inline-flex;
+            align-items: center;
+            height: 26px;
+            padding: 0 10px;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+    }
+    .isActive{
+        background-color: #fdf5f5;
+        color: #ec4141;
+        border-radius: 13px;
+    }
+}

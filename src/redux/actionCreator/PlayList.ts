@@ -1,4 +1,4 @@
-import { TracksInt } from '@/types/personalRecom';
+import { TracksInt } from '@/types/playList';
 import { songUrl } from '@/api/api_playlist';
 
 export interface ResponseInt {

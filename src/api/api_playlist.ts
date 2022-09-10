@@ -4,6 +4,7 @@ export interface ParamsIdInt {
     id?: string | null | number;
     limit?: number;
     cat?: string;
+    offset?: number;
 }
 
 // 账号信息
@@ -68,6 +69,37 @@ export function playlistHighquality(params: ParamsIdInt) {
         params: {
             timestamp: Date.now(),
             ...params,
+        },
+    });
+}
+
+//歌单列表
+export function topPlayList(params: ParamsIdInt) {
+    return http({
+        url: '/api/top/playlist',
+        params: {
+            timestamp: Date.now(),
+            ...params,
+        },
+    });
+}
+
+//歌单分类标签
+export function playlistLabel() {
+    return http({
+        url: '/api/playlist/hot',
+        params: {
+            timestamp: Date.now(),
+        },
+    });
+}
+
+//全部标签
+export function playCatlist() {
+    return http({
+        url: '/api/playlist/catlist',
+        params: {
+            timestamp: Date.now(),
         },
     });
 }
