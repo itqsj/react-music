@@ -98,6 +98,7 @@ export interface HighqualityPlstInt {
 
 export interface PlayListInt {
     //精品歌单的playlists
+    ToplistType?: number;
     adType: number;
     anonimous: boolean;
     cloudTrackCount: number;

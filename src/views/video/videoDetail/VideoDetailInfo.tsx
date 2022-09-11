@@ -12,7 +12,7 @@ interface PropsInt {
     info: ResMvOperatInt;
 }
 
-const videoDetailInfo: FC<PropsInt> = ({ data, info }) => {
+const videoDetailInfo: FC<PropsInt> = React.memo(({ data, info }) => {
     return (
         <div className={[style.info, 'ptop-10', 'mbottom-10'].join(' ')}>
             <div className={style.info_head}>
@@ -63,6 +63,6 @@ const videoDetailInfo: FC<PropsInt> = ({ data, info }) => {
             </div>
         </div>
     );
-};
+});
 
 export default videoDetailInfo;

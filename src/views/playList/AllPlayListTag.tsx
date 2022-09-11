@@ -46,50 +46,38 @@ const allPlayListTag: FC<PropsInt> = React.memo(
                     {catAll.name}
                 </div>
                 <div className={style.page_body}>
-                    {useMemo(
-                        () =>
-                            catCategories.map((item, index: number) => (
-                                <div className={style.item} key={index}>
-                                    <div
-                                        className={[
-                                            style.item_title,
-                                            'font-14',
-                                        ].join(' ')}
-                                    >
-                                        {composeIcon(index)}
-                                        <span className="mleft-10">{item}</span>
-                                    </div>
-                                    <ul className={style.item_ul}>
-                                        {catList
-                                            .filter(
-                                                (item) =>
-                                                    item.category === index,
-                                            )
-                                            .map((cat) => (
-                                                <li
-                                                    className="font-12"
-                                                    key={cat.name}
-                                                >
-                                                    <span
-                                                        onClick={() =>
-                                                            handleTagClick(cat)
-                                                        }
-                                                        className={
-                                                            tagActive.name ===
-                                                            cat.name
-                                                                ? style.is_active
-                                                                : ''
-                                                        }
-                                                    >
-                                                        {cat.name}
-                                                    </span>
-                                                </li>
-                                            ))}
-                                    </ul>
-                                </div>
-                            )),
-                        [catCategories],
-                    )}
+                    {catCategories.map((item, index: number) => (
+                        <div className={style.item} key={index}>
+                            <div
+                                className={[style.item_title, 'font-14'].join(
+                                    ' ',
+                                )}
+                            >
+                                {composeIcon(index)}
+                                <span className="mleft-10">{item}</span>
+                            </div>
+                            <ul className={style.item_ul}>
+                                {catList
+                                    .filter((item) => item.category === index)
+                                    .map((cat) => (
+                                        <li className="font-12" key={cat.name}>
+                                            <span
+                                                onClick={() =>
+                                                    handleTagClick(cat)
+                                                }
+                                                className={
+                                                    tagActive.name === cat.name
+                                                        ? style.is_active
+                                                        : ''
+                                                }
+                                            >
+                                                {cat.name}
+                                            </span>
+                                        </li>
+                                    ))}
+                            </ul>
+                        </div>
+                    ))}
                 </div>
             </div>
         );

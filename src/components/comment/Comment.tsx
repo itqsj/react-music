@@ -13,53 +13,60 @@ interface PropsInt {
     wonderComment: CommentInt[];
 }
 
-const Comment: FC<PropsInt> = ({ isPhone, newComment, wonderComment }) => {
-    const [commonVal, setCommonVal] = useState<string>('');
+const Comment: FC<PropsInt> = React.memo(
+    ({ isPhone, newComment, wonderComment }) => {
+        const [commonVal, setCommonVal] = useState<string>('');
 
-    const handleCommonChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setCommonVal(event.target.value);
-    };
+        const handleCommonChange = (
+            event: React.ChangeEvent<HTMLInputElement>,
+        ) => {
+            setCommonVal(event.target.value);
+        };
 
-    return (
-        <div className={style.page}>
-            <TextField
-                label="请输入评论"
-                multiline
-                rows={isPhone ? 2 : 3}
-                value={commonVal}
-                className={style.page_input}
-                onChange={handleCommonChange}
-            />
-            <div className={style.page_operation}>
-                <div className={style.page_operation_left}>
+        return (
+            <div className={style.page}>
+                <TextField
+                    label="请输入评论"
+                    multiline
+                    rows={isPhone ? 2 : 3}
+                    value={commonVal}
+                    className={style.page_input}
+                    onChange={handleCommonChange}
+                />
+                <div className={style.page_operation}>
+                    <div className={style.page_operation_left}>
+                        <Button
+                            className={style.page_operation_left_btn}
+                            variant="text"
+                        >
+                            @
+                        </Button>
+                        <Button
+                            className={style.page_operation_left_btn}
+                            variant="text"
+                        >
+                            #
+                        </Button>
+                    </div>
                     <Button
-                        className={style.page_operation_left_btn}
+                        className={style.page_operation_confirm}
                         variant="text"
                     >
-                        @
-                    </Button>
-                    <Button
-                        className={style.page_operation_left_btn}
-                        variant="text"
-                    >
-                        #
+                        评论
                     </Button>
                 </div>
-                <Button className={style.page_operation_confirm} variant="text">
-                    评论
-                </Button>
+                <h3 className={style.page_title}>精彩评论</h3>
+                <div className={style.page_comment}>
+                    <CommentList comment={wonderComment}></CommentList>
+                </div>
+                <h3 className={style.page_title}>最新评论</h3>
+                <div className={style.page_comment}>
+                    <CommentList comment={newComment}></CommentList>
+                </div>
             </div>
-            <h3 className={style.page_title}>精彩评论</h3>
-            <div className={style.page_comment}>
-                <CommentList comment={wonderComment}></CommentList>
-            </div>
-            <h3 className={style.page_title}>最新评论</h3>
-            <div className={style.page_comment}>
-                <CommentList comment={newComment}></CommentList>
-            </div>
-        </div>
-    );
-};
+        );
+    },
+);
 
 const mapStateToProps = function (store: any) {
     return {

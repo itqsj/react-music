@@ -40,6 +40,7 @@ const TagsSelect: FC<PropsInt> = React.memo(
             }
         };
         useLayoutEffect(() => {
+            console.log(123);
             getPlayCatlist();
         }, []);
 

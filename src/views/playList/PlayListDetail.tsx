@@ -27,7 +27,7 @@ const imageVariants = {
     },
 };
 
-function SongList() {
+function PlayListDetail() {
     const [tabVal, setTabVal] = useState<string>('1');
     const [playlist, setPlaylist] = useState<PlayListItemInt>(
         {} as PlayListItemInt,
@@ -90,4 +90,4 @@ function SongList() {
     );
 }
 
-export default SongList;
+export default PlayListDetail;

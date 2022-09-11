@@ -1,4 +1,4 @@
-import React, { useEffect, useState, ReactNode } from 'react';
+import React, { useEffect, useState, ReactNode, FC } from 'react';
 
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
@@ -16,7 +16,7 @@ interface PropsInt {
     change: (newValue: string) => void;
 }
 
-function NormalTabs(props: PropsInt) {
+const NormalTabs: FC<PropsInt> = React.memo((props) => {
     const [value, setValue] = useState<string>('1');
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -70,6 +70,6 @@ function NormalTabs(props: PropsInt) {
             ))}
         </TabContext>
     );
-}
+});
 
 export default NormalTabs;

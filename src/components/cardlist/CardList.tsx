@@ -3,19 +3,19 @@ import React, { FC } from 'react';
 import Card from './card/Card';
 
 import style from './css/cardList.module.less';
-import { PersonRecomInt, HighqualityPlstInt } from '@/types/playList';
+import { PersonRecomInt, PlayListInt } from '@/types/playList';
 import { useNavigate } from 'react-router-dom';
 
 interface PropsInt {
-    data?: PersonRecomInt[] | HighqualityPlstInt[];
+    data?: PersonRecomInt[] | PlayListInt[];
 }
 
-const CardList: FC<PropsInt> = ({ data = [] }) => {
+const CardList: FC<PropsInt> = React.memo(({ data = [] }) => {
     const navigate = useNavigate();
 
     return (
         <div className={style.page}>
-            {data.map((item: PersonRecomInt | HighqualityPlstInt) => (
+            {data.map((item: PersonRecomInt | PlayListInt) => (
                 <Card
                     data={item}
                     key={item.id}
@@ -26,6 +26,6 @@ const CardList: FC<PropsInt> = ({ data = [] }) => {
             ))}
         </div>
     );
-};
+});
 
 export default CardList;

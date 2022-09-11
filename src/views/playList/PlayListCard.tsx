@@ -8,7 +8,7 @@ interface PropsInt {
     data: PlayListInt;
 }
 
-const PlayListCard: FC<PropsInt> = ({ data }) => {
+const PlayListCard: FC<PropsInt> = React.memo(({ data }) => {
     return (
         <div className={[style.card, 'mtop-10', 'mbottom-10'].join(' ')}>
             <img className={style.card_bg} src={data.coverImgUrl} alt="" />
@@ -33,6 +33,6 @@ const PlayListCard: FC<PropsInt> = ({ data }) => {
             </div>
         </div>
     );
-};
+});
 
 export default PlayListCard;

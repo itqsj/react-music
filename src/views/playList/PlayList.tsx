@@ -1,10 +1,4 @@
-import React, {
-    FC,
-    useCallback,
-    useLayoutEffect,
-    useMemo,
-    useState,
-} from 'react';
+import React, { FC, useCallback, useLayoutEffect, useState } from 'react';
 
 import Animation from '@/components/animation/Animation';
 import Pagination from '@mui/material/Pagination';
@@ -78,9 +72,11 @@ const PlayList: FC = () => {
         },
         [tags],
     );
-    useMemo(() => {
-        getHighquality();
-        getTopPlayList();
+    useLayoutEffect(() => {
+        if (JSON.stringify(tagActive) !== '{}') {
+            getHighquality();
+            getTopPlayList();
+        }
     }, [tagActive]);
     const getPlaylistLabel = async () => {
         const res: ResPlayListLabelInt =
@@ -96,6 +92,7 @@ const PlayList: FC = () => {
     const handlePaginatChange = (event: object, page: number) => {
         topPlayListOffsetParam = page - 1;
         setTopPlayListOffset(page - 1);
+
         getTopPlayList();
     };
     useLayoutEffect(() => {
@@ -108,30 +105,13 @@ const PlayList: FC = () => {
     return (
         <Animation>
             <div className={style.page}>
-                {useMemo(
-                    () => (
-                        <PlayListCard data={highqualityList}></PlayListCard>
-                    ),
-                    [highqualityList],
-                )}
-
-                {useMemo(
-                    () => (
-                        <TagsSelect
-                            tagActive={tagActive}
-                            data={tags}
-                            selectTag={selectTag}
-                        ></TagsSelect>
-                    ),
-                    [tags, tagActive],
-                )}
-
-                {useMemo(
-                    () => (
-                        <CardList data={playList}></CardList>
-                    ),
-                    [playList],
-                )}
+                <PlayListCard data={highqualityList}></PlayListCard>;
+                <TagsSelect
+                    tagActive={tagActive}
+                    data={tags}
+                    selectTag={selectTag}
+                ></TagsSelect>
+                <CardList data={playList}></CardList>
                 <div
                     className={[
                         style.page_pagination,

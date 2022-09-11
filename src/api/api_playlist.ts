@@ -103,3 +103,13 @@ export function playCatlist() {
         },
     });
 }
+
+//全部榜单/
+export function allTopList() {
+    return http({
+        url: '/api/toplist',
+        params: {
+            timestamp: Date.now(),
+        },
+    });
+}

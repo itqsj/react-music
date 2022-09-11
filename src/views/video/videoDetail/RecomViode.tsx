@@ -5,7 +5,7 @@ import RecomViodeItem from './RecomViodeItem';
 
 import { PersonalRecomVideoInt, RecomVideoInt } from '@/types/video';
 
-const RecomViode: FC = () => {
+const RecomViode: FC = React.memo(() => {
     const [recomList, setRecomList] = useState<Array<RecomVideoInt>>([]);
     useEffect(() => {
         getPersonalizedMv();
@@ -25,6 +25,6 @@ const RecomViode: FC = () => {
             ))}
         </div>
     );
-};
+});
 
 export default RecomViode;

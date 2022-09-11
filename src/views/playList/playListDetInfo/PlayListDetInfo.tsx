@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import { PlayArrowRounded } from '@mui/icons-material';
 import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
@@ -15,7 +15,7 @@ interface PropsInt {
     isPhone: boolean;
 }
 
-function SongListInfo(props: PropsInt) {
+const PlayListDetInfo: FC<PropsInt> = React.memo((props) => {
     return (
         <div className={style.page}>
             <div className={style.page_info}>
@@ -120,10 +120,10 @@ function SongListInfo(props: PropsInt) {
             </div>
         </div>
     );
-}
+});
 
 const mapStateToProps = function (store: any) {
     return { isPhone: store.UserReducer.isPhone };
 };
 
-export default connect(mapStateToProps)(SongListInfo);
+export default connect(mapStateToProps)(PlayListDetInfo);
