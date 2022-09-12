@@ -16,6 +16,7 @@ const PlayListDetail = React.lazy(
 import Home from '@/views/home/Home';
 const PlayList = React.lazy(() => import('@/views/playList/PlayList'));
 const TopList = React.lazy(() => import('@/views/topList/TopList'));
+const Artistlist = React.lazy(() => import('@/views/artistlist/Artistlist'));
 const NotFount = React.lazy(() => import('@/views/notFount/NotFount'));
 
 const lazyLoad = (children: ReactNode): ReactNode => {
@@ -42,6 +43,10 @@ const routes: RouteObject[] = [
                     {
                         path: 'topList',
                         element: lazyLoad(<TopList></TopList>),
+                    },
+                    {
+                        path: 'artistlist',
+                        element: <Artistlist></Artistlist>,
                     },
                 ],
             },

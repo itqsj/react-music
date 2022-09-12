@@ -1,29 +1,44 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 
 import Card from './card/Card';
 
 import style from './css/cardList.module.less';
 import { PersonRecomInt, PlayListInt } from '@/types/playList';
+import { ArtistList } from '@/types/artist';
 import { useNavigate } from 'react-router-dom';
 
 interface PropsInt {
-    data?: PersonRecomInt[] | PlayListInt[];
+    data?: PersonRecomInt[] | PlayListInt[] | ArtistList[];
+    module?: number; //1为歌单列表，2为歌手列表
 }
 
-const CardList: FC<PropsInt> = React.memo(({ data = [] }) => {
+const CardList: FC<PropsInt> = React.memo(({ data = [], module = 1 }) => {
     const navigate = useNavigate();
+    const handlerNavigate = useCallback((id: number) => {
+        let path = '';
+        switch (module) {
+            case 1:
+                path = `/playListDetail?id=${id}`;
+                break;
+            case 2:
+                path = `/artistDetail?id=${id}`;
+                break;
+        }
+        navigate(path);
+    }, []);
 
     return (
         <div className={style.page}>
-            {data.map((item: PersonRecomInt | PlayListInt) => (
-                <Card
-                    data={item}
-                    key={item.id}
-                    navigate={() => {
-                        navigate(`/playListDetail?id=${item.id}`);
-                    }}
-                ></Card>
-            ))}
+            {data.length &&
+                data.map((item: PersonRecomInt | PlayListInt | ArtistList) => (
+                    <Card
+                        data={item}
+                        key={item.id}
+                        navigate={() => {
+                            handlerNavigate(item.id as number);
+                        }}
+                    ></Card>
+                ))}
         </div>
     );
 });

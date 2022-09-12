@@ -42,7 +42,7 @@ function RouterTab() {
         },
         {
             label: '歌手',
-            href: 'personalRecom',
+            href: 'artistlist',
         },
         {
             label: '最新音乐',

@@ -2,13 +2,14 @@ import React, { FC } from 'react';
 
 import style from './css/card.module.less';
 import { PersonRecomInt, PlayListInt } from '@/types/playList';
+import { ArtistList } from '@/types/artist';
 
 interface PropsInt {
-    data: PersonRecomInt | PlayListInt;
+    data: PersonRecomInt | PlayListInt | ArtistList;
     navigate: () => void;
 }
 
-const Card: FC<PropsInt> = (props) => {
+const Card: FC<PropsInt> = React.memo((props) => {
     return (
         <div
             className={style.card}
@@ -18,7 +19,10 @@ const Card: FC<PropsInt> = (props) => {
         >
             <img
                 className={style.card_img}
-                src={props.data.picUrl ?? props.data.coverImgUrl}
+                src={
+                    (props.data.picUrl ?? props.data.coverImgUrl) +
+                    '?param=300y300'
+                }
                 alt=""
             />
             <p className={style.card_title}>{props.data.name}</p>
@@ -27,6 +31,6 @@ const Card: FC<PropsInt> = (props) => {
             </div>
         </div>
     );
-};
+});
 
 export default Card;

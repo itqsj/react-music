@@ -1,0 +1,31 @@
+.item{
+    display: flex;
+    justify-content: flex-start;
+    &_left{
+        display: flex;
+        align-items: center;
+        width: 60px;
+        height: 30px;
+    }
+    &_right{
+        display: flex;
+        align-items: center;
+        flex: 1;
+        flex-wrap: wrap-reverse;
+        // height: 30px;
+        span{
+            width: 60px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            margin:10px 20px 0 0;
+            cursor: pointer;
+        }
+        .is_active{
+            color: #ec4141;
+            background-color: #fdf5f5;
+            border-radius: 15px;
+            display: inline-block;
+        }
+    }
+}
