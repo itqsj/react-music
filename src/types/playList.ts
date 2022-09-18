@@ -242,3 +242,9 @@ export interface PlayListCatItemInt {
     resourceType: number;
     type: number;
 }
+
+//检查是否可以播放返回值
+export interface CheckMusicInt {
+    success: boolean;
+    message: string;
+}

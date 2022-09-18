@@ -16,12 +16,12 @@ interface PropsInt {
     change: (newValue: string) => void;
 }
 
-const NormalTabs: FC<PropsInt> = React.memo((props) => {
+const NormalTabs: FC<PropsInt> = React.memo(({ tabs, change }) => {
     const [value, setValue] = useState<string>('1');
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
-        props.change(newValue);
+        change(newValue);
     };
 
     return (
@@ -46,7 +46,7 @@ const NormalTabs: FC<PropsInt> = React.memo((props) => {
                 }}
                 onChange={handleChange}
             >
-                {props.tabs.map((tab, index) => (
+                {tabs.map((tab, index) => (
                     <Tab
                         sx={{
                             fontSize: '14px',
@@ -59,7 +59,7 @@ const NormalTabs: FC<PropsInt> = React.memo((props) => {
                     ></Tab>
                 ))}
             </TabList>
-            {props.tabs.map((tab, index) => (
+            {tabs.map((tab, index) => (
                 <TabPanel
                     sx={{ padding: '5px 0 0 0' }}
                     key={tab.value}

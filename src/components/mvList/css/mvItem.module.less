@@ -1,0 +1,40 @@
+.item{
+    // overflow: hidden;
+    position: relative;
+    width: 100%;
+    transition: all .3s;
+    cursor: pointer;
+    img{
+        width: 100%;
+        aspect-ratio: 9/5;
+        border-radius: 4px;
+        box-shadow: #666666 0px 1px 4px, #666666 0px 3px 12px 2px;
+        object-fit: contain;
+    }
+    &_play{
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 40px;
+        height: 40px;
+        background-color: #fbf7f6;
+        border-radius: 50%;
+        transform: translate(-50%,-50%);
+        transition: all 1s;
+    }
+    &_count{
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: 8px;
+        right:10px;
+        color: #ffff;
+    }
+    &:hover{
+        transform:scale(1.01);
+        .item_play{
+            opacity: 1;
+        }
+    }
+}

@@ -1,6 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useCallback } from 'react';
 
-import { AnimatePresence, motion } from 'framer-motion';
 import SongListInfo from './playListDetInfo/PlayListDetInfo';
 import NormalTabs from '@/components/tab/Tabs';
 const PlayList = React.lazy(() => import('@/components/playList/PlayList'));
@@ -12,20 +11,6 @@ import style from './css/playListDetail.module.less';
 import { playListDetail } from '@/api/api_playlist';
 import { useSearchParams } from 'react-router-dom';
 import { PlayListDetailInt, PlayListItemInt } from '@/types/playList';
-
-const transition = {
-    duration: 1,
-    ease: [0.43, 0.13, 0.23, 0.96],
-};
-
-const imageVariants = {
-    exit: { y: '25%', opacity: 0, transition },
-    enter: {
-        y: '0%',
-        opacity: 1,
-        transition,
-    },
-};
 
 function PlayListDetail() {
     const [tabVal, setTabVal] = useState<string>('1');
@@ -71,9 +56,12 @@ function PlayListDetail() {
             children: <Collector></Collector>,
         },
     ];
-    const handleTabChange = (tabVal: string) => {
-        setTabVal(tabVal);
-    };
+    const handleTabChange = useCallback(
+        (tabVal: string) => {
+            setTabVal(tabVal);
+        },
+        [tabData],
+    );
     return (
         <Animation>
             <div className={style.page}>

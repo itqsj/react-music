@@ -199,6 +199,7 @@ const ArtistType: FC<PropsInt> = React.memo(({ handleChangeActive }) => {
 
     const handlerActiveChange = useCallback(
         (item: TypeInt, type: string) => {
+            console.log(item);
             switch (type) {
                 case '语种':
                     setActiveArea(item);
@@ -210,13 +211,12 @@ const ArtistType: FC<PropsInt> = React.memo(({ handleChangeActive }) => {
                     setActiveInitial(item);
                     break;
             }
-            handleChangeActive(activeArea, activeType, activeInitial);
         },
         [activeArea, activeType, activeInitial],
     );
     useLayoutEffect(() => {
         handleChangeActive(activeArea, activeType, activeInitial);
-    }, []);
+    }, [activeArea, activeType, activeInitial]);
     return (
         <div className={style.page}>
             {typeArr.map((item) => (

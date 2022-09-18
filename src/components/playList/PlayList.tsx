@@ -13,7 +13,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import { connect } from 'react-redux';
 import style from './css/playList.module.less';
-import { TracksInt } from '@/types/playList';
+import { TracksInt, CheckMusicInt } from '@/types/playList';
 import { changeSong } from '@/redux/actionCreator/PlayList';
 import { ActiveInt } from '@/redux/actionCreator/PlayList';
 import { checkMusic } from '@/api/api_playlist';
@@ -38,11 +38,6 @@ interface PropsInt {
     data: TracksInt[];
     isPhone: boolean;
     changeSong: (data: TracksInt) => ActiveInt;
-}
-
-interface CheckMusicInt {
-    success: boolean;
-    message: string;
 }
 
 const PlayList: FC<PropsInt> = (props) => {

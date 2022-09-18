@@ -1,0 +1,48 @@
+.page{
+    flex: 1;
+    h4{
+        display: flex;
+        align-items: center;
+    }
+}
+
+.table{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+     &_cell{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 35px;
+        font-size: 12px;
+        font-weight: 500;
+        color: rgba(0,0,0,.5);
+        cursor: pointer;
+        &_left{
+            flex: 3;
+            display: flex;
+            &_index{
+                width: 50px;
+            }
+        }
+        &_time{
+            flex: 1;
+        }
+        &:hover{
+            background-color: #f5f7fa!important;
+        }
+    }
+    .cell_bg{
+        background: rgba(0,0,0,.01);
+    }   
+}
+
+@media screen and (max-width: 900px) {
+    .page{
+        width: 100%;
+        h4{
+            justify-content: center;
+        }
+    }
+}
