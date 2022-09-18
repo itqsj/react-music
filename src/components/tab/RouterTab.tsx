@@ -46,7 +46,7 @@ function RouterTab() {
         },
         {
             label: '最新音乐',
-            href: 'personalRecom',
+            href: 'newMusic',
         },
     ];
 

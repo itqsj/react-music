@@ -104,3 +104,9 @@
 .h-20{
   height: 20px;
 }
+
+.center{
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}

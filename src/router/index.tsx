@@ -14,6 +14,8 @@ const PlayListDetail = React.lazy(
 );
 // import SongList from '@/views/songList/SongList';
 import Home from '@/views/home/Home';
+// import NewMusic from '@/views/newMusic/NewMusic';
+const NewMusic = React.lazy(() => import('@/views/newMusic/NewMusic'));
 const PlayList = React.lazy(() => import('@/views/playList/PlayList'));
 const TopList = React.lazy(() => import('@/views/topList/TopList'));
 const Artistlist = React.lazy(() => import('@/views/artistlist/Artistlist'));
@@ -50,6 +52,10 @@ const routes: RouteObject[] = [
                     {
                         path: 'artistlist',
                         element: <Artistlist></Artistlist>,
+                    },
+                    {
+                        path: 'newMusic',
+                        element: <NewMusic></NewMusic>,
                     },
                 ],
             },

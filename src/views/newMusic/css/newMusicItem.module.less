@@ -1,0 +1,38 @@
+.item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 90px;
+    width: 100%;
+    cursor: pointer;
+    &:hover{
+        background: #f0f1f2;
+    }
+    &_index{
+        width: 50px;
+        text-align: center;
+        color: #cfcfdf;
+    }
+    &_img{
+        width: 60px;
+        height: 60px;
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+    }
+    &_name{
+        flex: 1;
+    }
+    &_info{
+        width: 150px;
+        color: rgb(103, 103, 103);
+    }
+    &_time{
+        width: 100px;
+        text-align: center;
+        color: #c3c3c4;
+    }
+}
