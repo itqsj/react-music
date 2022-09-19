@@ -1,4 +1,4 @@
-import React, { FC, useLayoutEffect, useState } from 'react';
+import React, { FC } from 'react';
 
 import Animation from '@/components/animation/Animation';
 

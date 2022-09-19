@@ -1,5 +1,5 @@
 import Animation from '@/components/animation/Animation';
-import React, { FC, useCallback, useState, useLayoutEffect } from 'react';
+import React, { FC, useCallback, useState, useEffect } from 'react';
 
 import ArtistDetailInfo from './ArtistDetailInfo';
 import NormalTabs from '@/components/tab/Tabs';
@@ -115,7 +115,7 @@ const ArtistDetail: FC = () => {
             setDesc(res);
         }
     };
-    useLayoutEffect(() => {
+    useEffect(() => {
         getArtistDetail();
         getArtistTopSong();
     }, []);

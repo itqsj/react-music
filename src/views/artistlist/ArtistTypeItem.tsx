@@ -8,7 +8,7 @@ interface PropsInt {
     activeChange: (item: TypeInt, type: string) => void;
 }
 
-const ArtistType: FC<PropsInt> = ({ data, activeChange }) => {
+const ArtistTypeItem: FC<PropsInt> = ({ data, activeChange }) => {
     const [active, setActive] = useState<TypeInt>({
         name: '全部',
         value: -1,
@@ -38,4 +38,4 @@ const ArtistType: FC<PropsInt> = ({ data, activeChange }) => {
     );
 };
 
-export default ArtistType;
+export default ArtistTypeItem;

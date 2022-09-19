@@ -1,4 +1,4 @@
-import React, { FC, useState, useCallback, useLayoutEffect } from 'react';
+import React, { FC, useState, useCallback, useEffect } from 'react';
 
 import ArtistTypeItem from './ArtistTypeItem';
 
@@ -199,7 +199,6 @@ const ArtistType: FC<PropsInt> = React.memo(({ handleChangeActive }) => {
 
     const handlerActiveChange = useCallback(
         (item: TypeInt, type: string) => {
-            console.log(item);
             switch (type) {
                 case '语种':
                     setActiveArea(item);
@@ -214,7 +213,7 @@ const ArtistType: FC<PropsInt> = React.memo(({ handleChangeActive }) => {
         },
         [activeArea, activeType, activeInitial],
     );
-    useLayoutEffect(() => {
+    useEffect(() => {
         handleChangeActive(activeArea, activeType, activeInitial);
     }, [activeArea, activeType, activeInitial]);
     return (

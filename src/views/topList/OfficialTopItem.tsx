@@ -1,4 +1,4 @@
-import React, { FC, useLayoutEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -34,7 +34,7 @@ const OfficialTopItem: FC<PropsInt> = React.memo(({ data }) => {
     const goPlayListDetail = () => {
         navigate(`/playListDetail?id=${data.id}`);
     };
-    useLayoutEffect(() => {
+    useEffect(() => {
         getPlayListDetail();
     }, []);
     return (

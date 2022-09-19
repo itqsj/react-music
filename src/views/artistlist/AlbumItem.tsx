@@ -1,4 +1,4 @@
-import React, { FC, useLayoutEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import AlbumTable from './AlbumTable';
 
 import style from './css/albumItem.module.less';
@@ -30,12 +30,12 @@ const AlbumItem: FC<PropsInt> = React.memo(({ songs, album }) => {
             setTableSongs(res.songs);
         }
     };
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (album) {
             getAlbumDetail();
         }
     }, [album]);
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (songs.length) {
             setTableSongs(songs);
         }

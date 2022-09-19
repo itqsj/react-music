@@ -1,4 +1,4 @@
-import React, { FC, useLayoutEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
 import AlbumItem from './AlbumItem';
 
@@ -30,20 +30,23 @@ const AlbumList: FC<PropsInt> = React.memo(({ topSongs }) => {
             setAlbums(res.hotAlbums);
         }
     };
-    useLayoutEffect(() => {
+    useEffect(() => {
         getArtistAlbum();
     }, []);
+
     return (
         <Animation>
-            <AlbumItem songs={topSongs}></AlbumItem>
-            {albums.length &&
-                albums.map((item) => (
-                    <AlbumItem
-                        key={item.id}
-                        songs={topSongs}
-                        album={item}
-                    ></AlbumItem>
-                ))}
+            <div>
+                <AlbumItem songs={topSongs}></AlbumItem>
+                {albums.length &&
+                    albums.map((item) => (
+                        <AlbumItem
+                            key={item.id}
+                            songs={topSongs}
+                            album={item}
+                        ></AlbumItem>
+                    ))}
+            </div>
         </Animation>
     );
 });

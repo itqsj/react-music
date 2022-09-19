@@ -11,7 +11,7 @@ import { ArtistAlbumsInt } from '@/types/artist';
 
 interface PropsInt {
     songs: TracksInt[];
-    album: ArtistAlbumsInt;
+    album?: ArtistAlbumsInt;
     changeSong: (data: TracksInt) => void;
 }
 

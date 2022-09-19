@@ -1,4 +1,4 @@
-import React, { FC, useLayoutEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
 import Animation from '@/components/animation/Animation';
 import OfficialTop from './OfficialTop';
@@ -31,7 +31,7 @@ const TopList: FC = () => {
             setGlobalTopList(globalListRes);
         }
     };
-    useLayoutEffect(() => {
+    useEffect(() => {
         getAllTopList();
     }, []);
     return (

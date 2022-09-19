@@ -1,4 +1,4 @@
-import React, { FC, useLayoutEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
 import Menu from '@mui/material/Menu';
 import AllPlayListTag from './AllPlayListTag';
@@ -39,8 +39,7 @@ const TagsSelect: FC<PropsInt> = React.memo(
                 setCatAll(res.all);
             }
         };
-        useLayoutEffect(() => {
-            console.log(123);
+        useEffect(() => {
             getPlayCatlist();
         }, []);
 

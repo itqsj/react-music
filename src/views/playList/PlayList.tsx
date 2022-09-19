@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useLayoutEffect, useState } from 'react';
+import React, { FC, useCallback, useState, useEffect } from 'react';
 
 import Animation from '@/components/animation/Animation';
 import Pagination from '@mui/material/Pagination';
@@ -72,7 +72,7 @@ const PlayList: FC = () => {
         },
         [tags],
     );
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (JSON.stringify(tagActive) !== '{}') {
             getHighquality();
             getTopPlayList();
@@ -95,7 +95,7 @@ const PlayList: FC = () => {
 
         getTopPlayList();
     };
-    useLayoutEffect(() => {
+    useEffect(() => {
         eventBus.on('setActiveTag', setActiveTag);
         getPlaylistLabel();
         return () => {
@@ -105,7 +105,7 @@ const PlayList: FC = () => {
     return (
         <Animation>
             <div className={style.page}>
-                <PlayListCard data={highqualityList}></PlayListCard>;
+                <PlayListCard data={highqualityList}></PlayListCard>
                 <TagsSelect
                     tagActive={tagActive}
                     data={tags}
