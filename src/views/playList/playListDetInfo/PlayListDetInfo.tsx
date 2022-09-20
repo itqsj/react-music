@@ -5,6 +5,7 @@ import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
 import ScreenShareIcon from '@mui/icons-material/ScreenShare';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import Button from '@mui/material/Button';
+import ImgBox from '@/components/imgBox/ImgBox';
 
 import style from './css/playListDetInfo.module.less';
 import { connect } from 'react-redux';
@@ -20,7 +21,7 @@ const PlayListDetInfo: FC<PropsInt> = React.memo((props) => {
         <div className={style.page}>
             <div className={style.page_info}>
                 <img
-                    src={props.data.coverImgUrl}
+                    src={props.data?.coverImgUrl}
                     alt=""
                     style={{
                         filter: 'blur(10px)',
@@ -32,23 +33,22 @@ const PlayListDetInfo: FC<PropsInt> = React.memo((props) => {
                         marginLeft: '0px',
                     }}
                 />
-                <img
-                    className={style.page_info_img}
-                    src={props.data.coverImgUrl}
-                    alt=""
-                />
+                <div className={style.page_info_img}>
+                    <ImgBox src={props.data?.coverImgUrl} alt="" />
+                </div>
+
                 <div className={style.info}>
                     <div className={style.info_title}>
                         <span className={style.info_title_icon}>歌单</span>
-                        {props.data.name}
+                        {props.data?.name}
                     </div>
                     <div className={style.info_user}>
-                        <img src={props.data.creator.avatarUrl} alt="" />
+                        <img src={props.data.creator?.avatarUrl} alt="" />
                         <span className={style.info_user_name}>
-                            {props.data.creator.nickname}
+                            {props.data?.creator?.nickname}
                         </span>
                         <span className={style.info_user_create}>
-                            {props.data.createTime} 创建
+                            {props.data?.createTime} 创建
                         </span>
                     </div>
                     <div className={style.info_operation}>
@@ -65,11 +65,11 @@ const PlayListDetInfo: FC<PropsInt> = React.memo((props) => {
                         </span>
                         <span className={style.info_operation_item}>
                             <AddToPhotosIcon sx={{ fontSize: '1.5rem' }} />
-                            收藏（{props.data.subscribedCount}）
+                            收藏（{props.data?.subscribedCount}）
                         </span>
                         <span className={style.info_operation_item}>
                             <ScreenShareIcon sx={{ fontSize: '1.5rem' }} />
-                            分享（{props.data.shareCount}）
+                            分享（{props.data?.shareCount}）
                         </span>
                         <span className={style.info_operation_item}>
                             <CloudDownloadIcon sx={{ fontSize: '1.5rem' }} />
@@ -80,7 +80,7 @@ const PlayListDetInfo: FC<PropsInt> = React.memo((props) => {
                         <div className={style.info_label}>
                             <span>
                                 标签：
-                                {props.data.tags.map((tag, index) => (
+                                {props.data?.tags?.map((tag, index) => (
                                     <span
                                         key={index}
                                         style={{ marginLeft: '5px' }}
@@ -93,14 +93,14 @@ const PlayListDetInfo: FC<PropsInt> = React.memo((props) => {
                     )}
                     {!props.isPhone && (
                         <div className={style.info_label}>
-                            <span>歌曲：{props.data.trackCount}</span>
+                            <span>歌曲：{props.data?.trackCount}</span>
                             <span style={{ marginLeft: '10px' }}>
-                                播放：{props.data.playCount}
+                                播放：{props.data?.playCount}
                             </span>
                         </div>
                     )}
                     <div className={style.info_label}>
-                        简介：{props.data.description}
+                        简介：{props.data?.description}
                     </div>
                 </div>
             </div>
@@ -111,11 +111,11 @@ const PlayListDetInfo: FC<PropsInt> = React.memo((props) => {
                 </Button>
                 <Button>
                     <AddToPhotosIcon sx={{ fontSize: '1.5rem' }} />
-                    {props.data.subscribedCount}
+                    {props.data?.subscribedCount}
                 </Button>
                 <Button>
                     <ScreenShareIcon sx={{ fontSize: '1.5rem' }} />
-                    {props.data.shareCount}
+                    {props.data?.shareCount}
                 </Button>
             </div>
         </div>

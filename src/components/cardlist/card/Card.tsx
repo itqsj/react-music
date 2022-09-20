@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import style from './css/card.module.less';
 import { PersonRecomInt, PlayListInt } from '@/types/playList';
 import { ArtistList } from '@/types/artist';
+import ImgBox from '@/components/imgBox/ImgBox';
 
 interface PropsInt {
     data: PersonRecomInt | PlayListInt | ArtistList;
@@ -17,8 +18,7 @@ const Card: FC<PropsInt> = React.memo((props) => {
                 props.navigate();
             }}
         >
-            <img
-                className={style.card_img}
+            <ImgBox
                 src={
                     (props.data.picUrl ?? props.data.coverImgUrl) +
                     '?param=300y300'

@@ -5,6 +5,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import style from './css/mvItem.module.less';
 import { ArtistMvInt } from '@/types/artist';
 import { useNavigate } from 'react-router-dom';
+import ImgBox from '../imgBox/ImgBox';
 
 interface PropsInt {
     data: ArtistMvInt;
@@ -17,7 +18,13 @@ const MvItem: FC<PropsInt> = ({ data }) => {
     };
     return (
         <div className={style.item} onClick={goMVDetail}>
-            <img src={data.imgurl + '?param=320y180'} alt="" />
+            <div className={style.item_img}>
+                <ImgBox
+                    src={data.imgurl + '?param=320y180'}
+                    alt=""
+                    aspectRatio="9/5"
+                />
+            </div>
             <div className={[style.item_count, 'font-12'].join(' ')}>
                 <PlayArrowIcon
                     sx={{

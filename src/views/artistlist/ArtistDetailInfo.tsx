@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 
 import style from './css/artistDetailInfo.module.less';
 import { ArtistInfoInt } from '@/types/artist';
+import ImgBox from '@/components/imgBox/ImgBox';
 
 interface PropsInt {
     data: ArtistInfoInt;
@@ -10,7 +11,10 @@ interface PropsInt {
 const ArtistDetailInfo: FC<PropsInt> = ({ data }) => {
     return (
         <div className={['mtop-10', 'mbottom10', style.page].join(' ')}>
-            <img src={data.cover + '?param=300y300'} alt="" />
+            <div className={style.page_img}>
+                <ImgBox src={data.cover + '?param=300y300'} alt="" />
+            </div>
+
             <div className={['mtop-10', 'mleft-20', style.page_info].join(' ')}>
                 <h3>{data.name}</h3>
                 <div className={style.page_info_tag}>

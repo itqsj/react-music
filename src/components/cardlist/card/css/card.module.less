@@ -1,19 +1,13 @@
 .card{
     position: relative;
     transition: .3s;
+    width: 100%;
+    aspect-ratio: 1/1;
     &:hover{
         transform:scale(1.05);
         .card_icon{
             opacity: 1;
         }
-    }
-    &_img{
-        width: 100%;
-        // width: 190px;
-        aspect-ratio: 1/1;
-        object-fit: cover;
-        border-radius: 8px;
-        box-shadow:rgb(102, 102, 102) 0px 1px 4px, rgb(102, 102, 102) 0px 3px 12px 2px;
     }
     &_title{
         font-size: 14px;

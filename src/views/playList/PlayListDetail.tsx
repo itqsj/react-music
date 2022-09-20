@@ -65,7 +65,7 @@ function PlayListDetail() {
     return (
         <Animation>
             <div className={style.page}>
-                {hasPlayList && <SongListInfo data={playlist}></SongListInfo>}
+                <SongListInfo data={playlist}></SongListInfo>
                 <div style={{ padding: '5px 15px' }}>
                     <NormalTabs
                         tabs={tabData}

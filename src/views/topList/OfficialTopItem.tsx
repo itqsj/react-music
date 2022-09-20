@@ -12,6 +12,7 @@ import {
 } from '@/types/playList';
 import { playListDetail } from '@/api/api_playlist';
 import { useNavigate } from 'react-router-dom';
+import ImgBox from '@/components/imgBox/ImgBox';
 
 interface PropsInt {
     data: PlayListInt;
@@ -43,7 +44,10 @@ const OfficialTopItem: FC<PropsInt> = React.memo(({ data }) => {
                 className={[style.item_img, 'mright-20'].join(' ')}
                 onClick={goPlayListDetail}
             >
-                <img src={data.coverImgUrl} alt="" />
+                <div className={style.item_img_box}>
+                    <ImgBox src={data.coverImgUrl} alt="" />
+                </div>
+
                 <div className={style.item_img_play}>
                     <PlayArrowIcon
                         className={style.item_img_play_icon}

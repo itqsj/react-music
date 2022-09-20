@@ -14,6 +14,9 @@ const PlayListDetail = React.lazy(
 );
 // import SongList from '@/views/songList/SongList';
 import Home from '@/views/home/Home';
+
+import Loading from '@/components/loading/Loading';
+
 // import NewMusic from '@/views/newMusic/NewMusic';
 const NewMusic = React.lazy(() => import('@/views/newMusic/NewMusic'));
 const PlayList = React.lazy(() => import('@/views/playList/PlayList'));
@@ -25,7 +28,7 @@ const ArtistDetail = React.lazy(
 const NotFount = React.lazy(() => import('@/views/notFount/NotFount'));
 
 const lazyLoad = (children: ReactNode): ReactNode => {
-    return <Suspense fallback={<div>loading</div>}>{children}</Suspense>;
+    return <Suspense fallback={<Loading></Loading>}>{children}</Suspense>;
 };
 
 const routes: RouteObject[] = [

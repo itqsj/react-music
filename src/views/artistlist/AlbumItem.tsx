@@ -5,6 +5,7 @@ import style from './css/albumItem.module.less';
 import { TracksInt } from '@/types/playList';
 import { ArtistAlbumsInt, ParamsInt } from '@/types/artist';
 import { albumDetail } from '@/api/api_artist';
+import ImgBox from '@/components/imgBox/ImgBox';
 
 interface PropsInt {
     songs: TracksInt[];
@@ -43,14 +44,16 @@ const AlbumItem: FC<PropsInt> = React.memo(({ songs, album }) => {
 
     return (
         <div className={[style.item, 'mtop-10'].join(' ')}>
-            {album ? (
-                <img src={album?.picUrl + '?param=300y300'} alt="" />
-            ) : (
-                <img
-                    src="http://47.102.159.133/img/top50.89421d54.png?param=300y300"
-                    alt=""
-                />
-            )}
+            <div className={style.item_img}>
+                {album ? (
+                    <ImgBox src={album?.picUrl + '?param=300y300'} alt="" />
+                ) : (
+                    <ImgBox
+                        src="http://47.102.159.133/img/top50.89421d54.png?param=300y300"
+                        alt=""
+                    />
+                )}
+            </div>
 
             <AlbumTable album={album} songs={tableSongs}></AlbumTable>
         </div>

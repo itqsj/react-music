@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import style from './css/playListCard.module.less';
 
 import { PlayListInt } from '@/types/playList';
+import ImgBox from '@/components/imgBox/ImgBox';
 
 interface PropsInt {
     data: PlayListInt;
@@ -13,7 +14,10 @@ const PlayListCard: FC<PropsInt> = React.memo(({ data }) => {
         <div className={[style.card, 'mtop-10', 'mbottom-10'].join(' ')}>
             <img className={style.card_bg} src={data.coverImgUrl} alt="" />
             <div className={style.card_body}>
-                <img src={data.coverImgUrl} alt="" />
+                <div className={style.card_body_img}>
+                    <ImgBox src={data.coverImgUrl} alt="" />
+                </div>
+
                 <div className={style.card_body_info}>
                     <span
                         className={[style.card_body_info_label, 'font-16'].join(
