@@ -8,7 +8,7 @@ interface PropsInt {
     data: ArtistInfoInt;
 }
 
-const ArtistDetailInfo: FC<PropsInt> = ({ data }) => {
+const ArtistDetailInfo: FC<PropsInt> = React.memo(({ data }) => {
     return (
         <div className={['mtop-10', 'mbottom10', style.page].join(' ')}>
             <div className={style.page_img}>
@@ -30,6 +30,6 @@ const ArtistDetailInfo: FC<PropsInt> = ({ data }) => {
             </div>
         </div>
     );
-};
+});
 
 export default ArtistDetailInfo;

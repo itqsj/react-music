@@ -1,16 +1,17 @@
 import React, { FC, ReactNode } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 
 interface PropInt {
     children: ReactNode;
+    type?: string;
 }
 
 const transition = {
-    duration: 1,
+    duration: 0.8,
     ease: [0.43, 0.13, 0.23, 0.96],
 };
 
-const imageVariants = {
+const move = {
     exit: { y: '25%', opacity: 0, transition },
     enter: {
         y: '0%',
@@ -19,7 +20,20 @@ const imageVariants = {
     },
 };
 
-const Animation: FC<PropInt> = ({ children }) => {
+const opacity = {
+    exit: { opacity: 0, transition },
+    enter: {
+        opacity: 1,
+        transition,
+    },
+};
+
+const typeObj = {
+    move,
+    opacity,
+};
+
+const Animation: FC<PropInt> = ({ children, type = 'move' }) => {
     return (
         <AnimatePresence exitBeforeEnter>
             <motion.div
@@ -28,7 +42,7 @@ const Animation: FC<PropInt> = ({ children }) => {
                 animate="enter"
                 exit="exit"
             >
-                <motion.div key="modal" variants={imageVariants}>
+                <motion.div key="modal" variants={typeObj[type]}>
                     {children}
                 </motion.div>
             </motion.div>

@@ -35,9 +35,9 @@ const AlbumList: FC<PropsInt> = React.memo(({ topSongs }) => {
     }, []);
 
     return (
-        <Animation>
+        <Animation type="opacity">
             <div>
-                <AlbumItem songs={topSongs}></AlbumItem>
+                <AlbumItem songs={topSongs} isHot={true}></AlbumItem>
                 {albums.length &&
                     albums.map((item) => (
                         <AlbumItem

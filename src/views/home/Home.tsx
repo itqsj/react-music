@@ -4,6 +4,7 @@ import RouterTab from '@/components/tab/RouterTab';
 
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
+import HomeRouter from '@/router/HomeRouter';
 
 const transition = {
     duration: 1,
@@ -20,13 +21,13 @@ const imageVariants = {
 };
 
 function Home() {
-    const navigate = useNavigate();
-    const { pathname } = useLocation();
-    useEffect(() => {
-        if (pathname === '/home') {
-            navigate('/home/personalRecom');
-        }
-    }, []);
+    // const navigate = useNavigate();
+    // const { pathname } = useLocation();
+    // useEffect(() => {
+    //     if (pathname === '/home') {
+    //         navigate('/home/personalRecom');
+    //     }
+    // }, []);
     return (
         <div
             style={{
@@ -35,22 +36,8 @@ function Home() {
         >
             <RouterTab></RouterTab>
             <div>
-                <AnimatePresence exitBeforeEnter>
-                    <motion.div
-                        className="single"
-                        initial="exit"
-                        animate="enter"
-                        exit="exit"
-                    >
-                        <motion.div
-                            style={{ overflow: 'hidden' }}
-                            key="modal"
-                            variants={imageVariants}
-                        >
-                            <Outlet />
-                        </motion.div>
-                    </motion.div>
-                </AnimatePresence>
+                {/* <Outlet /> */}
+                <HomeRouter></HomeRouter>
             </div>
         </div>
     );

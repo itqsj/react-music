@@ -9,61 +9,58 @@ interface PropsInt {
     aspectRatio?: string;
 }
 
-const ImgBox: FC<PropsInt> = ({
-    src,
-    alt,
-    type = 'loada',
-    aspectRatio = '1/1',
-}) => {
-    const [loading, setLoading] = useState<boolean>(true);
+const ImgBox: FC<PropsInt> = React.memo(
+    ({ src, alt, type = 'loada', aspectRatio = '1/1' }) => {
+        const [loading, setLoading] = useState<boolean>(true);
 
-    const handleLoad = () => {
-        setLoading(false);
-    };
-    return (
-        <div
-            className={style.box}
-            style={{
-                aspectRatio,
-            }}
-        >
-            <img
+        const handleLoad = () => {
+            setLoading(false);
+        };
+        return (
+            <div
+                className={style.box}
                 style={{
-                    opacity: loading ? '0' : '1',
                     aspectRatio,
                 }}
-                className={style.box_img}
-                src={src}
-                onLoad={handleLoad}
-                alt={alt}
-            />
-            {type === 'loada' && (
-                <div
-                    className={style.box_load}
+            >
+                <img
                     style={{
-                        opacity: loading ? '1' : '0',
+                        opacity: loading ? '0' : '1',
+                        aspectRatio,
                     }}
-                >
-                    <hr />
-                    <hr />
-                    <hr />
-                    <hr />
-                </div>
-            )}
-            {type === 'loadb' && (
-                <div
-                    className={style.box_loadb}
-                    style={{
-                        opacity: loading ? '1' : '0',
-                    }}
-                >
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            )}
-        </div>
-    );
-};
+                    className={style.box_img}
+                    src={src}
+                    onLoad={handleLoad}
+                    alt={alt}
+                />
+                {type === 'loada' && (
+                    <div
+                        className={style.box_load}
+                        style={{
+                            opacity: loading ? '1' : '0',
+                        }}
+                    >
+                        <hr />
+                        <hr />
+                        <hr />
+                        <hr />
+                    </div>
+                )}
+                {type === 'loadb' && (
+                    <div
+                        className={style.box_loadb}
+                        style={{
+                            opacity: loading ? '1' : '0',
+                        }}
+                    >
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                )}
+            </div>
+        );
+    },
+);
 
 export default ImgBox;

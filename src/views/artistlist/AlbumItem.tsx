@@ -10,6 +10,7 @@ import ImgBox from '@/components/imgBox/ImgBox';
 interface PropsInt {
     songs: TracksInt[];
     album?: ArtistAlbumsInt;
+    isHot?: boolean;
 }
 
 interface ResAlbumSong {
@@ -18,46 +19,50 @@ interface ResAlbumSong {
     resourceState: boolean;
     songs: TracksInt[];
 }
-const AlbumItem: FC<PropsInt> = React.memo(({ songs, album }) => {
-    const [tableSongs, setTableSongs] = useState<TracksInt[]>(
-        [] as TracksInt[],
-    );
-    const getAlbumDetail = async () => {
-        const params = {
-            id: album?.id,
-        } as ParamsInt;
-        const res: ResAlbumSong = (await albumDetail(params)) as ResAlbumSong;
-        if (res.code === 200) {
-            setTableSongs(res.songs);
-        }
-    };
-    useEffect(() => {
-        if (album) {
-            getAlbumDetail();
-        }
-    }, [album]);
-    useEffect(() => {
-        if (songs.length) {
-            setTableSongs(songs);
-        }
-    }, [songs]);
+const AlbumItem: FC<PropsInt> = React.memo(
+    ({ songs, album, isHot = false }) => {
+        const [tableSongs, setTableSongs] = useState<TracksInt[]>(
+            [] as TracksInt[],
+        );
+        const getAlbumDetail = async () => {
+            const params = {
+                id: album?.id,
+            } as ParamsInt;
+            const res: ResAlbumSong = (await albumDetail(
+                params,
+            )) as ResAlbumSong;
+            if (res.code === 200) {
+                setTableSongs(res.songs);
+            }
+        };
+        useEffect(() => {
+            if (album?.id && !isHot) {
+                getAlbumDetail();
+            }
+        }, [album]);
+        useEffect(() => {
+            if (songs.length && isHot) {
+                setTableSongs(songs);
+            }
+        }, [songs]);
 
-    return (
-        <div className={[style.item, 'mtop-10'].join(' ')}>
-            <div className={style.item_img}>
-                {album ? (
-                    <ImgBox src={album?.picUrl + '?param=300y300'} alt="" />
-                ) : (
-                    <ImgBox
-                        src="http://47.102.159.133/img/top50.89421d54.png?param=300y300"
-                        alt=""
-                    />
-                )}
+        return (
+            <div className={[style.item, 'mtop-10'].join(' ')}>
+                <div className={style.item_img}>
+                    {album ? (
+                        <ImgBox src={album?.picUrl + '?param=300y300'} alt="" />
+                    ) : (
+                        <ImgBox
+                            src="http://47.102.159.133/img/top50.89421d54.png?param=300y300"
+                            alt=""
+                        />
+                    )}
+                </div>
+
+                <AlbumTable album={album} songs={tableSongs}></AlbumTable>
             </div>
-
-            <AlbumTable album={album} songs={tableSongs}></AlbumTable>
-        </div>
-    );
-});
+        );
+    },
+);
 
 export default AlbumItem;

@@ -8,6 +8,7 @@ import Player from '@/components/player/Player';
 import style from './css/layout.module.less';
 import { connect } from 'react-redux/es/exports';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
+import LayoutRouter from '@/router/LayoutRouter';
 
 const transition = {
     duration: 1,
@@ -52,22 +53,8 @@ function Layout({ isPhone }: LayoutPropInt) {
                         borderRadius: '8px',
                     }}
                 >
-                    <AnimatePresence>
-                        <motion.div
-                            className="single"
-                            initial="exit"
-                            animate="enter"
-                            exit="exit"
-                        >
-                            <motion.div
-                                style={{ overflow: 'hidden' }}
-                                key="modal"
-                                variants={imageVariants}
-                            >
-                                <Outlet />
-                            </motion.div>
-                        </motion.div>
-                    </AnimatePresence>
+                    {/* <Outlet /> */}
+                    <LayoutRouter></LayoutRouter>
                 </div>
                 <div className={style.layout_footer}>
                     <Player></Player>

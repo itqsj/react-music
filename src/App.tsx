@@ -27,7 +27,7 @@ function App(props: any) {
     }, []);
     return (
         <div className="App">
-            <AnimatePresence>
+            {/* <AnimatePresence>
                 <motion.div
                     style={{ overflow: 'hidden' }}
                     key="modal"
@@ -35,10 +35,11 @@ function App(props: any) {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 1, ease: [0.43, 0.13, 0.23, 0.96] }}
-                >
-                    {useRoutes(routes)}
-                </motion.div>
-            </AnimatePresence>
+                > */}
+            {/* {useRoutes(routes)} */}
+            <Layout></Layout>
+            {/* </motion.div> */}
+            {/* </AnimatePresence> */}
         </div>
     );
 }

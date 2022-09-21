@@ -1,13 +1,25 @@
 import Animation from '@/components/animation/Animation';
-import React, { FC, useCallback, useState, useEffect } from 'react';
+import React, {
+    FC,
+    useCallback,
+    useState,
+    useEffect,
+    Suspense,
+    ReactNode,
+} from 'react';
 
 import ArtistDetailInfo from './ArtistDetailInfo';
 import NormalTabs from '@/components/tab/Tabs';
-// const AlbumList = React.lazy(() => import('./AlbumList'));
-// const AlbumMv = React.lazy(() => import('./AlbumMv'));
-import AlbumList from './AlbumList';
-import AlbumMv from './AlbumMv';
-import ArtistDesc from './ArtistDesc';
+const AlbumList = React.lazy(() => import('./AlbumList'));
+const AlbumMv = React.lazy(() => import('./AlbumMv'));
+const ArtistDesc = React.lazy(() => import('./ArtistDesc'));
+// import AlbumList from './AlbumList';
+// import AlbumMv from './AlbumMv';
+// import ArtistDesc from './ArtistDesc';
+import Loading from '@/components/loading/Loading';
+const lazyLoad = (children: ReactNode): ReactNode => {
+    return <Suspense fallback={<Loading></Loading>}>{children}</Suspense>;
+};
 
 import style from './css/artistDetail.module.less';
 import {
@@ -48,17 +60,17 @@ const ArtistDetail: FC = () => {
         {
             label: '专辑',
             value: '1',
-            children: <AlbumList topSongs={topSongs}></AlbumList>,
+            children: lazyLoad(<AlbumList topSongs={topSongs}></AlbumList>),
         },
         {
             label: 'MV',
             value: '2',
-            children: <AlbumMv data={artistMvList}></AlbumMv>,
+            children: lazyLoad(<AlbumMv data={artistMvList}></AlbumMv>),
         },
         {
             label: '歌手详情',
             value: '3',
-            children: <ArtistDesc data={desc}></ArtistDesc>,
+            children: lazyLoad(<ArtistDesc data={desc}></ArtistDesc>),
         },
         {
             label: '相似歌手',
