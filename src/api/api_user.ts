@@ -2,8 +2,9 @@ import http from './api_index';
 
 interface CollectorInt {
     //收藏者列表
-    id: string;
-    limit: number;
+    id?: string;
+    limit?: number;
+    uid?: string;
 }
 
 // 账号信息
@@ -20,6 +21,17 @@ export function userAccount() {
 export function subscribers(params: CollectorInt) {
     return http({
         url: '/api/playlist/subscribers',
+        params: {
+            timestamp: Date.now(),
+            ...params,
+        },
+    });
+}
+
+//用户详情
+export function userDetail(params: CollectorInt) {
+    return http({
+        url: '/api/user/detail',
         params: {
             timestamp: Date.now(),
             ...params,

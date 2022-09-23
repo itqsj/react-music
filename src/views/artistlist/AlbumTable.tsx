@@ -3,8 +3,7 @@ import React, { FC } from 'react';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 
 import style from './css/albumTable.module.less';
-import { TracksInt, CheckMusicInt } from '@/types/playList';
-import { checkMusic } from '@/api/api_playlist';
+import { TracksInt } from '@/types/playList';
 import { connect } from 'react-redux';
 import { changeSong } from '@/redux/actionCreator/PlayList';
 import { ArtistAlbumsInt } from '@/types/artist';
@@ -17,12 +16,7 @@ interface PropsInt {
 
 const AlbumTable: FC<PropsInt> = React.memo(({ songs, album, changeSong }) => {
     const handlePlay = async (songData: TracksInt) => {
-        const data: CheckMusicInt = (await checkMusic({
-            id: songData.id,
-        })) as CheckMusicInt; //判断是否有版权
-        if (data.success) {
-            changeSong(songData);
-        }
+        changeSong(songData);
     };
     return (
         <div className={[style.page, 'mleft-20'].join(' ')}>
@@ -71,7 +65,7 @@ const AlbumTable: FC<PropsInt> = React.memo(({ songs, album, changeSong }) => {
                                 style={{
                                     color: 'rgba(0,0,0,08)',
                                 }}
-                                onDoubleClick={() => handlePlay(item)}
+                                onClick={() => handlePlay(item)}
                             >
                                 <div className={style.table_cell_left}>
                                     <div

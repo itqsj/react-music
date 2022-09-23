@@ -8,9 +8,11 @@ import style from './css/newMusicBody.module.less';
 import { NewSongsInt, ResNewSongsInt } from '@/types/newMusic';
 import { topSongs } from '@/api/api_newMusic';
 import Animation from '@/components/animation/Animation';
+import Loading from '@/components/loading/Loading';
 
 const NewMusicBody: FC = () => {
     const [active, setActive] = useState<number>(0);
+    const [loading, setLoading] = useState<boolean>(false);
     const [newSongs, setNewSongs] = useState<NewSongsInt[]>(
         [] as NewSongsInt[],
     );
@@ -43,9 +45,11 @@ const NewMusicBody: FC = () => {
         const res: ResNewSongsInt = (await topSongs(params)) as ResNewSongsInt;
         if (res.code === 200) {
             setNewSongs(res.data);
+            setLoading(false);
         }
     };
     useEffect(() => {
+        setLoading(true);
         getTopSongs();
     }, [active]);
     return (
@@ -88,6 +92,7 @@ const NewMusicBody: FC = () => {
                     </div>
                 </div>
                 <div className={style.page_body}>
+                    {loading && <Loading></Loading>}
                     {newSongs.map((item, index) => (
                         <NewMusicItem
                             data={item}

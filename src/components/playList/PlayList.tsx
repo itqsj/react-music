@@ -13,10 +13,9 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import { connect } from 'react-redux';
 import style from './css/playList.module.less';
-import { TracksInt, CheckMusicInt } from '@/types/playList';
+import { TracksInt } from '@/types/playList';
 import { changeSong } from '@/redux/actionCreator/PlayList';
 import { ActiveInt } from '@/redux/actionCreator/PlayList';
-import { checkMusic } from '@/api/api_playlist';
 import { PlayArrowRounded } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 
@@ -43,12 +42,7 @@ interface PropsInt {
 const PlayList: FC<PropsInt> = (props) => {
     const navigate = useNavigate();
     const handleSongClick = async (songData: TracksInt) => {
-        const data: CheckMusicInt = (await checkMusic({
-            id: songData.id,
-        })) as CheckMusicInt; //判断是否有版权
-        if (data.success) {
-            props.changeSong(songData);
-        }
+        props.changeSong(songData);
     };
 
     const handleGoMv = (event: Event, data: TracksInt) => {

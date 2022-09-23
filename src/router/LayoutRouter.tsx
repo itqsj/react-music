@@ -11,6 +11,7 @@ const ArtistDetail = React.lazy(
     () => import('@/views/artistlist/ArtistDetail'),
 );
 import Home from '@/views/home/Home';
+import UserDetail from '@/views/userDetail/UserDetail';
 const lazyLoad = (children: ReactNode): ReactNode => {
     return <Suspense fallback={<Loading></Loading>}>{children}</Suspense>;
 };
@@ -33,6 +34,10 @@ function LayoutRouter() {
             <Route
                 path="artistDetail"
                 element={lazyLoad(<ArtistDetail></ArtistDetail>)}
+            ></Route>
+            <Route
+                path="/userDetail"
+                element={<UserDetail></UserDetail>}
             ></Route>
 
             <Route path="*" element={<NotFount></NotFount>}></Route>
