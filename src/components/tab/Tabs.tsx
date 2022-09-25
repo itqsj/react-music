@@ -13,7 +13,7 @@ interface LinkTabProps {
 
 interface PropsInt {
     tabs: LinkTabProps[];
-    change: (newValue: string) => void;
+    change?: (newValue: string) => void;
 }
 
 const NormalTabs: FC<PropsInt> = React.memo(({ tabs, change }) => {
@@ -21,7 +21,7 @@ const NormalTabs: FC<PropsInt> = React.memo(({ tabs, change }) => {
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
-        change(newValue);
+        change && change(newValue);
     };
 
     return (

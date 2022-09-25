@@ -1,3 +1,5 @@
+import { PlayListInt } from './playList';
+
 //用户详情
 export interface ResUserDetailInt {
     adValid: boolean;
@@ -64,4 +66,12 @@ export interface ProfileInt {
     userId: number;
     userType: number;
     vipType: number;
+}
+
+//用户歌单返回值
+export interface ResUserPlaylistInt {
+    code: number;
+    more: boolean;
+    playlist: Array<PlayListInt>;
+    version: string;
 }

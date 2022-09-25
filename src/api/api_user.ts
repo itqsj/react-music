@@ -4,7 +4,7 @@ interface CollectorInt {
     //收藏者列表
     id?: string;
     limit?: number;
-    uid?: string;
+    uid?: string | number | null;
 }
 
 // 账号信息

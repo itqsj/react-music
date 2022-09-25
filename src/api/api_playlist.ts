@@ -2,6 +2,7 @@ import http from './api_index';
 
 export interface ParamsIdInt {
     id?: string | null | number;
+    Uid?: string | null | number;
     limit?: number;
     cat?: string;
     offset?: number;
@@ -110,6 +111,17 @@ export function allTopList() {
         url: '/api/toplist',
         params: {
             timestamp: Date.now(),
+        },
+    });
+}
+
+//获取用户歌单
+export function userPlaylist(params: ParamsIdInt) {
+    return http({
+        url: '/api/user/playlist',
+        params: {
+            timestamp: Date.now(),
+            ...params,
         },
     });
 }
