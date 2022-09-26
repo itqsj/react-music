@@ -10,8 +10,10 @@ const PlayListDetail = React.lazy(
 const ArtistDetail = React.lazy(
     () => import('@/views/artistlist/ArtistDetail'),
 );
+const Search = React.lazy(() => import('@/views/search/Search'));
 import Home from '@/views/home/Home';
 import UserDetail from '@/views/userDetail/UserDetail';
+
 const lazyLoad = (children: ReactNode): ReactNode => {
     return <Suspense fallback={<Loading></Loading>}>{children}</Suspense>;
 };
@@ -37,7 +39,11 @@ function LayoutRouter() {
             ></Route>
             <Route
                 path="/userDetail"
-                element={<UserDetail></UserDetail>}
+                element={lazyLoad(<UserDetail></UserDetail>)}
+            ></Route>
+            <Route
+                path="/searchDetail"
+                element={lazyLoad(<Search></Search>)}
             ></Route>
 
             <Route path="*" element={<NotFount></NotFount>}></Route>

@@ -248,3 +248,16 @@ export interface CheckMusicInt {
     success: boolean;
     message: string;
 }
+
+//
+export interface ResSearchInt {
+    code: number;
+    result: SearchInt;
+}
+
+//
+export interface SearchInt {
+    searchQcReminder: string;
+    songCount: number;
+    songs: Array<TracksInt>;
+}

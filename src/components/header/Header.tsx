@@ -1,4 +1,10 @@
-import React, { useState, ChangeEvent, MouseEvent, useEffect } from 'react';
+import React, {
+    FC,
+    useState,
+    FocusEvent,
+    ChangeEvent,
+    KeyboardEvent,
+} from 'react';
 
 import { styled, alpha } from '@mui/material/styles';
 import {
@@ -13,8 +19,12 @@ import {
 import SearchIcon from '@mui/icons-material/Search';
 import ArrowBackIosNew from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { connect } from 'react-redux/es/exports';
 import MenuIcon from '@mui/icons-material/Menu';
+import FocusPopper from '../focusPopper/FocusPopper';
+import SearchPopper from '@/views/search/SearchPopper';
+
+import { connect } from 'react-redux/es/exports';
+import { useNavigate } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -58,9 +68,26 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-function Header(props: any) {
-    const handleChange = () => {
-        return false;
+interface PropsInt {
+    isPhone?: boolean;
+}
+
+const Header: FC<PropsInt> = (props) => {
+    const [element, setelement] = useState<HTMLElement | null>(null);
+    let searchVal = '';
+    const navigate = useNavigate();
+    const searchFocus = (event: FocusEvent<HTMLElement>) => {
+        setelement(event.target.parentElement.parentElement);
+    };
+    const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
+        searchVal = event.target.value;
+    };
+    const handleSearch = (event: KeyboardEvent<HTMLInputElement>) => {
+        const keyCode = event.keyCode;
+        if (keyCode === 13) {
+            navigate(`/searchDetail?key=${searchVal}`);
+            console.log(event);
+        }
     };
     return (
         <Box
@@ -101,13 +128,20 @@ function Header(props: any) {
                     )}
 
                     <Search>
-                        <SearchIconWrapper>
+                        <SearchIconWrapper
+                            onClick={() =>
+                                navigate(`/searchDetail?key=${searchVal}`)
+                            }
+                        >
                             <SearchIcon />
                         </SearchIconWrapper>
                         <StyledInputBase
                             placeholder="Search…"
                             inputProps={{ 'aria-label': 'search' }}
-                            onChange={handleChange}
+                            onFocus={searchFocus}
+                            onBlur={() => setelement(null)}
+                            onKeyUp={handleSearch}
+                            onChange={handleSearchChange}
                         />
                     </Search>
                     <Typography
@@ -121,9 +155,12 @@ function Header(props: any) {
                     />
                 </Toolbar>
             </AppBar>
+            <FocusPopper element={element}>
+                <SearchPopper></SearchPopper>
+            </FocusPopper>
         </Box>
     );
-}
+};
 
 const mapStateToProps = function (store: any) {
     return { isPhone: store.UserReducer.isPhone };

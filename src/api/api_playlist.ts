@@ -125,3 +125,14 @@ export function userPlaylist(params: ParamsIdInt) {
         },
     });
 }
+
+//歌单
+export function cloudSearch(params: ParamsIdInt) {
+    return http({
+        url: '/api/cloudsearch',
+        params: {
+            timestamp: Date.now(),
+            ...params,
+        },
+    });
+}

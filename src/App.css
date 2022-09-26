@@ -108,6 +108,14 @@
   height: 20px;
 }
 
+.color-3{
+  color: rgba(0, 0, 0,0.3);
+}
+.color-5{
+  color: rgba(0, 0, 0,0.5);
+}
+
+
 .center{
   display: flex;
   align-items: center;
