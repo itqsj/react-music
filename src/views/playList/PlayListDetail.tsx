@@ -2,7 +2,9 @@ import React, { useEffect, useMemo, useState, useCallback } from 'react';
 
 import SongListInfo from './playListDetInfo/PlayListDetInfo';
 import NormalTabs from '@/components/tab/Tabs';
-const PlayList = React.lazy(() => import('@/components/playList/PlayList'));
+const PlayList = React.lazy(
+    () => import('@/components/list/playList/PlayList'),
+);
 const PlayComment = React.lazy(() => import('@/views/common/PlayComment'));
 const Animation = React.lazy(() => import('@/components/animation/Animation'));
 const Collector = React.lazy(() => import('@/views/collector/Collector'));

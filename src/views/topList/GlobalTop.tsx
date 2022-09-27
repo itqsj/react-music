@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 
-import CardList from '@/components/cardlist/CardList';
+import CardList from '@/components/list/cardlist/CardList';
 
 import style from './css/globalTop.module.less';
 import { PlayListInt } from '@/types/playList';

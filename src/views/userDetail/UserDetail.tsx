@@ -10,7 +10,7 @@ import { ResUserDetailInt, ProfileInt, ResUserPlaylistInt } from '@/types/user';
 import { userPlaylist } from '@/api/api_playlist';
 import { PlayListInt } from '@/types/playList';
 import NormalTabs from '@/components/tab/Tabs';
-import CardList from '@/components/cardlist/CardList';
+import CardList from '@/components/list/cardlist/CardList';
 
 const UserDetail: FC = () => {
     const [searchParams] = useSearchParams();

@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 
 import Animation from '@/components/animation/Animation';
 import NormalTabs from '@/components/tab/Tabs';
-import PlayList from '@/components/playList/PlayList';
+import PlayList from '@/components/list/playList/PlayList';
 import SearchAlbum from './SearchAlbum';
 
 import { cloudSearch } from '@/api/api_playlist';

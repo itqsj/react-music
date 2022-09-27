@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 
 import ArtistType from './ArtistType';
 import Animation from '@/components/animation/Animation';
-import CardList from '@/components/cardlist/CardList';
+import CardList from '@/components/list/cardlist/CardList';
 
 import style from './css/artistlist.module.less';
 import { artistList } from '@/api/api_artist';

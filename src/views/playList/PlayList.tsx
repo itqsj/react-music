@@ -3,7 +3,7 @@ import React, { FC, useCallback, useState, useEffect } from 'react';
 import Animation from '@/components/animation/Animation';
 import Pagination from '@mui/material/Pagination';
 import PlayListCard from './PlayListCard';
-import CardList from '@/components/cardlist/CardList';
+import CardList from '@/components/list/cardlist/CardList';
 import TagsSelect from './TagsSelect';
 
 import style from './css/playList.module.less';

@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import Animation from '@/components/animation/Animation';
 
 import style from './css/albumMv.module.less';
-import MvList from '@/components/mvList/MvList';
+import MvList from '@/components/list/mvList/MvList';
 import { ArtistMvInt } from '@/types/artist';
 
 interface PropsInt {

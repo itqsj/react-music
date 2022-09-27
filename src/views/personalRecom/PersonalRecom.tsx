@@ -5,7 +5,7 @@ import { PersonRecomInt, ResPersonalInt } from '@/types/playList';
 import style from './css/personalRecom.module.less';
 import { getPersonalized } from '@/api/api_playlist';
 import Animation from '@/components/animation/Animation';
-import CardList from '@/components/cardlist/CardList';
+import CardList from '@/components/list/cardlist/CardList';
 
 function PersonalRecom() {
     const [personalList, setPersonalList] = useState<PersonRecomInt[]>([]);
