@@ -3,8 +3,9 @@ import React, { FC } from 'react';
 import Animation from '@/components/animation/Animation';
 
 import { NewSongsInt } from '@/types/playList';
-import NewMusicItem from '../newMusic/NewMusicItem';
+
 import { connect } from 'react-redux';
+import StripeList from '@/components/list/stripeList/StripeList';
 
 interface PropsInt {
     data: NewSongsInt[];
@@ -22,14 +23,7 @@ const SearchAlbum: FC<PropsInt> = ({ data, isPhone }) => {
                         : 'calc(100vh - 280px)',
                 }}
             >
-                {data.map((item, index) => (
-                    <NewMusicItem
-                        module="album"
-                        data={item}
-                        key={item.id}
-                        index={index}
-                    ></NewMusicItem>
-                ))}
+                <StripeList data={data}></StripeList>
             </div>
         </Animation>
     );

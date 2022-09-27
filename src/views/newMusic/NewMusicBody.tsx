@@ -2,13 +2,13 @@ import React, { useState, FC, useEffect } from 'react';
 
 import { PlayArrowRounded } from '@mui/icons-material';
 import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
-import NewMusicItem from './NewMusicItem';
 
 import style from './css/newMusicBody.module.less';
 import { NewSongsInt, ResNewSongsInt } from '@/types/playList';
 import { topSongs } from '@/api/api_newMusic';
 import Animation from '@/components/animation/Animation';
 import Loading from '@/components/loading/Loading';
+import StripeList from '@/components/list/stripeList/StripeList';
 
 const NewMusicBody: FC = () => {
     const [active, setActive] = useState<number>(0);
@@ -93,13 +93,7 @@ const NewMusicBody: FC = () => {
                 </div>
                 <div className={style.page_body}>
                     {loading && <Loading></Loading>}
-                    {newSongs.map((item, index) => (
-                        <NewMusicItem
-                            data={item}
-                            key={item.id}
-                            index={index}
-                        ></NewMusicItem>
-                    ))}
+                    <StripeList data={newSongs}></StripeList>
                 </div>
             </div>
         </Animation>

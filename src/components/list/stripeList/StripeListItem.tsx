@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import style from './css/newMusicItem.module.less';
+import style from './css/stripeListItem.module.less';
 import { NewSongsInt } from '@/types/playList';
 import { useNavigate } from 'react-router-dom';
 
