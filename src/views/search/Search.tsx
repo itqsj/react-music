@@ -3,17 +3,20 @@ import React, { FC, useEffect, useState } from 'react';
 import Animation from '@/components/animation/Animation';
 import NormalTabs from '@/components/tab/Tabs';
 import PlayList from '@/components/playList/PlayList';
+import SearchAlbum from './SearchAlbum';
 
 import { cloudSearch } from '@/api/api_playlist';
 import { useSearchParams } from 'react-router-dom';
 import style from './css/search.module.less';
 import { ResSearchInt, TracksInt } from '@/types/playList';
+import { NewSongsInt } from '@/types/playList';
 
 const Search: FC = () => {
     const [search] = useSearchParams();
     const keywords = search.get('key');
     const [songCount, setSongCount] = useState<number>(0);
     const [songs, setSongs] = useState<TracksInt[]>([] as TracksInt[]);
+    const [album, setAlbum] = useState<NewSongsInt[]>([] as NewSongsInt[]);
     const tabData = [
         {
             label: '单曲',
@@ -22,45 +25,76 @@ const Search: FC = () => {
         },
         {
             label: '专辑',
-            value: '2',
-            children: <div>23</div>,
+            value: '10',
+            children: <SearchAlbum data={album}></SearchAlbum>,
         },
         {
             label: '歌手',
-            value: '3',
+            value: '100',
             children: <div>23</div>,
         },
         {
             label: '歌单',
-            value: '4',
+            value: '1000',
             children: <div>23</div>,
         },
         {
             label: '用户',
-            value: '5',
+            value: '1002',
             children: <div>23</div>,
         },
         {
             label: 'mv',
-            value: '6',
+            value: '1004',
             children: <div>23</div>,
         },
     ];
-    const getCloudSearch = async () => {
+    const getCloudSearch = async (
+        type: number,
+        callback?: (res: ResSearchInt) => void,
+    ) => {
         const params = {
             keywords,
             limit: 30,
-            type: 1,
+            type,
             offset: 0,
         };
         const res: ResSearchInt = (await cloudSearch(params)) as ResSearchInt;
         if (res.code === 200) {
-            setSongs(res.result.songs);
-            setSongCount(res.result.songCount);
+            callback && callback(res);
+        }
+    };
+    const setSongsCall = (res: ResSearchInt) => {
+        setSongCount(res.result.songCount as number);
+        setSongs(res.result.songs as TracksInt[]);
+    };
+    const setAlbumCall = (res: ResSearchInt) => {
+        setAlbum(res.result.albums as NewSongsInt[]);
+    };
+    const handleTabChange = (value: number | string) => {
+        switch (value) {
+            case '1':
+                getCloudSearch(1, setSongsCall);
+                break;
+            case '10':
+                getCloudSearch(10, setAlbumCall);
+                break;
+            case '100':
+                getCloudSearch(100);
+                break;
+            case '1000':
+                getCloudSearch(1000);
+                break;
+            case '1002':
+                getCloudSearch(1002);
+                break;
+            case '1004':
+                getCloudSearch(1004);
+                break;
         }
     };
     useEffect(() => {
-        getCloudSearch();
+        getCloudSearch(1, setSongsCall);
     }, []);
 
     return (
@@ -71,7 +105,7 @@ const Search: FC = () => {
                 </h3>
                 <NormalTabs
                     tabs={tabData}
-                    // change={handleTabChange}
+                    change={handleTabChange}
                 ></NormalTabs>
             </div>
         </Animation>

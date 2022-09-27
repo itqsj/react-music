@@ -151,8 +151,8 @@ const PlayList: FC<PropsInt> = (props) => {
                                             )}
                                         </TableCell>
                                         <TableCell align="left">
-                                            {row.ar.map((singer) => (
-                                                <span key={singer.id}>
+                                            {row.ar.map((singer, index) => (
+                                                <span key={index}>
                                                     {singer.name}
                                                 </span>
                                             ))}
@@ -189,8 +189,8 @@ const PlayList: FC<PropsInt> = (props) => {
                                             {song.name}
                                         </div>
                                         <div className={style.song_info_singer}>
-                                            {song.ar.map((singer) => (
-                                                <span key={singer.id}>
+                                            {song.ar.map((singer, index) => (
+                                                <span key={index}>
                                                     {singer.name}
                                                 </span>
                                             ))}

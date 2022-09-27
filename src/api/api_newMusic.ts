@@ -1,5 +1,5 @@
 import http from './api_index';
-import { ParamsInt } from '@/types/newMusic';
+import { ParamsInt } from '@/types/playList';
 
 // 歌手分类列表
 export function topSongs(params: ParamsInt) {

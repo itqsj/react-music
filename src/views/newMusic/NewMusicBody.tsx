@@ -5,7 +5,7 @@ import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
 import NewMusicItem from './NewMusicItem';
 
 import style from './css/newMusicBody.module.less';
-import { NewSongsInt, ResNewSongsInt } from '@/types/newMusic';
+import { NewSongsInt, ResNewSongsInt } from '@/types/playList';
 import { topSongs } from '@/api/api_newMusic';
 import Animation from '@/components/animation/Animation';
 import Loading from '@/components/loading/Loading';
