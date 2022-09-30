@@ -90,8 +90,8 @@ export interface ResArtistAlbumsInt {
 //歌手专辑
 export interface ArtistAlbumsInt {
     alias: Array<string>;
-    artist: object;
-    artists: Array<object>;
+    artist: ArtistInt;
+    artists: Array<ArtistInt>;
     awardTags: Array<string>;
     blurPicUrl: string;
     briefDesc: string;
@@ -100,7 +100,7 @@ export interface ArtistAlbumsInt {
     companyId: number;
     copyrightId: number;
     description: string;
-    id: number;
+    id: number | string;
     mark: number;
     name: string;
     onSale: boolean;
@@ -114,8 +114,26 @@ export interface ArtistAlbumsInt {
     songs: Array<string>;
     status: number;
     subType: string;
-    tags: string;
+    tags: Array<string>;
     type: string;
+}
+
+export interface ArtistInt {
+    albumSize: number;
+    alias: string[];
+    briefDesc: string;
+    followed: boolean;
+    id: number;
+    img1v1Id: number;
+    img1v1Id_str: string;
+    img1v1Url: string;
+    musicSize: number;
+    name: string;
+    picId: number;
+    picId_str: string;
+    picUrl: string;
+    topicPerson: number;
+    trans: string;
 }
 
 //歌手mv

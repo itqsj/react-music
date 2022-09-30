@@ -29,7 +29,7 @@ export interface PlayListDetailInt {
 
 export interface PlayListItemInt {
     //歌单信息
-    id: string;
+    id: number | string;
     name: string;
     creator: CreatorInt;
     tracks: TracksInt[]; //歌曲
@@ -266,6 +266,9 @@ export interface SearchInt {
 
 import { ArtistAlbumsInt, ArtistList } from '@/types/artist';
 
+export interface PlayListAndArtistAlbumsInt
+    extends PlayListItemInt,
+        ArtistAlbumsInt {}
 //最新音乐返回值
 export interface ResNewSongsInt {
     code: number;

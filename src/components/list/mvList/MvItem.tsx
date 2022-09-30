@@ -5,7 +5,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import style from './css/mvItem.module.less';
 import { ArtistMvInt } from '@/types/artist';
 import { useNavigate } from 'react-router-dom';
-import ImgBox from '../imgBox/ImgBox';
+import ImgBox from '@/components/imgBox/ImgBox';
 
 interface PropsInt {
     data: ArtistMvInt;

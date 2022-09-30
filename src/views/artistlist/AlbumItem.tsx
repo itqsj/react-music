@@ -4,7 +4,7 @@ import AlbumTable from './AlbumTable';
 import style from './css/albumItem.module.less';
 import { TracksInt } from '@/types/playList';
 import { ArtistAlbumsInt, ParamsInt } from '@/types/artist';
-import { albumDetail } from '@/api/api_artist';
+import { albumDetail } from '@/api/api_album';
 import ImgBox from '@/components/imgBox/ImgBox';
 
 interface PropsInt {

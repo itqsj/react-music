@@ -11,7 +11,7 @@ import React, {
 import ArtistDetailInfo from './ArtistDetailInfo';
 import NormalTabs from '@/components/tab/Tabs';
 const AlbumList = React.lazy(() => import('./AlbumList'));
-const AlbumMv = React.lazy(() => import('./AlbumMv'));
+const AlbumMv = React.lazy(() => import('./ArtisMv'));
 const ArtistDesc = React.lazy(() => import('./ArtistDesc'));
 // import AlbumList from './AlbumList';
 // import AlbumMv from './AlbumMv';

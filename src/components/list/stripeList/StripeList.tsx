@@ -6,14 +6,15 @@ import StripeListItem from './StripeListItem';
 
 interface PropsInt {
     data: NewSongsInt[];
+    module?: string;
 }
 
-const StripeList: FC<PropsInt> = ({ data }) => {
+const StripeList: FC<PropsInt> = ({ data, module = 'song' }) => {
     return (
         <div>
             {data.map((item, index) => (
                 <StripeListItem
-                    module="album"
+                    module={module}
                     data={item}
                     key={item.id}
                     index={index}

@@ -3,7 +3,7 @@ import React, { FC, useEffect, useRef, useState } from 'react';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import Animation from '@/components/animation/Animation';
 import RecomViode from './RecomViode';
-import Comment from '@/components/comment/Comment';
+import Comment from '@/components/list/comment/Comment';
 import VideoDetailInfo from '@/views/video/videoDetail/VideoDetailInfo';
 
 import style from './css/videoDetail.module.less';

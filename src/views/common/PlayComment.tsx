@@ -5,7 +5,7 @@ import { playlistComment } from '@/api/api_comment';
 
 import { CommentInt, commentResInt } from '@/types/comment';
 import Animation from '@/components/animation/Animation';
-import Comment from '@/components/comment/Comment';
+import Comment from '@/components/list/comment/Comment';
 import style from './css/playComment.module.less';
 
 const Common: FC = () => {

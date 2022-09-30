@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState, useCallback } from 'react';
 
-import SongListInfo from './playListDetInfo/PlayListDetInfo';
+import PlayListDetInfo from '@/components/info/cardInfo/CardInfo';
 import NormalTabs from '@/components/tab/Tabs';
 const PlayList = React.lazy(
     () => import('@/components/list/playList/PlayList'),
@@ -12,7 +12,11 @@ const Collector = React.lazy(() => import('@/views/collector/Collector'));
 import style from './css/playListDetail.module.less';
 import { playListDetail } from '@/api/api_playlist';
 import { useSearchParams } from 'react-router-dom';
-import { PlayListDetailInt, PlayListItemInt } from '@/types/playList';
+import {
+    PlayListDetailInt,
+    PlayListItemInt,
+    PlayListAndArtistAlbumsInt,
+} from '@/types/playList';
 
 function PlayListDetail() {
     const [tabVal, setTabVal] = useState<string>('1');
@@ -67,7 +71,9 @@ function PlayListDetail() {
     return (
         <Animation>
             <div className={style.page}>
-                <SongListInfo data={playlist}></SongListInfo>
+                <PlayListDetInfo
+                    data={playlist as PlayListAndArtistAlbumsInt}
+                ></PlayListDetInfo>
                 <div style={{ padding: '5px 15px' }}>
                     <NormalTabs
                         tabs={tabData}

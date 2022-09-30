@@ -15,7 +15,7 @@ const NewMusicItem: FC<PropsInt> = React.memo(
         const navigate = useNavigate();
         const handleClick = () => {
             if (module === 'album') {
-                // navigate(`/playListDetail?id=${data.id}`);
+                navigate(`/albumDetail?id=${data.id}`);
             }
         };
         return (

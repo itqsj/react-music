@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 
-import CommentList from '@/components/comment/CommentList';
+import CommentList from '@/components/list/comment/CommentList';
 import { Button, TextField } from '@mui/material';
 
 import style from './css/comment.module.less';

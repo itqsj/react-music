@@ -23,7 +23,7 @@ const SearchAlbum: FC<PropsInt> = ({ data, isPhone }) => {
                         : 'calc(100vh - 280px)',
                 }}
             >
-                <StripeList data={data}></StripeList>
+                <StripeList data={data} module="album"></StripeList>
             </div>
         </Animation>
     );

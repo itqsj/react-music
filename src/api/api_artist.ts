@@ -45,17 +45,6 @@ export function artistAlbum(params: ParamsInt) {
     });
 }
 
-//专辑内容
-export function albumDetail(params: ParamsInt) {
-    return http({
-        url: '/api/album',
-        params: {
-            timestamp: Date.now(),
-            ...params,
-        },
-    });
-}
-
 //歌手mv
 export function artistMv(params: ParamsInt) {
     return http({
