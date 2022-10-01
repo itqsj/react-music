@@ -4,12 +4,14 @@ import Animation from '@/components/animation/Animation';
 import NormalTabs from '@/components/tab/Tabs';
 import PlayList from '@/components/list/playList/PlayList';
 import SearchAlbum from './SearchAlbum';
+import SearchSinger from './SearchSinger';
 
 import { cloudSearch } from '@/api/api_playlist';
 import { useSearchParams } from 'react-router-dom';
 import style from './css/search.module.less';
 import { ResSearchInt, TracksInt } from '@/types/playList';
 import { NewSongsInt } from '@/types/playList';
+import { ArtistList } from '@/types/artist';
 
 const Search: FC = () => {
     const [search] = useSearchParams();
@@ -17,6 +19,7 @@ const Search: FC = () => {
     const [songCount, setSongCount] = useState<number>(0);
     const [songs, setSongs] = useState<TracksInt[]>([] as TracksInt[]);
     const [album, setAlbum] = useState<NewSongsInt[]>([] as NewSongsInt[]);
+    const [singers, setSingers] = useState<ArtistList[]>([] as ArtistList[]);
     const tabData = [
         {
             label: '单曲',
@@ -31,7 +34,7 @@ const Search: FC = () => {
         {
             label: '歌手',
             value: '100',
-            children: <div>23</div>,
+            children: <SearchSinger data={singers}></SearchSinger>,
         },
         {
             label: '歌单',
@@ -65,11 +68,16 @@ const Search: FC = () => {
         }
     };
     const setSongsCall = (res: ResSearchInt) => {
-        setSongCount(res.result.songCount as number);
+        setSongCount(res.result.songCount);
         setSongs(res.result.songs as TracksInt[]);
     };
     const setAlbumCall = (res: ResSearchInt) => {
+        setSongCount(res.result.albumCount);
         setAlbum(res.result.albums as NewSongsInt[]);
+    };
+    const setSingerCall = (res: ResSearchInt) => {
+        setSongCount(res.result.artistCount);
+        setSingers(res.result.artists);
     };
     const handleTabChange = (value: number | string) => {
         switch (value) {
@@ -80,7 +88,7 @@ const Search: FC = () => {
                 getCloudSearch(10, setAlbumCall);
                 break;
             case '100':
-                getCloudSearch(100);
+                getCloudSearch(100, setSingerCall);
                 break;
             case '1000':
                 getCloudSearch(1000);

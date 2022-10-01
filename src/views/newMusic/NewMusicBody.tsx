@@ -4,7 +4,7 @@ import { PlayArrowRounded } from '@mui/icons-material';
 import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
 
 import style from './css/newMusicBody.module.less';
-import { NewSongsInt, ResNewSongsInt } from '@/types/playList';
+import { NewSongsInt, ResNewSongsInt, StripeDataInt } from '@/types/playList';
 import { topSongs } from '@/api/api_newMusic';
 import Animation from '@/components/animation/Animation';
 import Loading from '@/components/loading/Loading';
@@ -93,7 +93,7 @@ const NewMusicBody: FC = () => {
                 </div>
                 <div className={style.page_body}>
                     {loading && <Loading></Loading>}
-                    <StripeList data={newSongs}></StripeList>
+                    <StripeList data={newSongs as StripeDataInt[]}></StripeList>
                 </div>
             </div>
         </Animation>

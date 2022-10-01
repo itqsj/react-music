@@ -7,3 +7,15 @@ export interface ResAlbumDetailInt {
     resourceState: boolean;
     songs: TracksInt[];
 }
+
+export interface ResAlbumDynamicInt {
+    albumGameInfo: number;
+    code: number;
+    commentCount: number;
+    isSub: boolean;
+    likedCount: number;
+    onSale: boolean;
+    shareCount: number;
+    subCount: number;
+    subTime: number;
+}

@@ -1,3 +1,5 @@
+import { ArtistAlbumsInt, ArtistList } from '@/types/artist';
+
 export interface ResPersonalInt {
     code: number;
     result: PersonRecomInt[];
@@ -257,14 +259,14 @@ export interface ResSearchInt {
 
 //
 export interface SearchInt {
-    searchQcReminder?: string;
-    songCount?: number;
-    songs?: Array<TracksInt>;
-    albumCount?: number;
-    albums?: NewSongsInt[];
+    searchQcReminder: string;
+    songCount: number;
+    songs: Array<TracksInt>;
+    albumCount: number;
+    albums: NewSongsInt[];
+    artistCount: number;
+    artists: ArtistList[];
 }
-
-import { ArtistAlbumsInt, ArtistList } from '@/types/artist';
 
 export interface PlayListAndArtistAlbumsInt
     extends PlayListItemInt,
@@ -274,16 +276,18 @@ export interface ResNewSongsInt {
     code: number;
     data: NewSongsInt[];
 }
+
+export interface StripeDataInt extends NewSongsInt, ArtistList {}
 //最新音乐
 export interface NewSongsInt {
     //歌单信息
-    id: string;
+    id: string | number;
     name: string;
     artists: ArtistList[];
     album: ArtistAlbumsInt;
     mvid: number;
     duration: number;
-    picUrl?: string;
+    picUrl: string;
 }
 
 export interface ParamsInt {

@@ -30,7 +30,7 @@ export interface ArtistList {
     alias: string[];
     briefDesc: string;
     followed: false;
-    id: number;
+    id: number | string;
     img1v1Id: number;
     img1v1Id_str: string;
     img1v1Url: string;

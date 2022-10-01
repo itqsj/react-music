@@ -25,3 +25,14 @@ export function album(params: ParamsInt) {
         },
     });
 }
+
+//专辑动态信息
+export function albumDynamic(params: ParamsInt) {
+    return http({
+        url: '/api/album/detail/dynamic',
+        params: {
+            timestamp: Date.now(),
+            ...params,
+        },
+    });
+}

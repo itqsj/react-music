@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 
 import style from './css/stripeListItem.module.less';
-import { NewSongsInt } from '@/types/playList';
+import { StripeDataInt } from '@/types/playList';
 import { useNavigate } from 'react-router-dom';
 
 interface PropsInt {
-    data: NewSongsInt;
+    data: StripeDataInt;
     index: number;
     module?: string;
 }
@@ -16,6 +16,9 @@ const NewMusicItem: FC<PropsInt> = React.memo(
         const handleClick = () => {
             if (module === 'album') {
                 navigate(`/albumDetail?id=${data.id}`);
+            }
+            if (module === 'singer') {
+                navigate(`/artistDetail?id=${data.id}`);
             }
         };
         return (
@@ -39,11 +42,13 @@ const NewMusicItem: FC<PropsInt> = React.memo(
                 <div className={[style.item_name, 'mleft-10'].join(' ')}>
                     {data.name}
                 </div>
-                <div className={[style.item_info, 'font-12'].join(' ')}>
-                    {data.artists.map((item) => (
-                        <span key={item.id}>{item.name}</span>
-                    ))}
-                </div>
+                {(module === 'music' || module === 'album') && (
+                    <div className={[style.item_info, 'font-12'].join(' ')}>
+                        {data.artists.map((item) => (
+                            <span key={item.id}>{item.name}</span>
+                        ))}
+                    </div>
+                )}
                 {module === 'music' && (
                     <div className={[style.item_info, 'font-12'].join(' ')}>
                         {data.album.name}

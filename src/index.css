@@ -7,6 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+.MuiTabs-root{
+  min-height: 0px!important;
+}
 #drag_container, #spin_container {
   position: relative;
   display: -webkit-box;

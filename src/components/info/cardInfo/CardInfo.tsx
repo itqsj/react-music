@@ -49,8 +49,49 @@ const CardInfo: FC<PropsInt> = React.memo(
                             </span>
                             {data?.name}
                         </div>
+
+                        {module === 'playList' && (
+                            <div className={style.info_user}>
+                                <img src={data.creator?.avatarUrl} alt="" />
+                                <span className={style.info_user_name}>
+                                    {data?.creator?.nickname}
+                                </span>
+                                <span className={style.info_user_create}>
+                                    {data?.createTime} 创建
+                                </span>
+                            </div>
+                        )}
+
+                        <div className={style.info_operation}>
+                            <span
+                                className={style.info_operation_item}
+                                style={{
+                                    backgroundColor: 'rgb(236, 65, 65)',
+                                    border: '1px solid rgb(236, 65, 65)',
+                                    color: 'white',
+                                }}
+                            >
+                                <PlayArrowRounded sx={{ fontSize: '1.5rem' }} />
+                                全部播放
+                            </span>
+                            <span className={style.info_operation_item}>
+                                <AddToPhotosIcon sx={{ fontSize: '1.5rem' }} />
+                                收藏（{data?.subscribedCount}）
+                            </span>
+                            <span className={style.info_operation_item}>
+                                <ScreenShareIcon sx={{ fontSize: '1.5rem' }} />
+                                分享（{data?.shareCount}）
+                            </span>
+                            <span className={style.info_operation_item}>
+                                <CloudDownloadIcon
+                                    sx={{ fontSize: '1.5rem' }}
+                                />
+                                下载全部
+                            </span>
+                        </div>
+
                         {module === 'album' && (
-                            <div className="font-14">
+                            <div className="font-14 mtop-5">
                                 <div>
                                     <span>歌手：</span>
                                     <span
@@ -68,52 +109,7 @@ const CardInfo: FC<PropsInt> = React.memo(
                                 </div>
                             </div>
                         )}
-                        {module === 'playList' && (
-                            <div className={style.info_user}>
-                                <img src={data.creator?.avatarUrl} alt="" />
-                                <span className={style.info_user_name}>
-                                    {data?.creator?.nickname}
-                                </span>
-                                <span className={style.info_user_create}>
-                                    {data?.createTime} 创建
-                                </span>
-                            </div>
-                        )}
-                        {module === 'playList' && (
-                            <div className={style.info_operation}>
-                                <span
-                                    className={style.info_operation_item}
-                                    style={{
-                                        backgroundColor: 'rgb(236, 65, 65)',
-                                        border: '1px solid rgb(236, 65, 65)',
-                                        color: 'white',
-                                    }}
-                                >
-                                    <PlayArrowRounded
-                                        sx={{ fontSize: '1.5rem' }}
-                                    />
-                                    全部播放
-                                </span>
-                                <span className={style.info_operation_item}>
-                                    <AddToPhotosIcon
-                                        sx={{ fontSize: '1.5rem' }}
-                                    />
-                                    收藏（{data?.subscribedCount}）
-                                </span>
-                                <span className={style.info_operation_item}>
-                                    <ScreenShareIcon
-                                        sx={{ fontSize: '1.5rem' }}
-                                    />
-                                    分享（{data?.shareCount}）
-                                </span>
-                                <span className={style.info_operation_item}>
-                                    <CloudDownloadIcon
-                                        sx={{ fontSize: '1.5rem' }}
-                                    />
-                                    下载全部
-                                </span>
-                            </div>
-                        )}
+
                         {!isPhone && module === 'playList' && (
                             <div className={style.info_label}>
                                 <span>

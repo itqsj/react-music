@@ -1,4 +1,13 @@
 .page{
+    overflow: auto;
+    height: calc(100vh - 100px - 100px);
     padding: 20px;
     letter-spacing: 1px;
+}
+
+
+@media screen and (max-width: 1000px) {
+    .page{
+        height: calc(100vh - 78px - 100px);
+    }
 }

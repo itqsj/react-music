@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
 
-import { NewSongsInt } from '@/types/playList';
+import { NewSongsInt, StripeDataInt } from '@/types/playList';
 
 import StripeListItem from './StripeListItem';
 
 interface PropsInt {
-    data: NewSongsInt[];
+    data: StripeDataInt[];
     module?: string;
 }
 
-const StripeList: FC<PropsInt> = ({ data, module = 'song' }) => {
+const StripeList: FC<PropsInt> = React.memo(({ data, module = 'song' }) => {
     return (
         <div>
             {data.map((item, index) => (
@@ -22,6 +22,6 @@ const StripeList: FC<PropsInt> = ({ data, module = 'song' }) => {
             ))}
         </div>
     );
-};
+});
 
 export default StripeList;

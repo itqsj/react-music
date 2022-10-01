@@ -1,26 +1,26 @@
-import React, { FC } from 'react';
+import React, { FC, Fragment } from 'react';
 
 import Animation from '@/components/animation/Animation';
 
-import { NewSongsInt, StripeDataInt } from '@/types/playList';
-
+import { ArtistList } from '@/types/artist';
+import { StripeDataInt } from '@/types/playList';
 import { connect } from 'react-redux';
 import StripeList from '@/components/list/stripeList/StripeList';
 
 interface PropsInt {
-    data: NewSongsInt[];
+    data: ArtistList[];
     isPhone: boolean;
 }
 
-const SearchAlbum: FC<PropsInt> = ({ data, isPhone }) => {
+const SearchSinger: FC<PropsInt> = ({ data, isPhone }) => {
     return (
         <Animation>
-            <div>
+            <Fragment>
                 <StripeList
                     data={data as StripeDataInt[]}
-                    module="album"
+                    module="singer"
                 ></StripeList>
-            </div>
+            </Fragment>
         </Animation>
     );
 };
@@ -29,4 +29,4 @@ const mapStateToProps = function (store: any) {
     return { isPhone: store.UserReducer.isPhone };
 };
 
-export default connect(mapStateToProps)(SearchAlbum);
+export default connect(mapStateToProps)(SearchSinger);
