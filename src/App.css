@@ -132,3 +132,9 @@
   color: #ec4141;
   border-radius: 2px;
 }
+
+.ellipsis{
+  overflow: hidden; 
+  white-space: nowrap; 
+  text-overflow: ellipsis; 
+}

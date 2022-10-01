@@ -20,6 +20,12 @@ const NewMusicItem: FC<PropsInt> = React.memo(
             if (module === 'singer') {
                 navigate(`/artistDetail?id=${data.id}`);
             }
+            if (module === 'playlist') {
+                navigate(`/playlistDetail?id=${data.id}`);
+            }
+            if (module === 'users') {
+                navigate(`/userDetail?id=${data.userId}`);
+            }
         };
         return (
             <div
@@ -33,29 +39,75 @@ const NewMusicItem: FC<PropsInt> = React.memo(
                 <div className={style.item_img}>
                     <img
                         src={
-                            (data.album?.picUrl ?? data.picUrl) +
-                            '?param=100y100'
+                            (data.album?.picUrl ??
+                                data.picUrl ??
+                                data.coverImgUrl ??
+                                data.backgroundUrl) + '?param=100y100'
                         }
                         alt=""
                     />
                 </div>
-                <div className={[style.item_name, 'mleft-10'].join(' ')}>
-                    {data.name}
+                <div
+                    className={[style.item_name, 'ellipsis', 'mleft-10'].join(
+                        ' ',
+                    )}
+                >
+                    {data.name ?? data.nickname}
                 </div>
                 {(module === 'music' || module === 'album') && (
-                    <div className={[style.item_info, 'font-12'].join(' ')}>
+                    <div
+                        className={[
+                            style.item_info,
+                            'ellipsis',
+                            'font-12',
+                        ].join(' ')}
+                    >
                         {data.artists.map((item) => (
                             <span key={item.id}>{item.name}</span>
                         ))}
                     </div>
                 )}
                 {module === 'music' && (
-                    <div className={[style.item_info, 'font-12'].join(' ')}>
+                    <div
+                        className={[
+                            style.item_info,
+                            'ellipsis',
+                            'font-12',
+                        ].join(' ')}
+                    >
                         {data.album.name}
                     </div>
                 )}
+                {module === 'playlist' && (
+                    <div
+                        className={[
+                            style.item_info,
+                            'font-12',
+                            'ellipsis',
+                        ].join(' ')}
+                    >
+                        {data.trackCount}首
+                    </div>
+                )}
+                {module === 'playlist' && (
+                    <div
+                        className={[
+                            style.item_info,
+                            'font-12',
+                            'ellipsis',
+                        ].join(' ')}
+                    >
+                        by {data.creator.nickname}
+                    </div>
+                )}
                 {module === 'music' && (
-                    <div className={['font-12', style.item_time].join(' ')}>
+                    <div
+                        className={[
+                            'font-12',
+                            style.item_time,
+                            'ellipsis',
+                        ].join(' ')}
+                    >
                         {data.duration}
                     </div>
                 )}

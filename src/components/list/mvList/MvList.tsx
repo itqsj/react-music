@@ -2,11 +2,11 @@ import React, { FC } from 'react';
 
 import MvItem from './MvItem';
 
-import { ArtistMvInt } from '@/types/artist';
+import { MvListInt } from '@/types/video';
 import style from './css/mvList.module.less';
 
 interface PropsInt {
-    list: ArtistMvInt[];
+    list: MvListInt[];
 }
 const MvList: FC<PropsInt> = ({ list }) => {
     return (

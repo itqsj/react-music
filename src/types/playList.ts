@@ -1,4 +1,6 @@
 import { ArtistAlbumsInt, ArtistList } from '@/types/artist';
+import { ProfileInt } from '@/types/user';
+import { MvInfoInt } from '@/types/video';
 
 export interface ResPersonalInt {
     code: number;
@@ -115,7 +117,7 @@ export interface PlayListInt {
     creator: PlayCreatorInt;
     description: string;
     highQuality: boolean;
-    id: number;
+    id: number | string;
     name: string;
     newImported: boolean;
     ordered: boolean;
@@ -266,6 +268,12 @@ export interface SearchInt {
     albums: NewSongsInt[];
     artistCount: number;
     artists: ArtistList[];
+    playlistCount: number;
+    playlists: PlayListInt[];
+    userprofileCount: number;
+    userprofiles: ProfileInt[];
+    mvCount: number;
+    mvs: MvInfoInt[];
 }
 
 export interface PlayListAndArtistAlbumsInt
@@ -277,7 +285,12 @@ export interface ResNewSongsInt {
     data: NewSongsInt[];
 }
 
-export interface StripeDataInt extends NewSongsInt, ArtistList {}
+export interface StripeDataInt
+    extends NewSongsInt,
+        ArtistList,
+        PlayListInt,
+        ProfileInt,
+        MvInfoInt {}
 //最新音乐
 export interface NewSongsInt {
     //歌单信息

@@ -4,10 +4,10 @@ import Animation from '@/components/animation/Animation';
 
 import style from './css/albumMv.module.less';
 import MvList from '@/components/list/mvList/MvList';
-import { ArtistMvInt } from '@/types/artist';
+import { MvListInt } from '@/types/video';
 
 interface PropsInt {
-    data: ArtistMvInt[];
+    data: MvListInt[];
 }
 const AlbumMv: FC<PropsInt> = React.memo(({ data }) => {
     return (

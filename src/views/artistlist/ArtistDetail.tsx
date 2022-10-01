@@ -35,7 +35,7 @@ import {
     ResArtistDescInt,
 } from '@/types/artist';
 import { TracksInt } from '@/types/playList';
-import { ArtistMvInt } from '@/types/artist';
+import { ArtistMvInt, MvListInt } from '@/types/video';
 
 interface ResArtistMv {
     code: number;
@@ -65,7 +65,9 @@ const ArtistDetail: FC = () => {
         {
             label: 'MV',
             value: '2',
-            children: lazyLoad(<AlbumMv data={artistMvList}></AlbumMv>),
+            children: lazyLoad(
+                <AlbumMv data={artistMvList as MvListInt[]}></AlbumMv>,
+            ),
         },
         {
             label: '歌手详情',

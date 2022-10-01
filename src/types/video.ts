@@ -1,3 +1,5 @@
+import { ArtistList } from '@/types/artist';
+
 //mv推荐的返回值
 export interface PersonalRecomVideoInt {
     code: number;
@@ -54,7 +56,7 @@ export interface MvDetailInt {
 export interface MvInfoInt {
     artistId: number;
     artistName: string;
-    artists: Array<object>;
+    artists: Array<ArtistList>;
     briefDesc: string;
     brs: Array<object>;
     commentCount: number;
@@ -64,7 +66,7 @@ export interface MvInfoInt {
     coverId_str: string;
     desc: string;
     duration: number;
-    id: number;
+    id: string | number;
     nType: number;
     name: string;
     playCount: number;
@@ -103,3 +105,20 @@ export interface ResMvOperatInt {
     likedCount: number;
     shareCount: number;
 }
+
+//歌手mv
+export interface ArtistMvInt {
+    artist: object;
+    artistName: string;
+    duration: number;
+    id: number | string;
+    imgurl: string;
+    imgurl16v9: string;
+    name: string;
+    playCount: number;
+    publishTime: string;
+    status: number;
+    subed: boolean;
+}
+
+export interface MvListInt extends ArtistMvInt, MvInfoInt {}

@@ -3,12 +3,12 @@ import React, { FC } from 'react';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 import style from './css/mvItem.module.less';
-import { ArtistMvInt } from '@/types/artist';
+import { MvListInt } from '@/types/video';
 import { useNavigate } from 'react-router-dom';
 import ImgBox from '@/components/imgBox/ImgBox';
 
 interface PropsInt {
-    data: ArtistMvInt;
+    data: MvListInt;
 }
 
 const MvItem: FC<PropsInt> = ({ data }) => {
@@ -20,7 +20,7 @@ const MvItem: FC<PropsInt> = ({ data }) => {
         <div className={style.item} onClick={goMVDetail}>
             <div className={style.item_img}>
                 <ImgBox
-                    src={data.imgurl + '?param=320y180'}
+                    src={data.imgurl ?? data.cover + '?param=320y180'}
                     alt=""
                     aspectRatio="9/5"
                 />

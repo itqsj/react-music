@@ -136,21 +136,6 @@ export interface ArtistInt {
     trans: string;
 }
 
-//歌手mv
-export interface ArtistMvInt {
-    artist: object;
-    artistName: string;
-    duration: number;
-    id: number;
-    imgurl: string;
-    imgurl16v9: string;
-    name: string;
-    playCount: number;
-    publishTime: string;
-    status: number;
-    subed: boolean;
-}
-
 //歌手简介
 export interface ResArtistDescInt {
     briefDesc: string;
