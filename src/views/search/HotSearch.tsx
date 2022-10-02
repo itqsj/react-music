@@ -12,7 +12,6 @@ const HotSearch: FC = () => {
         if (res.code === 200) {
             sethotlist(res.data);
         }
-        console.log(res);
     };
     const handleSearch = (data: SearchHotInt) => {
         eventBus.emit('search', data.searchWord);

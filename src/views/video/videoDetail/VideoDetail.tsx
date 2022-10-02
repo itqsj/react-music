@@ -39,7 +39,7 @@ const videoDetail: FC = () => {
         getCommentMv();
         getInfoMv();
         getMvOperatData();
-    }, []);
+    }, [search.get('id')]);
     const getMvOperatData = async () => {
         const params = {
             mvid: id,
@@ -56,7 +56,6 @@ const videoDetail: FC = () => {
         if (res.code === 200) {
             setWonderComment(res.hotComments);
             setNewComment(res.comments);
-            console.log(wonderComment, newComment);
         }
     };
     const getInfoMv = async () => {
@@ -75,7 +74,12 @@ const videoDetail: FC = () => {
         const res: ResMvDetailInt = (await detailMv(params)) as ResMvDetailInt;
         if (res.code === 200) {
             setPlayInfo(res.data);
-            initPlayAndEvent(res.data.url);
+
+            if (player) {
+                player.src = res.data.url;
+            } else {
+                initPlayAndEvent(res.data.url);
+            }
         }
     };
     const initPlayAndEvent = (url: string) => {
