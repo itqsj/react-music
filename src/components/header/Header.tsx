@@ -2,7 +2,7 @@ import React, {
     FC,
     useState,
     FocusEvent,
-    ChangeEvent,
+    useEffect,
     KeyboardEvent,
 } from 'react';
 
@@ -25,6 +25,7 @@ import SearchPopper from '@/views/search/SearchPopper';
 
 import { connect } from 'react-redux/es/exports';
 import { useNavigate, useSearchParams, useLocation } from 'react-router-dom';
+import { eventBus } from '@/untils/eventBus';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -79,16 +80,43 @@ const Header: FC<PropsInt> = (props) => {
     const searchFocus = (event: FocusEvent<HTMLElement>) => {
         setelement(event.target.parentElement.parentElement);
     };
-    const handleSearch = (event: KeyboardEvent<HTMLInputElement>) => {
+    const saveSearchHistry = (value: string) => {
+        let searchLis = JSON.parse(
+            window.localStorage.getItem('search') || '[]',
+        );
+        const isInclude = searchLis.includes(value);
+        if (isInclude) {
+            searchLis = searchLis.filter(
+                (item: string) => item !== value.trim(),
+            );
+        }
+        searchLis.unshift(value.trim());
+        window.localStorage.setItem('search', JSON.stringify(searchLis));
+    };
+    const handleKeyUp = (event: KeyboardEvent<HTMLInputElement>) => {
         const keyCode = event.keyCode;
         if (keyCode === 13) {
-            navigate(`/searchDetail?key=${event.target.value}`);
-            if (local.pathname === '/searchDetail') {
-                // setSearch(`key=${event.target.value}`);
-                window.location.reload();
-            }
+            handleSearch(event.target.value);
         }
     };
+    const handleSearch = (data: string) => {
+        navigate(`/searchDetail?key=${data}`);
+
+        saveSearchHistry(data);
+
+        if (local.pathname === '/searchDetail') {
+            // setSearch(`key=${event.target.value}`);
+            window.location.reload();
+        }
+    };
+    useEffect(() => {
+        eventBus.on('search', handleSearch);
+
+        return () => {
+            eventBus.off('search', handleSearch);
+        };
+    }, []);
+
     return (
         <Box
             sx={{
@@ -140,7 +168,7 @@ const Header: FC<PropsInt> = (props) => {
                             inputProps={{ 'aria-label': 'search' }}
                             onFocus={searchFocus}
                             onBlur={() => setelement(null)}
-                            onKeyUp={handleSearch}
+                            onKeyUp={handleKeyUp}
                         />
                     </Search>
                     <Typography

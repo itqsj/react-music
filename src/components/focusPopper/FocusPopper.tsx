@@ -19,7 +19,7 @@ const FocusPopper: FC<PropsInt> = React.memo((props) => {
     const showPopper = () => {
         if (element) {
             const top = element.offsetTop + element.offsetHeight + 5;
-            const left = isPhone ? '0' : element.offsetLeft;
+            const left = isPhone ? 0 : element.offsetLeft;
             settop(top);
             setleft(left);
 
@@ -28,10 +28,12 @@ const FocusPopper: FC<PropsInt> = React.memo((props) => {
                 opacity: '1',
             });
         } else {
-            setStyleObj({
-                zIndex: '-1',
-                opacity: '0',
-            });
+            setTimeout(() => {
+                setStyleObj({
+                    zIndex: '-1',
+                    opacity: '0',
+                });
+            }, 500);
         }
     };
     useEffect(() => {
