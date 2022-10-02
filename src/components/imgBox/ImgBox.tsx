@@ -33,6 +33,14 @@ const ImgBox: FC<PropsInt> = React.memo(
                     onLoad={handleLoad}
                     alt={alt}
                 />
+                {type === 'move_load' && (
+                    <div
+                        className={style.box_move_loader}
+                        style={{
+                            opacity: loading ? '1' : '0',
+                        }}
+                    ></div>
+                )}
                 {type === 'loada' && (
                     <div
                         className={style.box_load}

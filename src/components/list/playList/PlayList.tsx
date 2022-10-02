@@ -52,7 +52,6 @@ const PlayList: FC<PropsInt> = (props) => {
             search: `?id=${data.mv}`,
         });
     };
-    console.log(123);
     return (
         <motion.div
             className="single"

@@ -10,7 +10,7 @@ import SearchUsers from './SearchUsers';
 import SearchMv from './SearchMv';
 
 import { cloudSearch } from '@/api/api_playlist';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import style from './css/search.module.less';
 import { ResSearchInt, TracksInt } from '@/types/playList';
 import { NewSongsInt, PlayListInt } from '@/types/playList';
@@ -19,8 +19,8 @@ import { ProfileInt } from '@/types/user';
 import { MvInfoInt } from '@/types/video';
 
 const Search: FC = () => {
-    const [search] = useSearchParams();
-    const keywords = useMemo(() => search.get('key'), [search]);
+    const [search, setSearch] = useSearchParams();
+    const keywords = search.get('key');
     const [activeTab, setActiveTab] = useState('1');
     const [songCount, setSongCount] = useState<number>(0);
     const [songs, setSongs] = useState<TracksInt[]>([] as TracksInt[]);

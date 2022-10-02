@@ -24,7 +24,7 @@ import FocusPopper from '../focusPopper/FocusPopper';
 import SearchPopper from '@/views/search/SearchPopper';
 
 import { connect } from 'react-redux/es/exports';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams, useLocation } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -74,19 +74,19 @@ interface PropsInt {
 
 const Header: FC<PropsInt> = (props) => {
     const [element, setelement] = useState<HTMLElement | null>(null);
-    let searchVal = '';
     const navigate = useNavigate();
+    const local = useLocation();
     const searchFocus = (event: FocusEvent<HTMLElement>) => {
         setelement(event.target.parentElement.parentElement);
-    };
-    const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
-        searchVal = event.target.value;
     };
     const handleSearch = (event: KeyboardEvent<HTMLInputElement>) => {
         const keyCode = event.keyCode;
         if (keyCode === 13) {
-            navigate(`/searchDetail?key=${searchVal}`);
-            console.log(event);
+            navigate(`/searchDetail?key=${event.target.value}`);
+            if (local.pathname === '/searchDetail') {
+                // setSearch(`key=${event.target.value}`);
+                window.location.reload();
+            }
         }
     };
     return (
@@ -141,7 +141,6 @@ const Header: FC<PropsInt> = (props) => {
                             onFocus={searchFocus}
                             onBlur={() => setelement(null)}
                             onKeyUp={handleSearch}
-                            onChange={handleSearchChange}
                         />
                     </Search>
                     <Typography
