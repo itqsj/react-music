@@ -55,11 +55,21 @@ const Comment: FC<PropsInt> = React.memo(
                         评论
                     </Button>
                 </div>
-                <h3 className={style.page_title}>精彩评论</h3>
+                {wonderComment.length === 0 && newComment.length === 0 && (
+                    <div className="center mtop-10 mbottom-10">
+                        还没有评论，快来抢沙发~
+                    </div>
+                )}
+                {wonderComment.length !== 0 && (
+                    <h3 className={style.page_title}>精彩评论</h3>
+                )}
                 <div className={style.page_comment}>
                     <CommentList comment={wonderComment}></CommentList>
                 </div>
-                <h3 className={style.page_title}>最新评论</h3>
+                {newComment.length !== 0 && (
+                    <h3 className={style.page_title}>最新评论</h3>
+                )}
+
                 <div className={style.page_comment}>
                     <CommentList comment={newComment}></CommentList>
                 </div>

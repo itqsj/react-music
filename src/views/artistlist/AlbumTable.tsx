@@ -7,6 +7,7 @@ import { TracksInt } from '@/types/playList';
 import { connect } from 'react-redux';
 import { changeSong } from '@/redux/actionCreator/PlayList';
 import { ArtistAlbumsInt } from '@/types/artist';
+import { getTime } from '@/untils/filters';
 
 interface PropsInt {
     songs: TracksInt[];
@@ -85,7 +86,7 @@ const AlbumTable: FC<PropsInt> = React.memo(({ songs, album, changeSong }) => {
                                         'font-14',
                                     ].join(' ')}
                                 >
-                                    {item.dt}
+                                    {getTime(item.dt / 1000, true)}
                                 </div>
                             </div>
                         ))}

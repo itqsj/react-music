@@ -5,6 +5,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 
 import { useNavigate } from 'react-router-dom';
+import { eventBus } from '@/untils/eventBus';
 
 interface LinkTabProps {
     label?: string;
@@ -60,13 +61,20 @@ function RouterTab() {
         setValue(newValue);
         handleTabClick(newValue);
     };
+    const setActiveTab = () => {
+        setValue(0);
+    };
     useEffect(() => {
         const tabIndex: string | null =
             window.sessionStorage.getItem('musicTab');
         if (tabIndex) {
             setValue(parseInt(tabIndex));
         }
-    });
+        eventBus.on('setActiveTab', setActiveTab);
+        return () => {
+            eventBus.off('setActiveTab', setActiveTab);
+        };
+    }, []);
     return (
         <Tabs
             variant="scrollable"

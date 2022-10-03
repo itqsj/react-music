@@ -6,8 +6,13 @@ export interface ResponseInt {
     data: TracksInt[];
 }
 interface ActiveInt {
-    type: 'change_song';
+    type: string;
     payload: TracksInt;
+}
+
+interface PlaySongsPayloadInt {
+    type: string;
+    payload: TracksInt[];
 }
 
 async function changeSong(songInfo: TracksInt) {
@@ -31,5 +36,14 @@ async function changeSong(songInfo: TracksInt) {
     }
 }
 
-export { changeSong };
-export type { ActiveInt };
+async function changePlaySongs(songlist: TracksInt[]) {
+    const action: PlaySongsPayloadInt = {
+        type: 'change_playsongs',
+        payload: songlist,
+    };
+
+    return action;
+}
+
+export { changeSong, changePlaySongs };
+export type { ActiveInt, PlaySongsPayloadInt };

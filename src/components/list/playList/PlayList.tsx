@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, Fragment } from 'react';
 
 import { motion } from 'framer-motion';
 import Table from '@mui/material/Table';
@@ -10,39 +10,41 @@ import SlowMotionVideoIcon from '@mui/icons-material/SlowMotionVideo';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import VolumeMuteIcon from '@mui/icons-material/VolumeMute';
+import Animation from '@/components/animation/Animation';
 
 import { connect } from 'react-redux';
 import style from './css/playList.module.less';
 import { TracksInt } from '@/types/playList';
-import { changeSong } from '@/redux/actionCreator/PlayList';
+import { changeSong, changePlaySongs } from '@/redux/actionCreator/PlayList';
 import { ActiveInt } from '@/redux/actionCreator/PlayList';
 import { PlayArrowRounded } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-
-const transition = {
-    duration: 1,
-    ease: [0.43, 0.13, 0.23, 0.96],
-};
-
-const imageVariants = {
-    exit: { y: '25%', opacity: 0, transition },
-    enter: {
-        y: '0%',
-        opacity: 1,
-        transition,
-    },
-};
+import { getTime } from '@/untils/filters';
 
 interface PropsInt {
     data: TracksInt[];
     isPhone: boolean;
+    module?: string;
+    currentSong: TracksInt;
     changeSong: (data: TracksInt) => ActiveInt;
+    changePlaySongs: (data: TracksInt[]) => ActiveInt;
 }
 
-const PlayList: FC<PropsInt> = (props) => {
+const PlayList: FC<PropsInt> = ({
+    data,
+    isPhone,
+    module = 'songs',
+    currentSong,
+    changeSong,
+    changePlaySongs,
+}) => {
     const navigate = useNavigate();
     const handleSongClick = async (songData: TracksInt) => {
-        props.changeSong(songData);
+        changeSong(songData);
+        if (module === 'songs') {
+            changePlaySongs(data);
+        }
     };
 
     const handleGoMv = (event: Event, data: TracksInt) => {
@@ -53,43 +55,38 @@ const PlayList: FC<PropsInt> = (props) => {
         });
     };
     return (
-        <motion.div
-            className="single"
-            initial="exit"
-            animate="enter"
-            exit="exit"
-        >
-            <motion.div
-                style={{ overflow: 'hidden' }}
-                key="modal"
-                variants={imageVariants}
-            >
-                {!props.isPhone && (
+        <Animation type={module === 'songs' ? 'move' : 'opacity'}>
+            <Fragment>
+                {!isPhone && (
                     <div className={style.page}>
                         <Table size="small" aria-label="a dense table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell
-                                        align="left"
-                                        sx={{ paddingRight: '0' }}
-                                    >
-                                        序号
-                                    </TableCell>
-                                    <TableCell align="left"></TableCell>
-                                    <TableCell align="left"></TableCell>
-                                    <TableCell align="left">音乐标题</TableCell>
-                                    <TableCell align="left">歌手</TableCell>
-                                    <TableCell
-                                        align="left"
-                                        className={style.page_cell}
-                                    >
-                                        专辑
-                                    </TableCell>
-                                    <TableCell align="left">时长</TableCell>
-                                </TableRow>
-                            </TableHead>
+                            {module === 'songs' && (
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell
+                                            align="left"
+                                            sx={{ paddingRight: '0' }}
+                                        >
+                                            序号
+                                        </TableCell>
+                                        <TableCell align="left"></TableCell>
+                                        <TableCell align="left"></TableCell>
+                                        <TableCell align="left">
+                                            音乐标题
+                                        </TableCell>
+                                        <TableCell align="left">歌手</TableCell>
+                                        <TableCell
+                                            align="left"
+                                            className={style.page_cell}
+                                        >
+                                            专辑
+                                        </TableCell>
+                                        <TableCell align="left">时长</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                            )}
                             <TableBody>
-                                {props.data.map((row, index) => (
+                                {data.map((row, index) => (
                                     <TableRow
                                         key={row.id}
                                         sx={{
@@ -98,9 +95,9 @@ const PlayList: FC<PropsInt> = (props) => {
                                                     border: 0,
                                                 },
                                         }}
-                                        onDoubleClick={() => {
-                                            handleSongClick(row);
-                                        }}
+                                        onDoubleClick={() =>
+                                            handleSongClick(row)
+                                        }
                                     >
                                         <TableCell
                                             component="th"
@@ -109,46 +106,94 @@ const PlayList: FC<PropsInt> = (props) => {
                                             sx={{
                                                 width: '40px',
                                                 paddingRight: '0',
+                                                lineHeight: 'normal',
                                             }}
                                         >
-                                            {index + 1}
-                                        </TableCell>
-                                        <TableCell
-                                            component="th"
-                                            scope="row"
-                                            align="left"
-                                            sx={{ width: '10px', padding: '0' }}
-                                        >
-                                            <FavoriteIcon></FavoriteIcon>
-                                        </TableCell>
-                                        <TableCell
-                                            component="th"
-                                            scope="row"
-                                            align="left"
-                                            sx={{ width: '10px', padding: '0' }}
-                                        >
-                                            <FileDownloadIcon></FileDownloadIcon>
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">
-                                            {row.name}
-                                            {row.mv !== 0 && (
-                                                <span
-                                                    className={style.page_mv}
-                                                    onClick={() =>
-                                                        handleGoMv(
-                                                            event as Event,
-                                                            row,
-                                                        )
-                                                    }
-                                                >
-                                                    MV
-                                                    <PlayArrowRounded
-                                                        sx={{
-                                                            fontSize: '14px',
-                                                        }}
-                                                    />
-                                                </span>
+                                            {currentSong.id === row.id ? (
+                                                <VolumeMuteIcon
+                                                    fontSize="small"
+                                                    sx={{
+                                                        position: 'relative',
+                                                        left: '-5px',
+                                                        lineHeight: 'normal',
+                                                        color: '#ec4141',
+                                                    }}
+                                                ></VolumeMuteIcon>
+                                            ) : (
+                                                index + 1
                                             )}
+                                        </TableCell>
+                                        {module === 'songs' && (
+                                            <Fragment>
+                                                <TableCell
+                                                    component="th"
+                                                    scope="row"
+                                                    align="left"
+                                                    sx={{
+                                                        width: '10px',
+                                                        padding: '0',
+                                                    }}
+                                                >
+                                                    <FavoriteIcon></FavoriteIcon>
+                                                </TableCell>
+
+                                                <TableCell
+                                                    component="th"
+                                                    scope="row"
+                                                    align="left"
+                                                    sx={{
+                                                        width: '10px',
+                                                        padding: '0',
+                                                    }}
+                                                >
+                                                    <FileDownloadIcon></FileDownloadIcon>
+                                                </TableCell>
+                                            </Fragment>
+                                        )}
+                                        <TableCell component="th" scope="row">
+                                            <span
+                                                className={[
+                                                    module === 'current'
+                                                        ? 'ellipsis'
+                                                        : '',
+                                                ].join(' ')}
+                                                style={{
+                                                    maxWidth:
+                                                        module === 'current'
+                                                            ? '200px'
+                                                            : 'auto',
+                                                    display: 'inline-block',
+                                                    color:
+                                                        currentSong.id ===
+                                                        row.id
+                                                            ? '#ec4141'
+                                                            : 'rgba(0, 0, 0, 0.87)',
+                                                }}
+                                            >
+                                                {row.name}
+                                            </span>
+                                            {row.mv !== 0 &&
+                                                module === 'songs' && (
+                                                    <span
+                                                        className={
+                                                            style.page_mv
+                                                        }
+                                                        onClick={() =>
+                                                            handleGoMv(
+                                                                event as Event,
+                                                                row,
+                                                            )
+                                                        }
+                                                    >
+                                                        MV
+                                                        <PlayArrowRounded
+                                                            sx={{
+                                                                fontSize:
+                                                                    '14px',
+                                                            }}
+                                                        />
+                                                    </span>
+                                                )}
                                         </TableCell>
                                         <TableCell align="left">
                                             {row.ar.map((singer, index) => (
@@ -157,14 +202,16 @@ const PlayList: FC<PropsInt> = (props) => {
                                                 </span>
                                             ))}
                                         </TableCell>
-                                        <TableCell
-                                            align="left"
-                                            className={style.page_cell}
-                                        >
-                                            {row.al.name}
-                                        </TableCell>
+                                        {module === 'songs' && (
+                                            <TableCell
+                                                align="left"
+                                                className={style.page_cell}
+                                            >
+                                                {row.al.name}
+                                            </TableCell>
+                                        )}
                                         <TableCell align="left">
-                                            {row.dt}
+                                            {getTime(row.dt / 1000, true)}
                                         </TableCell>
                                     </TableRow>
                                 ))}
@@ -172,9 +219,9 @@ const PlayList: FC<PropsInt> = (props) => {
                         </Table>
                     </div>
                 )}
-                {props.isPhone && (
+                {isPhone && (
                     <div className={style.page}>
-                        {props.data.map((song, index) => (
+                        {data.map((song, index) => (
                             <div
                                 className={style.song}
                                 key={song.id}
@@ -215,17 +262,21 @@ const PlayList: FC<PropsInt> = (props) => {
                         ))}
                     </div>
                 )}
-            </motion.div>
-        </motion.div>
+            </Fragment>
+        </Animation>
     );
 };
 
 const mapStateToProps = function (store: any) {
-    return { isPhone: store.UserReducer.isPhone };
+    return {
+        isPhone: store.UserReducer.isPhone,
+        currentSong: store.PlayListReducer.currentSong,
+    };
 };
 
 const mapDispatchToProps = {
     changeSong,
+    changePlaySongs,
 };
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore

@@ -144,7 +144,7 @@ const Header: FC<PropsInt> = (props) => {
                         </Typography>
                     )}
                     {!props.isPhone && (
-                        <IconButton>
+                        <IconButton onClick={() => navigate(-1)}>
                             <ArrowBackIosNew />
                         </IconButton>
                     )}

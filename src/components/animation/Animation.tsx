@@ -35,7 +35,7 @@ const typeObj = {
 
 const Animation: FC<PropInt> = ({ children, type = 'move' }) => {
     return (
-        <AnimatePresence exitBeforeEnter>
+        <AnimatePresence>
             <motion.div
                 className="single"
                 initial="exit"

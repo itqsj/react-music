@@ -12,10 +12,14 @@ interface PropsInt {
 const PlayListCard: FC<PropsInt> = React.memo(({ data }) => {
     return (
         <div className={[style.card, 'mtop-10', 'mbottom-10'].join(' ')}>
-            <img className={style.card_bg} src={data.coverImgUrl} alt="" />
+            <img
+                className={style.card_bg}
+                src={data?.coverImgUrl ?? ''}
+                alt=""
+            />
             <div className={style.card_body}>
                 <div className={style.card_body_img}>
-                    <ImgBox src={data.coverImgUrl} alt="" />
+                    <ImgBox src={data?.coverImgUrl ?? ''} alt="" />
                 </div>
 
                 <div className={style.card_body_info}>
@@ -31,7 +35,7 @@ const PlayListCard: FC<PropsInt> = React.memo(({ data }) => {
                             ' ',
                         )}
                     >
-                        {data.name}
+                        {data?.name}
                     </p>
                 </div>
             </div>

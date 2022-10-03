@@ -61,7 +61,7 @@ const PlayList: FC = () => {
             params,
         )) as ResTopPlayListInt;
         if (res.code === 200) {
-            setPlayList(res.playlists);
+            setPlayList([...res.playlists]);
             setTopPlayListPages(Math.ceil(res.total / 30));
         }
     };

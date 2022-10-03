@@ -1,5 +1,5 @@
 import { TracksInt } from '@/types/playList';
-import { fromJS } from 'immutable';
+import { Collection, fromJS } from 'immutable';
 
 interface ActionInt {
     type: string;
@@ -7,11 +7,13 @@ interface ActionInt {
 }
 interface PrevStateInt {
     currentSong: TracksInt;
+    currentPlaySongs: TracksInt[];
 }
 
 export const PlayListReducer = (
     prevState: PrevStateInt = {
         currentSong: {} as TracksInt,
+        currentPlaySongs: [],
     },
     action: ActionInt,
 ) => {
@@ -23,7 +25,10 @@ export const PlayListReducer = (
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             return newState.set('currentSong', payload).toJS();
-
+        case 'change_playsongs':
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            return newState.set('currentPlaySongs', payload).toJS();
         default:
             return prevState;
     }

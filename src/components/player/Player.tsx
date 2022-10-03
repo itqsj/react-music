@@ -16,14 +16,17 @@ import CircularProgress, {
 } from '@mui/material/CircularProgress';
 import Drawer from '@mui/material/Drawer';
 import { AnimatePresence, motion } from 'framer-motion';
-
+import PlayList from '@/components/list/playList/PlayList';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import PlayDetail from '@/views/playDetail/PlayDetail';
+import CurrentSongs from './CurrentSongs';
+import { Toggle } from '../toggle/Toggle';
 
 import style from './css/player.module.less';
 import { connect } from 'react-redux';
 import { TracksInt } from '@/types/playList';
-import { Toggle } from '../toggle/Toggle';
-import PlayDetail from '@/views/playDetail/PlayDetail';
+import { changeSong } from '@/redux/actionCreator/PlayList';
+
 // const PlayDetail = React.lazy(() => import('@/views/playDetail/PlayDetail'));
 
 const WallPaper = styled('div')({
@@ -100,6 +103,8 @@ const CoverImage = styled('div')({
 interface PlayerPropInit {
     isPhone: boolean;
     currentSong: TracksInt;
+    currentPlaySongs: TracksInt[];
+    changeSong: (data: TracksInt) => void;
 }
 
 interface audioInt {
@@ -113,7 +118,7 @@ interface currentInt {
 }
 
 interface SongInfoInt {
-    showDetailDrawer: () => viod;
+    showDetailDrawer: () => void;
 }
 
 function CircularProgressWithLabel(
@@ -143,13 +148,21 @@ function CircularProgressWithLabel(
     );
 }
 
-function Player({ isPhone, currentSong }: PlayerPropInit) {
+function Player({
+    isPhone,
+    currentSong,
+    currentPlaySongs,
+    changeSong,
+}: PlayerPropInit) {
     const theme = useTheme();
     const [duration, setDuration] = React.useState<number>(0); // seconds
     const [position, setPosition] = React.useState<number>(0);
     const [paused, setPaused] = React.useState(false);
-    const audio = React.useRef<HTMLAudioElement>(null) as audioInt;
+    const audio = React.useRef<HTMLAudioElement>(
+        null as unknown as HTMLAudioElement,
+    );
     const [openPlayer, setOpenPlayer] = React.useState<boolean>(false);
+    const [songsDraw, setSongsDraw] = React.useState<boolean>(false);
 
     const pausedControl = () => {
         setPaused(!paused);
@@ -169,7 +182,25 @@ function Player({ isPhone, currentSong }: PlayerPropInit) {
 
     const updateCurrenTime = () => {
         setPosition(Math.floor(audio.current.currentTime as number));
-        // console.log(audio.current.currentTime);
+    };
+    const playEnd = () => {
+        changeSong(getNextSong());
+    };
+    const getNextSong = () => {
+        let index = currentPlaySongs.findIndex(
+            (item) => item.id === currentSong.id,
+        );
+        if (index + 1 === currentPlaySongs.length) {
+            index = 0;
+        } else {
+            index = index + 1;
+        }
+        return currentPlaySongs[index];
+    };
+
+    const handleVolumeChange = (event: Event) => {
+        const target = event.target as EventTarget;
+        audio.current.volume = (target.value / 100) as number;
     };
     function formatDuration(value: number) {
         const minute = Math.floor(value / 60);
@@ -336,7 +367,8 @@ function Player({ isPhone, currentSong }: PlayerPropInit) {
                                         step={1}
                                         max={duration}
                                         onChange={(_, value) =>
-                                            (audio.current.currentTime = value)
+                                            (audio.current.currentTime =
+                                                value as number)
                                         }
                                         sx={{
                                             color:
@@ -411,7 +443,8 @@ function Player({ isPhone, currentSong }: PlayerPropInit) {
                                     />
                                     <Slider
                                         aria-label="Volume"
-                                        defaultValue={30}
+                                        defaultValue={100}
+                                        onChange={handleVolumeChange}
                                         sx={{
                                             color:
                                                 theme.palette.mode === 'dark'
@@ -446,6 +479,7 @@ function Player({ isPhone, currentSong }: PlayerPropInit) {
                                         fontSize: '40px',
                                         marginLeft: '15px',
                                     }}
+                                    onClick={() => setSongsDraw(true)}
                                 ></MenuOpenIcon>
                             </div>
                         </Widget>
@@ -500,11 +534,21 @@ function Player({ isPhone, currentSong }: PlayerPropInit) {
             >
                 <PlayDetail></PlayDetail>
             </Drawer>
+            <Drawer
+                anchor="right"
+                open={songsDraw}
+                onClose={() => setSongsDraw(false)}
+            >
+                <div style={{ width: '600px' }}>
+                    <CurrentSongs></CurrentSongs>
+                </div>
+            </Drawer>
             <audio
                 ref={audio}
                 src={currentSong.url}
                 autoPlay={true}
                 onTimeUpdate={updateCurrenTime}
+                onEnded={playEnd}
             ></audio>
         </Box>
     );
@@ -514,7 +558,12 @@ const mapStateToProps = function (store: any) {
     return {
         isPhone: store.UserReducer.isPhone,
         currentSong: store.PlayListReducer.currentSong,
+        currentPlaySongs: store.PlayListReducer.currentPlaySongs,
     };
 };
 
-export default connect(mapStateToProps)(Player);
+const mapDispatchToProps = {
+    changeSong,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Player);

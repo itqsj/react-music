@@ -29,16 +29,21 @@ const CardList: FC<PropsInt> = React.memo(({ data = [], module = 1 }) => {
 
     return (
         <div className={style.page}>
-            {data.length &&
-                data.map((item: PersonRecomInt | PlayListInt | ArtistList) => (
-                    <Card
-                        data={item}
-                        key={item.id}
-                        navigate={() => {
-                            handlerNavigate(item.id as number);
-                        }}
-                    ></Card>
-                ))}
+            {data.length !== 0 &&
+                data.map(
+                    (
+                        item: PersonRecomInt | PlayListInt | ArtistList,
+                        index: number,
+                    ) => (
+                        <Card
+                            data={item}
+                            key={index}
+                            navigate={() => {
+                                handlerNavigate(item.id as number);
+                            }}
+                        ></Card>
+                    ),
+                )}
         </div>
     );
 });

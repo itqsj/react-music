@@ -29,11 +29,7 @@ function Home() {
     //     }
     // }, []);
     return (
-        <div
-            style={{
-                padding: '0 20px',
-            }}
-        >
+        <div>
             <RouterTab></RouterTab>
             <div>
                 {/* <Outlet /> */}

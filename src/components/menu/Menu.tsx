@@ -9,7 +9,15 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ContentPaste from '@mui/icons-material/ContentPaste';
 import Cloud from '@mui/icons-material/Cloud';
 
+import { useNavigate } from 'react-router-dom';
+import { eventBus } from '@/untils/eventBus';
+
 function Menu() {
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate('/home/personalRecom');
+        eventBus.emit('setActiveTab');
+    };
     return (
         <Paper sx={{ width: 320, maxWidth: '100%' }}>
             <MenuList
@@ -23,6 +31,7 @@ function Menu() {
                         height: 50,
                         background: '#dbdbdb',
                     }}
+                    onClick={handleClick}
                 >
                     <ListItemText>发现音乐</ListItemText>
                 </MenuItem>
