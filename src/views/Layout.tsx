@@ -2,36 +2,24 @@ import React, { useEffect } from 'react';
 
 import Header from '@/components/header/Header';
 import Menu from '@/components/menu/Menu';
-import { AnimatePresence, motion } from 'framer-motion';
 import Player from '@/components/player/Player';
+import LayoutRouter from '@/router/LayoutRouter';
 
 import style from './css/layout.module.less';
 import { connect } from 'react-redux/es/exports';
-import { Outlet, useNavigate, useLocation } from 'react-router-dom';
-import LayoutRouter from '@/router/LayoutRouter';
-
-const transition = {
-    duration: 1,
-    ease: [0.43, 0.13, 0.23, 0.96],
-};
-
-const imageVariants = {
-    exit: { y: '25%', opacity: 0, transition },
-    enter: {
-        y: '0%',
-        opacity: 1,
-        transition,
-    },
-};
+import { useNavigate, useLocation } from 'react-router-dom';
+import { getAccount } from '@/redux/actionCreator/User';
 
 interface LayoutPropInt {
     isPhone: boolean;
+    getAccount: () => void;
 }
 
-function Layout({ isPhone }: LayoutPropInt) {
+function Layout({ isPhone, getAccount }: LayoutPropInt) {
     const navigate = useNavigate();
     const { pathname } = useLocation();
     useEffect(() => {
+        getAccount();
         if (pathname === '/') {
             navigate('/home');
         }
@@ -68,4 +56,6 @@ const mapStateToProps = function (store: any) {
     return { isPhone: store.UserReducer.isPhone };
 };
 
-export default connect(mapStateToProps)(Layout);
+const mapDispatchToProps = { getAccount };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);

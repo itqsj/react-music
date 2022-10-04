@@ -75,3 +75,79 @@ export interface ResUserPlaylistInt {
     playlist: Array<PlayListInt>;
     version: string;
 }
+
+//用户登录二维码key返回值
+export interface ResQrKeyInt {
+    code: number;
+    data: QrKeyInt;
+}
+
+export interface QrKeyInt {
+    code: number;
+    unikey: string;
+}
+
+//用户登录二维码返回值
+export interface ResQrCreateInt {
+    code: number;
+    data: QrCreateInt;
+}
+
+export interface QrCreateInt {
+    qrimg: string;
+    qrurl: string;
+}
+
+//二维码检查状态
+export interface ResQrStatusInt {
+    code: number;
+    cookie: string;
+    message: string;
+}
+
+//用户信息
+export interface ResUserInfoInt {
+    account: object;
+    code: number;
+    profile: UserInfoInt;
+}
+
+export interface UserInfoInt {
+    accountStatus: number;
+    accountType: number;
+    anchor: boolean;
+    authStatus: number;
+    authenticated: boolean;
+    authenticationTypes: number;
+    authority: number;
+    avatarDetail: number;
+    avatarImgId: number;
+    avatarUrl: string;
+    backgroundImgId: number;
+    backgroundUrl: string;
+    birthday: number;
+    city: number;
+    createTime: number;
+    defaultAvatar: boolean;
+    description: boolean;
+    detailDescription: boolean;
+    djStatus: number;
+    expertTags: boolean;
+    experts: boolean;
+    followed: boolean;
+    gender: number;
+    lastLoginIP: string;
+    lastLoginTime: number;
+    locationStatus: number;
+    mutual: boolean;
+    nickname: string;
+    province: number;
+    remarkName: boolean;
+    shortUserName: string;
+    signature: boolean;
+    userId: number;
+    userName: string;
+    userType: number;
+    vipType: number;
+    viptypeVersion: number;
+}

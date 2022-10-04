@@ -24,8 +24,9 @@ import FocusPopper from '../focusPopper/FocusPopper';
 import SearchPopper from '@/views/search/SearchPopper';
 
 import { connect } from 'react-redux/es/exports';
-import { useNavigate, useSearchParams, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { eventBus } from '@/untils/eventBus';
+import { UserInfoInt } from '@/types/user';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -71,9 +72,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 interface PropsInt {
     isPhone?: boolean;
+    userInfo: UserInfoInt;
 }
 
-const Header: FC<PropsInt> = (props) => {
+const Header: FC<PropsInt> = React.memo(({ isPhone, userInfo }) => {
     const [element, setelement] = useState<HTMLElement | null>(null);
     const navigate = useNavigate();
     const local = useLocation();
@@ -117,6 +119,10 @@ const Header: FC<PropsInt> = (props) => {
         };
     }, []);
 
+    useEffect(() => {
+        console.log(userInfo);
+    }, [userInfo]);
+
     return (
         <Box
             sx={{
@@ -138,18 +144,18 @@ const Header: FC<PropsInt> = (props) => {
                     >
                         <MenuIcon />
                     </IconButton>
-                    {!props.isPhone && (
+                    {!isPhone && (
                         <Typography variant="h6" component="div" sx={{ mr: 2 }}>
                             News
                         </Typography>
                     )}
-                    {!props.isPhone && (
+                    {!isPhone && (
                         <IconButton onClick={() => navigate(-1)}>
                             <ArrowBackIosNew />
                         </IconButton>
                     )}
 
-                    {!props.isPhone && (
+                    {!isPhone && (
                         <IconButton>
                             <ArrowForwardIosIcon />
                         </IconButton>
@@ -157,9 +163,7 @@ const Header: FC<PropsInt> = (props) => {
 
                     <Search>
                         <SearchIconWrapper
-                            onClick={() =>
-                                navigate(`/searchDetail?key=${searchVal}`)
-                            }
+                            onClick={() => navigate(`/searchDetail?key=晚安`)}
                         >
                             <SearchIcon />
                         </SearchIconWrapper>
@@ -178,7 +182,11 @@ const Header: FC<PropsInt> = (props) => {
                     ></Typography>
                     <Avatar
                         alt="Remy Sharp"
-                        src="/static/images/avatar/1.jpg"
+                        src={
+                            userInfo.backgroundUrl
+                                ? userInfo.backgroundUrl
+                                : '/static/images/avatar/1.jpg'
+                        }
                     />
                 </Toolbar>
             </AppBar>
@@ -187,10 +195,13 @@ const Header: FC<PropsInt> = (props) => {
             </FocusPopper>
         </Box>
     );
-};
+});
 
 const mapStateToProps = function (store: any) {
-    return { isPhone: store.UserReducer.isPhone };
+    return {
+        isPhone: store.UserReducer.isPhone,
+        userInfo: store.UserReducer.userInfo,
+    };
 };
 
 export default connect(mapStateToProps)(Header);

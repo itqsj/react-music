@@ -1,5 +1,6 @@
 // 作废
 
+import Login from '@/views/login/Login';
 import React, { Suspense, ReactNode } from 'react';
 import { Route, Navigate, Routes } from 'react-router-dom';
 
@@ -11,15 +12,11 @@ const NotFount = React.lazy(() => import('@/views/notFount/NotFount'));
 
 function IndexRouter() {
     return (
+        // <Navigate to="/music"></Navigate>
         // <Suspense>
         <Routes>
-            <Route path="/music" element={<Layout></Layout>}>
-                <Route
-                    path="/music/personalRecom"
-                    element={<PersonalRecom></PersonalRecom>}
-                ></Route>
-            </Route>
-            <Route path="/" element={<Navigate to="/music"></Navigate>}></Route>
+            <Route path="/login" element={<Login></Login>}></Route>
+            <Route path="/*" element={<Layout></Layout>}></Route>
             <Route path="*" element={<NotFount></NotFount>}></Route>
         </Routes>
         // </Suspense>

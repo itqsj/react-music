@@ -3,12 +3,9 @@ import './App.css';
 
 import { browsers } from '@/untils/browser';
 import { connect } from 'react-redux/es/exports';
-import { changeIsPhone, getAccount } from '@/redux/actionCreator/User';
-import Layout from './views/Layout';
+import { changeIsPhone } from '@/redux/actionCreator/User';
 
-import { useRoutes } from 'react-router-dom';
-import routes from '@/router/index';
-import { AnimatePresence, motion } from 'framer-motion';
+import IndexRouter from './router/IndexRouter';
 
 function App(props: any) {
     const resize = () => {
@@ -16,7 +13,6 @@ function App(props: any) {
         props.changeIsPhone(isPhone);
     };
     useEffect(() => {
-        props.getAccount();
         const isPhone = browsers();
         props.changeIsPhone(isPhone);
         window.addEventListener('resize', resize);
@@ -37,7 +33,7 @@ function App(props: any) {
                     transition={{ duration: 1, ease: [0.43, 0.13, 0.23, 0.96] }}
                 > */}
             {/* {useRoutes(routes)} */}
-            <Layout></Layout>
+            <IndexRouter></IndexRouter>
             {/* </motion.div> */}
             {/* </AnimatePresence> */}
         </div>
@@ -49,7 +45,6 @@ const mapStateToProps = function (store: any) {
 
 const mapDispatchToProps = {
     changeIsPhone,
-    getAccount,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

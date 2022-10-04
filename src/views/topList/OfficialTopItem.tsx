@@ -14,17 +14,18 @@ import { playListDetail } from '@/api/api_playlist';
 import { useNavigate } from 'react-router-dom';
 import ImgBox from '@/components/imgBox/ImgBox';
 import { connect } from 'react-redux';
-import { changeSong } from '@/redux/actionCreator/PlayList';
+import { changeSong, changePlaySongs } from '@/redux/actionCreator/PlayList';
 import { ActiveInt } from '@/redux/actionCreator/PlayList';
 
 interface PropsInt {
     data: PlayListInt;
     isPhone: boolean;
     changeSong: (data: TracksInt) => ActiveInt;
+    changePlaySongs: (data: TracksInt[]) => ActiveInt;
 }
 
 const OfficialTopItem: FC<PropsInt> = React.memo(
-    ({ data, isPhone, changeSong }) => {
+    ({ data, isPhone, changeSong, changePlaySongs }) => {
         const navigate = useNavigate();
         const [playDetail, setPlayDetail] = useState<PlayListItemInt>(
             {} as PlayListItemInt,
@@ -44,6 +45,7 @@ const OfficialTopItem: FC<PropsInt> = React.memo(
 
         const handlePlay = (data: TracksInt) => {
             changeSong(data);
+            changePlaySongs(playDetail.tracks);
         };
         useEffect(() => {
             getPlayListDetail();
@@ -125,6 +127,7 @@ const mapStateToProps = function (store: any) {
 
 const mapDispatchToProps = {
     changeSong,
+    changePlaySongs,
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment

@@ -1,4 +1,5 @@
-import { userAccount } from '@/api/api_user';
+import { fromJS } from 'immutable';
+import { UserInfoInt } from '@/types/user';
 
 interface ActionInt {
     type: string;
@@ -6,23 +7,28 @@ interface ActionInt {
 }
 interface PrevStateInt {
     isPhone: boolean;
+    userInfo: UserInfoInt;
 }
 
 export const UserReducer = (
     prevState: PrevStateInt = {
         isPhone: false,
+        userInfo: {} as UserInfoInt,
     },
     action: ActionInt,
 ) => {
     const { type, payload } = action;
-    const newState = { ...prevState };
+    const newState = fromJS(prevState);
+
     switch (type) {
         case 'change_isphone':
-            newState.isPhone = payload;
-            return newState;
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            return newState.set('isPhone', payload).toJS();
         case 'get_account':
-            userAccount();
-            return newState;
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            return newState.set('userInfo', payload).toJS();
         default:
             return prevState;
     }
