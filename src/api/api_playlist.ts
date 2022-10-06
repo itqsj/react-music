@@ -136,3 +136,24 @@ export function cloudSearch(params: ParamsIdInt) {
         },
     });
 }
+
+//私人 FM/
+export function personalFm() {
+    return http({
+        url: '/api/personal_fm',
+        params: {
+            timestamp: Date.now(),
+        },
+    });
+}
+
+//歌词
+export function lyric(params: ParamsIdInt) {
+    return http({
+        url: '/api/lyric',
+        params: {
+            timestamp: Date.now(),
+            ...params,
+        },
+    });
+}

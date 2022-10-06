@@ -1,9 +1,9 @@
-export const getTime = (time: any, retain: boolean) => {
+export const getTime = (time: any, retain: boolean, digit = 1) => {
     if (!time) return '00:00';
     let minute: any = Math.floor(time / 60);
     let second: any = time % 60;
     if (retain) {
-        second = Math.floor(second);
+        second = Math.floor(second * digit) / digit;
     }
     minute = minute >= 10 ? minute : `0${minute}`;
     second = second >= 10 ? second : `0${second}`;
@@ -54,6 +54,5 @@ export const transitionLyricArray = (songLyric: string) => {
         } else if (timeLyricArr.length === 0) {
         }
     });
-    console.log(lyricArr);
     return lyricArr;
 };

@@ -306,3 +306,21 @@ export interface NewSongsInt {
 export interface ParamsInt {
     type?: number;
 }
+
+//歌词返回值
+
+export interface ResLyricInt {
+    code: number;
+    klyric: LyricInt;
+    lrc: LyricInt;
+    qfy: boolean;
+    sfy: boolean;
+    sgc: boolean;
+    tlyric: number;
+}
+
+//歌词数据
+export interface LyricInt {
+    lyric: string;
+    version: number;
+}

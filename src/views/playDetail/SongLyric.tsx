@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { songLyric } from '@/api/api_playlist';
 import { transitionLyricArray, LyricInt } from '@/untils/filters';
 import style from './css/songLyric.module.less';
+import LyricWrap from '@/components/lyricWrap/LyricWrap';
 
 interface SongLyricInt {
     id: number | string;
@@ -20,28 +21,24 @@ interface LrcInt {
 }
 
 function SongLyric({ id }: SongLyricInt) {
-    const [lyricList, setLyricList] = useState<Array<LyricInt>>(
-        [] as Array<LyricInt>,
-    );
-    const getSongLyric = async () => {
-        const params: SongLyricInt = {
-            id,
-        };
-        const res: LyricRes = (await songLyric(params)) as LyricRes;
-        if (res.code === 200) {
-            setLyricList(transitionLyricArray(res.lrc.lyric));
-        }
-    };
+    // const [lyricList, setLyricList] = useState<Array<LyricInt>>(
+    //     [] as Array<LyricInt>,
+    // );
+    // const getSongLyric = async () => {
+    //     const params: SongLyricInt = {
+    //         id,
+    //     };
+    //     const res: LyricRes = (await songLyric(params)) as LyricRes;
+    //     if (res.code === 200) {
+    //         setLyricList(transitionLyricArray(res.lrc.lyric));
+    //     }
+    // };
     useEffect(() => {
-        getSongLyric();
+        // getSongLyric();
     }, []);
     return (
         <div className={style.page}>
-            {lyricList.map((item, index) => (
-                <p className={style.page_item} key={index}>
-                    {item.lyric}
-                </p>
-            ))}
+            <LyricWrap id={id}></LyricWrap>
         </div>
     );
 }

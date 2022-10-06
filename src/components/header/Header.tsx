@@ -120,7 +120,7 @@ const Header: FC<PropsInt> = React.memo(({ isPhone, userInfo }) => {
     }, []);
 
     useEffect(() => {
-        console.log(userInfo);
+        // console.log(userInfo);
     }, [userInfo]);
 
     return (

@@ -12,12 +12,50 @@ import Cloud from '@mui/icons-material/Cloud';
 import { useNavigate } from 'react-router-dom';
 import { eventBus } from '@/untils/eventBus';
 
+interface MenuInt {
+    href: string;
+    label: string;
+    disabled?: boolean;
+}
+
 function Menu() {
     const navigate = useNavigate();
-    const handleClick = () => {
-        navigate('/home/personalRecom');
-        eventBus.emit('setActiveTab');
+    const handleClick = (item: MenuInt) => {
+        if ('/home/personalRecom' === item.href) {
+            eventBus.emit('setActiveTab');
+        }
+        navigate(item.href);
     };
+    const menuList: MenuInt[] = [
+        {
+            href: '/home/personalRecom',
+            label: '发现音乐',
+        },
+        {
+            href: '/personalfm',
+            label: '视频',
+            disabled: true,
+        },
+        {
+            href: '/personalfm',
+            label: '私人FM',
+        },
+        {
+            href: '/personalfm',
+            label: '每日推荐',
+            disabled: true,
+        },
+        {
+            href: '/personalfm',
+            label: '最近播放',
+            disabled: true,
+        },
+        {
+            href: '/personalfm',
+            label: '我的收藏',
+            disabled: true,
+        },
+    ];
     return (
         <Paper sx={{ width: 320, maxWidth: '100%' }}>
             <MenuList
@@ -26,90 +64,19 @@ function Menu() {
                     padding: '10px 15px 0',
                 }}
             >
-                <MenuItem
-                    sx={{
-                        height: 50,
-                        background: '#dbdbdb',
-                    }}
-                    onClick={handleClick}
-                >
-                    <ListItemText>发现音乐</ListItemText>
-                </MenuItem>
-                <MenuItem
-                    sx={{
-                        height: 50,
-                    }}
-                >
-                    <ListItemText>视频</ListItemText>
-                </MenuItem>
-                <MenuItem
-                    sx={{
-                        height: 50,
-                    }}
-                >
-                    <ListItemText>朋友</ListItemText>
-                </MenuItem>
-
-                <MenuItem
-                    sx={{
-                        height: 50,
-                    }}
-                >
-                    <ListItemText>直播</ListItemText>
-                </MenuItem>
-
-                <MenuItem
-                    sx={{
-                        height: 50,
-                    }}
-                >
-                    <ListItemText>私人FM</ListItemText>
-                </MenuItem>
-                <MenuItem
-                    sx={{
-                        height: 50,
-                    }}
-                >
-                    <ListItemText>我的音乐</ListItemText>
-                </MenuItem>
-                <MenuItem
-                    sx={{
-                        height: 50,
-                    }}
-                >
-                    <ListItemIcon>
-                        <ContentPaste fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText>本地音乐</ListItemText>
-                </MenuItem>
-                <MenuItem
-                    sx={{
-                        height: 50,
-                    }}
-                >
-                    <ListItemIcon>
-                        <ContentPaste fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText>下载管理</ListItemText>
-                </MenuItem>
-                <MenuItem
-                    sx={{
-                        height: 50,
-                    }}
-                >
-                    <ListItemText>最近播放</ListItemText>
-                </MenuItem>
-                <Divider />
-                <MenuItem
-                    sx={{
-                        height: 50,
-                    }}
-                >
-                    <ListItemIcon>
-                        <Cloud fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText>创建的歌单</ListItemText>
-                </MenuItem>
+                {menuList.map((item: MenuInt, index) => (
+                    <MenuItem
+                        sx={{
+                            height: 50,
+                            background: index === 0 ? '#dbdbdb' : '',
+                        }}
+                        key={index}
+                        disabled={item?.disabled}
+                        onClick={() => handleClick(item)}
+                    >
+                        <ListItemText>{item.label}</ListItemText>
+                    </MenuItem>
+                ))}
             </MenuList>
         </Paper>
     );

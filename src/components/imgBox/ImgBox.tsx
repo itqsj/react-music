@@ -12,10 +12,15 @@ interface PropsInt {
 const ImgBox: FC<PropsInt> = React.memo(
     ({ src, alt, type = 'loada', aspectRatio = '1/1' }) => {
         const [loading, setLoading] = useState<boolean>(true);
+        const [imgSrc, setImgSrc] = useState<string>('');
 
         const handleLoad = () => {
             setLoading(false);
         };
+        useEffect(() => {
+            setImgSrc(src);
+            setLoading(true);
+        }, [src]);
         return (
             <div
                 className={style.box}
@@ -29,7 +34,7 @@ const ImgBox: FC<PropsInt> = React.memo(
                         aspectRatio,
                     }}
                     className={style.box_img}
-                    src={src}
+                    src={imgSrc}
                     onLoad={handleLoad}
                     alt={alt}
                 />

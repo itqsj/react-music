@@ -26,6 +26,8 @@ import style from './css/player.module.less';
 import { connect } from 'react-redux';
 import { TracksInt } from '@/types/playList';
 import { changeSong } from '@/redux/actionCreator/PlayList';
+import { getTime } from '@/untils/filters';
+import { eventBus } from '@/untils/eventBus';
 
 // const PlayDetail = React.lazy(() => import('@/views/playDetail/PlayDetail'));
 
@@ -182,6 +184,8 @@ function Player({
 
     const updateCurrenTime = () => {
         setPosition(Math.floor(audio.current.currentTime as number));
+        const time = getTime(audio.current.currentTime, true, 1000);
+        eventBus.emit('updateCurrenTime', time);
     };
     const playEnd = () => {
         changeSong(getNextSong());

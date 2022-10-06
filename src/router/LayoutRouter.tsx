@@ -13,6 +13,7 @@ const ArtistDetail = React.lazy(
 const Search = React.lazy(() => import('@/views/search/Search'));
 import Home from '@/views/home/Home';
 import UserDetail from '@/views/userDetail/UserDetail';
+import PersonalFm from '@/views/personalFm/PersonalFm';
 // import AlbumDetail from '@/views/album/AlbumDetail';
 const AlbumDetail = React.lazy(() => import('@/views/album/AlbumDetail'));
 
@@ -50,6 +51,10 @@ function LayoutRouter() {
             <Route
                 path="/albumDetail"
                 element={lazyLoad(<AlbumDetail></AlbumDetail>)}
+            ></Route>
+            <Route
+                path="/personalfm"
+                element={lazyLoad(<PersonalFm></PersonalFm>)}
             ></Route>
 
             <Route path="*" element={<NotFount></NotFount>}></Route>
