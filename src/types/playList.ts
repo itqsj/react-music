@@ -265,7 +265,7 @@ export interface SearchInt {
     songCount: number;
     songs: Array<TracksInt>;
     albumCount: number;
-    albums: NewSongsInt[];
+    albums: SongsInt[];
     artistCount: number;
     artists: ArtistList[];
     playlistCount: number;
@@ -282,17 +282,17 @@ export interface PlayListAndArtistAlbumsInt
 //最新音乐返回值
 export interface ResNewSongsInt {
     code: number;
-    data: NewSongsInt[];
+    data: SongsInt[];
 }
 
 export interface StripeDataInt
-    extends NewSongsInt,
+    extends SongsInt,
         ArtistList,
         PlayListInt,
         ProfileInt,
         MvInfoInt {}
 //最新音乐
-export interface NewSongsInt {
+export interface SongsInt {
     //歌单信息
     id: string | number;
     name: string;

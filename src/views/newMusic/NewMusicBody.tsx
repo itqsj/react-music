@@ -4,7 +4,7 @@ import { PlayArrowRounded } from '@mui/icons-material';
 import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
 
 import style from './css/newMusicBody.module.less';
-import { NewSongsInt, ResNewSongsInt, StripeDataInt } from '@/types/playList';
+import { SongsInt, ResNewSongsInt, StripeDataInt } from '@/types/playList';
 import { topSongs } from '@/api/api_newMusic';
 import Animation from '@/components/animation/Animation';
 import Loading from '@/components/loading/Loading';
@@ -13,8 +13,8 @@ import StripeList from '@/components/list/stripeList/StripeList';
 const NewMusicBody: FC = () => {
     const [active, setActive] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(false);
-    const [newSongs, setNewSongs] = useState<NewSongsInt[]>(
-        [] as NewSongsInt[],
+    const [newSongs, setNewSongs] = useState<SongsInt[]>(
+        [] as SongsInt[],
     );
     const tabList = [
         {

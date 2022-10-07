@@ -16,6 +16,7 @@ interface PlaySongsPayloadInt {
 }
 
 async function changeSong(songInfo: TracksInt) {
+    console.log(songInfo);
     const params = {
         id: songInfo.id,
     };

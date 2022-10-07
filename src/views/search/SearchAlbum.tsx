@@ -2,13 +2,13 @@ import React, { FC } from 'react';
 
 import Animation from '@/components/animation/Animation';
 
-import { NewSongsInt, StripeDataInt } from '@/types/playList';
+import { SongsInt, StripeDataInt } from '@/types/playList';
 
 import { connect } from 'react-redux';
 import StripeList from '@/components/list/stripeList/StripeList';
 
 interface PropsInt {
-    data: NewSongsInt[];
+    data: SongsInt[];
     isPhone: boolean;
 }
 

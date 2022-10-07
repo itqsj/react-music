@@ -9,10 +9,10 @@ import SkipNextIcon from '@mui/icons-material/SkipNext';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 import style from './css/fmPanel.module.less';
-import { NewSongsInt } from '@/types/playList';
+import { SongsInt } from '@/types/playList';
 
 interface PropsInt {
-    data: NewSongsInt;
+    data: SongsInt;
     next: () => void;
 }
 

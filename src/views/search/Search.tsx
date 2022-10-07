@@ -13,7 +13,7 @@ import { cloudSearch } from '@/api/api_playlist';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import style from './css/search.module.less';
 import { ResSearchInt, TracksInt } from '@/types/playList';
-import { NewSongsInt, PlayListInt } from '@/types/playList';
+import { SongsInt, PlayListInt } from '@/types/playList';
 import { ArtistList } from '@/types/artist';
 import { ProfileInt } from '@/types/user';
 import { MvInfoInt } from '@/types/video';
@@ -24,7 +24,7 @@ const Search: FC = () => {
     const [activeTab, setActiveTab] = useState('1');
     const [songCount, setSongCount] = useState<number>(0);
     const [songs, setSongs] = useState<TracksInt[]>([] as TracksInt[]);
-    const [album, setAlbum] = useState<NewSongsInt[]>([] as NewSongsInt[]);
+    const [album, setAlbum] = useState<SongsInt[]>([] as SongsInt[]);
     const [singers, setSingers] = useState<ArtistList[]>([] as ArtistList[]);
     const [playlist, setPlaylist] = useState<PlayListInt[]>(
         [] as PlayListInt[],
@@ -84,7 +84,7 @@ const Search: FC = () => {
     };
     const setAlbumCall = (res: ResSearchInt) => {
         setSongCount(res.result.albumCount);
-        setAlbum(res.result.albums as NewSongsInt[]);
+        setAlbum(res.result.albums as SongsInt[]);
     };
     const setSingerCall = (res: ResSearchInt) => {
         setSongCount(res.result.artistCount);

@@ -6,10 +6,10 @@ import FmPanel from './FmPanel';
 
 import style from './css/personalFm.module.less';
 import { personalFm } from '@/api/api_playlist';
-import { NewSongsInt, ResNewSongsInt } from '@/types/playList';
+import { SongsInt, ResNewSongsInt } from '@/types/playList';
 
 function PersonalFm() {
-    const [songs, setSongs] = useState<NewSongsInt[]>([]);
+    const [songs, setSongs] = useState<SongsInt[]>([]);
     const [currentActive, setCurrentActive] = useState<number>(0);
     const getPersonalFm = async (index: number) => {
         const res: ResNewSongsInt = (await personalFm()) as ResNewSongsInt;

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { NewSongsInt, StripeDataInt } from '@/types/playList';
+import { SongsInt, StripeDataInt } from '@/types/playList';
 
 import StripeListItem from './StripeListItem';
 
