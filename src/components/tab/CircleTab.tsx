@@ -38,8 +38,6 @@ const NormalTabs: FC<PropsInt> = React.memo(({ tabs, change }) => {
                     },
                     '& .MuiButtonBase-root': {
                         padding: '0 15px',
-                    },
-                    '&  .css-uekjgu-MuiButtonBase-root-MuiTab-root': {
                         minWidth: '100px',
                         minHeight: '30px',
                         height: '30px',

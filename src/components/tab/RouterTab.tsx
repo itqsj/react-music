@@ -87,10 +87,10 @@ function RouterTab() {
                     padding: '0 20px',
                     boxSizing: 'border-box',
                 },
-                '& .css-uekjgu-MuiButtonBase-root-MuiTab-root.Mui-selected ': {
-                    color: '#373737',
+                '& .Mui-selected ': {
                     fontSize: '18px',
                     fontWeight: '800',
+                    color: '#373737!important',
                 },
             }}
             value={value}
