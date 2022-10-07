@@ -131,7 +131,8 @@ function PlayDetail({ currentSong }: PlayDetail) {
 
             return false;
         };
-
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         document.onmousewheel = function (e: EventInt) {
             e = e || window.event;
             const d = e.wheelDelta / 20 || -e.detail;

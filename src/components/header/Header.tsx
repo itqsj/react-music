@@ -27,6 +27,8 @@ import { connect } from 'react-redux/es/exports';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { eventBus } from '@/untils/eventBus';
 import { UserInfoInt } from '@/types/user';
+import { logout } from '@/api/api_user';
+import { getAccount } from '@/redux/actionCreator/User';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -72,14 +74,22 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 interface PropsInt {
     isPhone?: boolean;
+    isLogin: boolean;
     userInfo: UserInfoInt;
+    getAccount: () => void;
 }
 
-const Header: FC<PropsInt> = React.memo(({ isPhone, userInfo }) => {
+interface LoginOutInt {
+    code: number;
+}
+
+const Header: FC<PropsInt> = React.memo(({ isPhone, userInfo, isLogin }) => {
     const [element, setelement] = useState<HTMLElement | null>(null);
     const navigate = useNavigate();
     const local = useLocation();
     const searchFocus = (event: FocusEvent<HTMLElement>) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         setelement(event.target.parentElement.parentElement);
     };
     const saveSearchHistry = (value: string) => {
@@ -98,6 +108,8 @@ const Header: FC<PropsInt> = React.memo(({ isPhone, userInfo }) => {
     const handleKeyUp = (event: KeyboardEvent<HTMLInputElement>) => {
         const keyCode = event.keyCode;
         if (keyCode === 13) {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             handleSearch(event.target.value);
         }
     };
@@ -111,6 +123,13 @@ const Header: FC<PropsInt> = React.memo(({ isPhone, userInfo }) => {
             window.location.reload();
         }
     };
+    const loginOut = async () => {
+        const res: LoginOutInt = (await logout()) as LoginOutInt;
+
+        if (res.code === 200) {
+            getAccount();
+        }
+    };
     useEffect(() => {
         eventBus.on('search', handleSearch);
 
@@ -118,10 +137,6 @@ const Header: FC<PropsInt> = React.memo(({ isPhone, userInfo }) => {
             eventBus.off('search', handleSearch);
         };
     }, []);
-
-    useEffect(() => {
-        // console.log(userInfo);
-    }, [userInfo]);
 
     return (
         <Box
@@ -183,11 +198,20 @@ const Header: FC<PropsInt> = React.memo(({ isPhone, userInfo }) => {
                     <Avatar
                         alt="Remy Sharp"
                         src={
-                            userInfo.backgroundUrl
+                            userInfo?.backgroundUrl
                                 ? userInfo.backgroundUrl
                                 : '/static/images/avatar/1.jpg'
                         }
                     />
+                    {isLogin && (
+                        <span
+                            className="mleft-5"
+                            style={{ cursor: 'pointer' }}
+                            onClick={loginOut}
+                        >
+                            退出登录
+                        </span>
+                    )}
                 </Toolbar>
             </AppBar>
             <FocusPopper element={element}>
@@ -200,8 +224,11 @@ const Header: FC<PropsInt> = React.memo(({ isPhone, userInfo }) => {
 const mapStateToProps = function (store: any) {
     return {
         isPhone: store.UserReducer.isPhone,
+        isLogin: store.UserReducer.isLogin,
         userInfo: store.UserReducer.userInfo,
     };
 };
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = { getAccount };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

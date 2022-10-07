@@ -3,7 +3,7 @@ import { motion, AnimatePresence, Variants } from 'framer-motion';
 
 interface PropInt {
     children: ReactNode;
-    type?: string;
+    type?: 'move' | 'opacity';
 }
 
 const transition = {
@@ -11,7 +11,7 @@ const transition = {
     ease: [0.43, 0.13, 0.23, 0.96],
 };
 
-const move = {
+const move: Variants = {
     exit: { y: '25%', opacity: 0, transition },
     enter: {
         y: '0%',
@@ -20,7 +20,7 @@ const move = {
     },
 };
 
-const opacity = {
+const opacity: Variants = {
     exit: { opacity: 0, transition },
     enter: {
         opacity: 1,

@@ -15,7 +15,7 @@ async function getAccount() {
 
     if (res.code === 200) {
         const action = {
-            type: 'get_account',
+            type: 'change_account',
             payload: res.profile,
         };
         return action;

@@ -8,11 +8,13 @@ interface ActionInt {
 interface PrevStateInt {
     isPhone: boolean;
     userInfo: UserInfoInt;
+    isLogin: boolean;
 }
 
 export const UserReducer = (
     prevState: PrevStateInt = {
         isPhone: false,
+        isLogin: false,
         userInfo: {} as UserInfoInt,
     },
     action: ActionInt,
@@ -25,10 +27,16 @@ export const UserReducer = (
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             return newState.set('isPhone', payload).toJS();
-        case 'get_account':
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            return newState.set('userInfo', payload).toJS();
+        case 'change_account':
+            const login = payload ? true : false;
+            return (
+                newState
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
+                    .set('userInfo', payload)
+                    .set('isLogin', login)
+                    .toJS()
+            );
         default:
             return prevState;
     }

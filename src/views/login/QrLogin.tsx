@@ -57,7 +57,7 @@ const QrLogin: FC = () => {
     useEffect(() => {
         getQrKey();
         return () => {
-            clearTimeout(timer);
+            clearTimeout(timer as NodeJS.Timeout);
             timer = null;
         };
     }, []);

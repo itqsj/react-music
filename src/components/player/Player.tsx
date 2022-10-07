@@ -204,6 +204,8 @@ function Player({
 
     const handleVolumeChange = (event: Event) => {
         const target = event.target as EventTarget;
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         audio.current.volume = (target.value / 100) as number;
     };
     function formatDuration(value: number) {
@@ -278,7 +280,10 @@ function Player({
         </div>
     );
     const toggleDrawer = () => {
-        setOpenPlayer(!openPlayer);
+        console.log(currentSong);
+        if (JSON.stringify(currentSong) !== '{}') {
+            setOpenPlayer(!openPlayer);
+        }
     };
     return (
         <Box sx={{ width: '100%', height: '100%', overflow: 'hidden' }}>

@@ -13,7 +13,7 @@ interface CollectorInt {
 export function userAccount() {
     return http({
         url: '/api/user/account',
-        data: {
+        params: {
             timestamp: Date.now(),
         },
     });
@@ -69,6 +69,16 @@ export function qrCheck(params: CollectorInt) {
         params: {
             timestamp: Date.now(),
             ...params,
+        },
+    });
+}
+
+//推出登录
+export function logout() {
+    return http({
+        url: '/api/logout',
+        params: {
+            timestamp: Date.now(),
         },
     });
 }

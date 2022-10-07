@@ -20,6 +20,8 @@ const Card: FC<PropsInt> = React.memo((props) => {
         >
             <ImgBox
                 src={
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
                     (props.data.picUrl ?? props.data.coverImgUrl) +
                     '?param=300y300'
                 }

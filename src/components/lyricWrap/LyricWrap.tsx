@@ -38,6 +38,8 @@ const LyricWrap: FC<PropsInt> = React.memo(({ id }) => {
         const step = (timestamp: number) => {
             if (start === undefined) start = timestamp;
             const elapsed = timestamp - start;
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             ulref.current.scrollTop = Math.min(
                 0.16 * elapsed + (line - 1) * 40,
                 line * 40,
