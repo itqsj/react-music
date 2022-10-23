@@ -17,8 +17,10 @@ const LyricWrap: FC<PropsInt> = React.memo(({ id }) => {
     const [currentLint, setcurrentLint] = useState(0);
     let currentIndex = 0;
     let startSrollLint = 0;
-    let lyrics: LyricInt[] = [];
-    let liArr: HTMLLIElement[] = [];
+    const lyrics: { current: LyricInt[] } = useRef([]) as unknown as {
+        current: LyricInt[];
+    };
+    // let lyrics: LyricInt[] = [];
 
     const getlyric = async () => {
         const params = {
@@ -28,8 +30,7 @@ const LyricWrap: FC<PropsInt> = React.memo(({ id }) => {
         if (res.code === 200) {
             const newLyricArr: LyricInt[] = transitionLyricArray(res.lrc.lyric);
             setlyricArr(newLyricArr);
-            lyrics = newLyricArr;
-            console.log(lyrics);
+            lyrics.current = newLyricArr;
         }
     };
     /* 歌词滚动动画 */
@@ -52,21 +53,17 @@ const LyricWrap: FC<PropsInt> = React.memo(({ id }) => {
         window.requestAnimationFrame(step);
     };
     const scroll = (time: string) => {
-        if (!liArr.length) {
-            liArr = ulref.current?.querySelectorAll(
-                'li',
-            ) as unknown as HTMLLIElement[];
-        }
-
-        const index = lyrics.findIndex((item, index, arr) => {
+        const index = lyrics.current.findIndex((item, index, arr) => {
             const indexLyrics =
-                index + 1 >= lyrics.length - 1 ? lyrics.length - 1 : index + 1;
-            if (item.time < time && lyrics[indexLyrics].time > time) {
+                index + 1 >= lyrics.current.length - 1
+                    ? lyrics.current.length - 1
+                    : index + 1;
+            if (item.time < time && lyrics.current[indexLyrics].time > time) {
                 return index;
             }
         });
 
-        if (!index) {
+        if (index === -1) {
             return false;
         }
 

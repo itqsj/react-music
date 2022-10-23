@@ -143,8 +143,8 @@ const Header: FC<PropsInt> = React.memo(({ isPhone, userInfo, isLogin }) => {
             sx={{
                 width: '100vw',
                 backgroundColor: '#ec4141',
-                boxShadow:
-                    'rgb(236, 65, 65) 0px 1px 4px, rgb(236, 65, 65) 0px 3px 12px 2px',
+                // boxShadow:
+                //     'rgb(236, 65, 65) 0px 1px 4px, rgb(236, 65, 65) 0px 3px 12px 2px',
                 '& .MuiPaper-root': { backgroundColor: '#ec4141' },
             }}
         >

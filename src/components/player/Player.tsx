@@ -280,7 +280,6 @@ function Player({
         </div>
     );
     const toggleDrawer = () => {
-        console.log(currentSong);
         if (JSON.stringify(currentSong) !== '{}') {
             setOpenPlayer(!openPlayer);
         }

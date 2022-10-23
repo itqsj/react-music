@@ -1,17 +1,20 @@
 import React, { FC } from 'react';
 
 import style from './css/stripeListItem.module.less';
-import { StripeDataInt } from '@/types/playList';
+import { StripeDataInt, TracksInt } from '@/types/playList';
 import { useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { changeSong } from '@/redux/actionCreator/PlayList';
 
 interface PropsInt {
     data: StripeDataInt;
     index: number;
     module?: string;
+    changeSong: (data: TracksInt, check: boolean) => void;
 }
 
 const NewMusicItem: FC<PropsInt> = React.memo(
-    ({ data, index, module = 'music' }) => {
+    ({ data, index, module = 'music', changeSong }) => {
         const navigate = useNavigate();
         const handleClick = () => {
             if (module === 'album') {
@@ -25,6 +28,9 @@ const NewMusicItem: FC<PropsInt> = React.memo(
             }
             if (module === 'users') {
                 navigate(`/userDetail?id=${data.userId}`);
+            }
+            if (module === 'song') {
+                changeSong(data as unknown as TracksInt, false);
             }
         };
         return (
@@ -116,4 +122,14 @@ const NewMusicItem: FC<PropsInt> = React.memo(
     },
 );
 
-export default NewMusicItem;
+const mapStateToProps = function (store: any) {
+    return {
+        currentSong: store.PlayListReducer.currentSong,
+    };
+};
+
+const mapDispatchToProps = {
+    changeSong,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewMusicItem);

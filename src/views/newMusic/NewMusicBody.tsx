@@ -13,9 +13,7 @@ import StripeList from '@/components/list/stripeList/StripeList';
 const NewMusicBody: FC = () => {
     const [active, setActive] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(false);
-    const [newSongs, setNewSongs] = useState<SongsInt[]>(
-        [] as SongsInt[],
-    );
+    const [newSongs, setNewSongs] = useState<SongsInt[]>([] as SongsInt[]);
     const tabList = [
         {
             label: '全部',

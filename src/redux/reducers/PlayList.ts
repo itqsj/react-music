@@ -18,7 +18,6 @@ export const PlayListReducer = (
     action: ActionInt,
 ) => {
     const { type, payload } = action;
-
     const newState = fromJS(prevState);
     switch (type) {
         case 'change_song':

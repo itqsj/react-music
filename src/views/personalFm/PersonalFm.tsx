@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, FC } from 'react';
 
 import Animation from '@/components/animation/Animation';
 import LyricWrap from '@/components/lyricWrap/LyricWrap';
@@ -6,15 +6,23 @@ import FmPanel from './FmPanel';
 
 import style from './css/personalFm.module.less';
 import { personalFm } from '@/api/api_playlist';
-import { SongsInt, ResNewSongsInt } from '@/types/playList';
+import { SongsInt, ResNewSongsInt, TracksInt } from '@/types/playList';
+import { connect } from 'react-redux';
+import { changeSong } from '@/redux/actionCreator/PlayList';
 
-function PersonalFm() {
+interface PropsInt {
+    currentSong: TracksInt;
+    changeSong: (data: TracksInt, check: boolean) => void;
+}
+
+const PersonalFm: FC<PropsInt> = ({ changeSong }) => {
     const [songs, setSongs] = useState<SongsInt[]>([]);
     const [currentActive, setCurrentActive] = useState<number>(0);
     const getPersonalFm = async (index: number) => {
         const res: ResNewSongsInt = (await personalFm()) as ResNewSongsInt;
         if (res.code === 200) {
             setSongs(res.data);
+
             setCurrentActive(index);
         }
     };
@@ -29,6 +37,11 @@ function PersonalFm() {
     useEffect(() => {
         getPersonalFm(0);
     }, []);
+    useEffect(() => {
+        if (songs.length - 1 >= currentActive) {
+            changeSong(songs[currentActive] as unknown as TracksInt, false);
+        }
+    }, [currentActive, songs]);
 
     return (
         <Animation>
@@ -59,6 +72,16 @@ function PersonalFm() {
             </div>
         </Animation>
     );
-}
+};
 
-export default PersonalFm;
+const mapStateToProps = function (store: any) {
+    return {
+        currentSong: store.PlayListReducer.currentSong,
+    };
+};
+
+const mapDispatchToProps = {
+    changeSong,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PersonalFm);
