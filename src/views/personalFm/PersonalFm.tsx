@@ -1,4 +1,4 @@
-import React, { useEffect, useState, FC } from 'react';
+import React, { useEffect, useState, FC, useRef } from 'react';
 
 import Animation from '@/components/animation/Animation';
 import LyricWrap from '@/components/lyricWrap/LyricWrap';
@@ -18,6 +18,8 @@ interface PropsInt {
 const PersonalFm: FC<PropsInt> = ({ changeSong }) => {
     const [songs, setSongs] = useState<SongsInt[]>([]);
     const [currentActive, setCurrentActive] = useState<number>(0);
+    const wrap = useRef<HTMLDivElement>(null);
+
     const getPersonalFm = async (index: number) => {
         const res: ResNewSongsInt = (await personalFm()) as ResNewSongsInt;
         if (res.code === 200) {
@@ -65,8 +67,11 @@ const PersonalFm: FC<PropsInt> = ({ changeSong }) => {
                             next={handleNext}
                         ></FmPanel>
                     </div>
-                    <div className={style.page_body_right}>
-                        <LyricWrap id={songs[currentActive]?.id}></LyricWrap>
+                    <div ref={wrap} className={style.page_body_right}>
+                        <LyricWrap
+                            wrap={wrap as { current: HTMLDivElement }}
+                            id={songs[currentActive]?.id}
+                        ></LyricWrap>
                     </div>
                 </div>
             </div>

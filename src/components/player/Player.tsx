@@ -20,7 +20,6 @@ import PlayList from '@/components/list/playList/PlayList';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import PlayDetail from '@/views/playDetail/PlayDetail';
 import CurrentSongs from './CurrentSongs';
-import { Toggle } from '../toggle/Toggle';
 
 import style from './css/player.module.less';
 import { connect } from 'react-redux';
@@ -521,7 +520,22 @@ function Player({
                                     pause={pausedControl}
                                 ></CircularProgressWithLabel>
 
-                                <Toggle></Toggle>
+                                <IconButton
+                                    edge="start"
+                                    color="inherit"
+                                    aria-label="menu"
+                                    sx={{
+                                        padding: '0',
+                                        marginLeft: '15px',
+                                    }}
+                                    onClick={() => setSongsDraw(true)}
+                                >
+                                    <MenuOpenIcon
+                                        style={{
+                                            fontSize: '40px',
+                                        }}
+                                    ></MenuOpenIcon>
+                                </IconButton>
                             </div>
                         </Widget>
                     </motion.div>
@@ -547,7 +561,7 @@ function Player({
                 open={songsDraw}
                 onClose={() => setSongsDraw(false)}
             >
-                <div style={{ width: '600px' }}>
+                <div style={{ maxWidth: '600px' }}>
                     <CurrentSongs></CurrentSongs>
                 </div>
             </Drawer>

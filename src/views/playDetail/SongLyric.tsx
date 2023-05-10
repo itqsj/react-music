@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { songLyric } from '@/api/api_playlist';
 import { transitionLyricArray, LyricInt } from '@/untils/filters';
 import style from './css/songLyric.module.less';
@@ -21,6 +21,7 @@ interface LrcInt {
 }
 
 function SongLyric({ id }: SongLyricInt) {
+    const wrap = useRef<HTMLDivElement>(null);
     // const [lyricList, setLyricList] = useState<Array<LyricInt>>(
     //     [] as Array<LyricInt>,
     // );
@@ -37,8 +38,11 @@ function SongLyric({ id }: SongLyricInt) {
         // getSongLyric();
     }, []);
     return (
-        <div className={style.page}>
-            <LyricWrap id={id}></LyricWrap>
+        <div ref={wrap} className={style.page}>
+            <LyricWrap
+                wrap={wrap as { current: HTMLDivElement }}
+                id={id}
+            ></LyricWrap>
         </div>
     );
 }

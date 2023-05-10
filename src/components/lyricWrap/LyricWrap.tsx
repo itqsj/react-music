@@ -8,15 +8,19 @@ import { eventBus } from '@/untils/eventBus';
 
 interface PropsInt {
     id: number | string;
+    wrap: { current: HTMLDivElement };
 }
 
-const LyricWrap: FC<PropsInt> = React.memo(({ id }) => {
+const LyricWrap: FC<PropsInt> = React.memo(({ id, wrap }) => {
     const ulref = useRef<HTMLUListElement>(null);
-    const wrap = useRef<HTMLDivElement>(null);
+    // const wrap = useRef<HTMLDivElement>(null);
     const [lyricArr, setlyricArr] = useState<LyricInt[]>([]);
     const [currentLint, setcurrentLint] = useState(0);
     let currentIndex = 0;
-    let startSrollLint = 0;
+    // let startSrollLint = 0;
+    const startSrollLint: { current: number } = useRef(0) as unknown as {
+        current: number;
+    };
     const lyrics: { current: LyricInt[] } = useRef([]) as unknown as {
         current: LyricInt[];
     };
@@ -73,16 +77,17 @@ const LyricWrap: FC<PropsInt> = React.memo(({ id }) => {
         currentIndex = index;
         setcurrentLint(index);
 
-        if (startSrollLint <= index) {
-            scrollAnimation(index - startSrollLint + 1);
+        if (startSrollLint.current <= index) {
+            scrollAnimation(index - startSrollLint.current + 1);
         }
     };
     useEffect(() => {
-        const height = wrap.current?.offsetHeight;
+        const height = wrap.current.clientHeight;
+
         if (height) {
-            startSrollLint = Math.ceil(height / 2 / 40);
+            startSrollLint.current = Math.ceil(height / 2 / 40);
         }
-    }, [wrap.current]);
+    }, [wrap.current?.clientHeight]);
     useEffect(() => {
         eventBus.on('updateCurrenTime', scroll);
         return () => {
